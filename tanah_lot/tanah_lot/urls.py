@@ -9,5 +9,6 @@ urlpatterns = [
     path("news/", include("news.urls")),
     path("attractions/", include("attractions.urls")),
     path("dashboard/", include("dashboard.urls")),
+    path("about/", include("about.urls")),
     path('', views.index,name='/'),
 ]

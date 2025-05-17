@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "news",
     "attractions",
     "dashboard",
+    "about",
 ]
 
 MIDDLEWARE = [
