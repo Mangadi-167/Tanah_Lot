@@ -1,0 +1,587 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>{{ judul }}</title>
+  {% include "snippets/styles.html" %}
+
+</head>
+
+<link rel="stylesheet" href="{% static 'dist/styles.css'%}" />
+<body>
+  {% include "snippets/navbar.html"%} -->
+{% block body %}
+<section id="hero" class="bg-cover bg-center bg-no-repeat h-[538.64px] flex items-center"
+  style="background-image: url('{% static 'image/home1.jpg' %}')">
+  {% comment %}
+  <div class="relative">
+    <img src="{% static 'image/home1.jpg' %}" class="w-full h-auto" alt="" />
+    <div class="bg-black absolute bg-opacity-20 inset-0"></div>
+  </div>
+
+  {% endcomment %}
+
+  <div
+    class="px-5 md:px-24 xl:px-44 w-full pt-[64px] flex flex-col items-start justify-center h-full bg-gradient-to-r from-[rgba(0,0,0,0.7)] md:to-[rgba(0,0,0,0.1)] to-[rgba(0,0,0,0.2)] text-white">
+    <div class="max-w-[800px] ">
+      <h1 class="text-4xl  sm:text-start sm:text-5xl md:text-[35px] font-family font-main font-semibold mb-2">
+        Sacred Footprints in the Middle of the Waves
+      </h1>
+      <p class="sm:text-start text-sm sm:text-base font-se max-w-xl ">
+        Situated amidst the majestic waves of the Indian Ocean,
+        Tanah Lot Temple stands as an iconic symbol of Bali's spiritual and natural allure.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<section id="about" class="about py-15 bg-gray-50 mb-10">
+  <div class="container mx-auto px-6 md:px-20 lg:px-30">
+    <div class="section-title text-center mb-12">
+      <h2 class="text-2xl md:text-3xl text-pr-900 font-semibold font-se pb-4">
+        About Tanah Lot
+      </h2>
+    </div>
+    <div class="about-content flex flex-col md:flex-row items-start gap-8">
+      <!-- <div class="about-img flex-1 rounded-lg overflow-hidden shadow-xl">
+                <img src="{% static 'image/card1.jpg' %}" alt="Tanah Lot Temple"
+                    class="w-full h-full object-cover">
+            </div> -->
+      <div class="group relative flex-1 rounded-xl overflow-hidden shadow-xl cursor-pointer aspect-w-4 aspect-h-3">
+        <img src="{% static 'image/card1.jpg' %}" alt="Deskripsi Gambar"
+          class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+
+        <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+                          bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                          opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+
+          <div
+            class="h-40 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 bg-neu-900 p-6 py-2">
+            <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2">
+              The Great Temple of Tanah Lot
+            </h3>
+            <p class="text-gray-100 text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3">
+              Perched atop a rugged offshore rock formation, this ancient Hindu shrine
+              captivates visitors with its dramatic silhouette against the sunset-dappled horizon..
+            </p>
+            <div class="py-2">
+              <button type="button"
+                class=" text-white font-se  font-medium hover:text-white border border-white hover:bg-pr-900 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+                Read more
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text flex-1">
+        <h3 class="text-2xl md:text-2xl font-semibold mb-4 text-gray-900 font-se">History and Beauty of Tanah Lot</h3>
+        <p class="text-base leading-relaxed mb-6 text-justify font-se">
+          Pura Luhur Tanah Lot is located on a coral island located a bit to the edge,
+          in Segara Kidul Tanah Lot. The location of the coral island that is the location
+          of Pura Luhur Tanah Lot like that gave birth to several stories about the
+          origin of the name of the coral island which are put forward in a pantheon
+          or mythology. The area of Tanah Lot itself is 28.58 Ha which includes the
+          Temple, Housing, Tourist Lodging, Office, Park, Wantilan, Parking, Rice
+          Fields and Roads.
+        </p>
+
+        <button type="button"
+          class="text-pr-900 font-se  font-semibold hover:text-white border border-pr-900 hover:bg-pr-900 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+          Read more
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Card Slider temple & Attraction -->
+<div class="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-white">
+
+  <!-- Card pura -->
+  <div class="text-center mb-16 ">
+    <h2 class="text-2xl md:text-3xl text-pr-900 font-semibold font-se pb-4">
+      Temple
+    </h2>
+  </div>
+
+  <div class="max-w-5xl mx-auto ">
+    <div id="slider" class="slider-container flex overflow-x-auto hide-scrollbar py-0 snap-x snap-mandatory">
+      <div class="flex space-x-6 px-4">
+
+        <!-- Card pura 1 -->
+        <div>
+          <div
+            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+            <img src="{% static 'image/pura1.jpg' %}" alt="Deskripsi Gambar"
+              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+                                  bg-gradient-to-t from-black/70 via-black/60 to-transparent
+                                  opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+              <div
+                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                  Pura Pakendungan
+                </h3>
+                <p
+                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                  Pakendungan Temple is located on the northwest side of Tanah Lot Temple. The origins of...
+                </p>
+                <div class="py-2">
+                  <button
+                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Pakendungan Temple</h1>
+        </div>
+
+        <!-- Card pura 2 -->
+        <div>
+          <div
+            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+            <img src="{% static 'image/pura2.jpg' %}" alt="Deskripsi Gambar"
+              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+                                  bg-gradient-to-t from-black/70 via-black/60 to-transparent
+                                  opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+              <div
+                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+
+                  Penataran Madya Temple
+                </h3>
+                <p
+                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                  Penataran Madya Tanah Lot Temple is located on the west side of Penataran Temple...
+                </p>
+                <div class="py-2">
+                  <button
+                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Penataran Madya Temple</h1>
+        </div>
+
+        <!-- Card pura 3 -->
+        <div>
+          <div
+            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+            <img src="{% static 'image/pura3.jpg' %}" alt="Deskripsi Gambar"
+              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+                                  bg-gradient-to-t from-black/70 via-black/60 to-transparent
+                                  opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+              <div
+                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                  Jro Kandang Temple
+                </h3>
+                <p
+                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                  Jro Kandang Temple is located in front of the right side of Njung Galuh. Almost parallel to the path
+                  with Galuh Temple (Pura Enjung Galuh)....
+                </p>
+                <div class="py-2">
+                  <button
+                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Jro Kandang Temple</h1>
+        </div>
+
+        <!-- Card pura 4 -->
+        <div>
+          <div
+            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+            <img src="{% static 'image/pura4.jpg' %}" alt="Deskripsi Gambar"
+              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+                                  bg-gradient-to-t from-black/70 via-black/60 to-transparent
+                                  opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+              <div
+                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                  Njung Galuh Temple
+                </h3>
+                <p
+                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                  Enjung Galuh Temple is located near Jero Kandang Temple to be exact at Enjung Galuh, “NJUNG” wich is
+                  rock stick out in to the sea.....
+                </p>
+                <div class="py-2">
+                  <button
+                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Njung Galuh Temple</h1>
+        </div>
+
+        <!-- Card pura 5 -->
+        <div>
+          <div
+            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+            <img src="{% static 'image/pura5.jpg' %}" alt="Deskripsi Gambar"
+              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+                                  bg-gradient-to-t from-black/70 via-black/60 to-transparent
+                                  opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+              <div
+                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                  Batu Bolong Temple
+                </h3>
+                <p
+                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                  Batu Bolong Temple is located on top of one of the Njung (rocks that jut into the sea) in Segara
+                  Kidul
+                  Tanah Lot where this Njung rock has a hole in the middle
+                </p>
+                <div class="py-2">
+                  <button
+                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Batu Bolong Temple</h1>
+        </div>
+
+        <!-- Card pura 6 -->
+        <div>
+          <div
+            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+            <img src="{% static 'image/pura6.jpg' %}" alt="Deskripsi Gambar"
+              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+                                  bg-gradient-to-t from-black/70 via-black/60 to-transparent
+                                  opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
+              <div
+                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                  Batu Mejan Temple
+                </h3>
+                <p
+                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                  Batu Mejan Temple is located 100 meters in the west side of Batu Bolong Temple. Batu Mejan Temple
+                  also
+                  known as Beji Temple, “BEJI” means holly place to get holly water for Hindus ceremonial.
+                </p>
+                <div class="py-2">
+                  <button
+                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Batu Mejan Temple</h1>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <style>
+      .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+  
+      .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+  </style>
+  
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const slider = document.getElementById('slider');
+          const cardWidth = 320 + 24; // Lebar card + margin (perkiraan, sesuaikan jika perlu)
+  
+          // Tidak perlu event listener untuk tombol prev/next di sini
+          // karena kita ingin perilaku scroll otomatis dari overflow-x-auto
+      });
+  </script> -->
+
+
+
+
+
+  <!-- Card Slider Attraction -->
+  <!-- Card Event -->
+  <!-- <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-white" > -->
+  <div class="max-w-5xl mx-auto py-15">
+    <!-- Header -->
+    <div class="text-center mb-16 ">
+      <h2 class="text-2xl md:text-3xl text-pr-900 font-semibold font-se pb-4">
+        Attraction
+      </h2>
+    </div>
+
+    <div class="relative mb-0">
+      <!-- Slider Controls -->
+      <div class="flex justify-between absolute inset-0 items-center z-10 px-4 pointer-events-none">
+        <button id="prev-btn"
+          class="nav-button bg-white p-3 rounded-full shadow-lg text-gray-800 pointer-events-auto focus:outline-none hover:bg-gray-50 transform transition">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="next-btn"
+          class="nav-button bg-white p-3 rounded-full shadow-lg text-gray-800 pointer-events-auto focus:outline-none hover:bg-gray-50 transform transition">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Slider Container -->
+      <div id="slider" class="slider-container flex overflow-x-auto hide-scrollbar py-4 snap-x snap-mandatory">
+        <div class="flex space-x-6 px-4">
+
+          <!-- Card 1 -->
+          <div class="card flex-none w-80 bg-white shadow-lg snap-center">
+            <div class="relative h-56 overflow-hidden">
+              <div>
+                <img src="{% static 'image/kecak.jpg' %}">
+                <i class="fas fa-laptop-code text-white text-5xl card-image"></i>
+              </div>
+              <div class="absolute inset-0 card-overlay flex flex-col justify-end p-3 text-white">
+                <h3 class="font-bold text-xl text-center">Kecak Dance</h3>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600 mb-4 text-justify font-se">Kecak Dance is one of Bali's most popular
+                and globally recognized cultural heritages..
+              </p>
+              <button
+                class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                <span>Read More</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card flex-none w-80 bg-white shadow-lg snap-center">
+            <div class="relative h-56 overflow-hidden">
+              <div>
+                <img src="{% static 'image/restaurant.jpg' %}">
+                <i class="fas fa-laptop-code text-white text-5xl card-image"></i>
+              </div>
+              <div class="absolute inset-0 card-overlay flex flex-col justify-end p-3 text-white">
+                <h3 class="font-bold text-xl text-center">Natys Restaurant</h3>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600 mb-4 text-justify font-se">Just moments away from one of Bali's most iconic
+                landmarks, Naty's
+                Restaurant is a natural stop...
+              </p>
+              <button
+                class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                <span>Read More</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card flex-none w-80 bg-white shadow-lg snap-center">
+            <div class="relative h-56 overflow-hidden">
+              <div>
+                <img src="{% static 'image/selfie.jpg' %}">
+                <i class="fas fa-laptop-code text-white text-5xl card-image"></i>
+              </div>
+              <div class="absolute inset-0 card-overlay flex flex-col justify-end p-3 text-white">
+                <h3 class="font-bold text-xl text-center">Selfie Spot</h3>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600 mb-4 text-justify font-se">JWelcome to our enchanting tourism spot, where every
+                corner
+                is waiting to be captured...
+              </p>
+              <button
+                class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                <span>Read More</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="card flex-none w-80 bg-white shadow-lg snap-center">
+            <div class="relative h-56 overflow-hidden">
+              <div>
+                <img src="{% static 'image/market.jpg' %}">
+                <i class="fas fa-laptop-code text-white text-5xl card-image"></i>
+              </div>
+              <div class="absolute inset-0 card-overlay flex flex-col justify-end p-3 text-white">
+                <h3 class="font-bold text-xl text-center">Art Market</h3>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600 mb-4 text-justify font-se">Tanah Lot completed with Art Market for all of
+                visitors who wants to buy
+                any...
+              </p>
+              <button
+                class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                <span>Read More</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="card flex-none w-80 bg-white shadow-lg snap-center">
+            <div class="relative h-56 overflow-hidden">
+              <div>
+                <img src="{% static 'image/kecak.jpg' %}">
+                <i class="fas fa-laptop-code text-white text-5xl card-image"></i>
+              </div>
+              <div class="absolute inset-0 card-overlay flex flex-col justify-end p-3 text-white">
+                <h3 class="font-bold text-xl text-center">Kecak Dance</h3>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-gray-600 mb-4 text-justify font-se">Kecak Dance is one of Bali's most popular
+                and globally recognized cultural heritages..
+              </p>
+              <button
+                class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                <span>Read More</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination Dots -->
+<!-- <div class="flex justify-center mb-16 space-x-2">
+      <button class="w-2.5 h-2.5 rounded-full bg-blue-500 focus:outline-none"></button>
+      <button class="w-2.5 h-2.5 rounded-full bg-gray-300 focus:outline-none hover:bg-blue-300"></button>
+      <button class="w-2.5 h-2.5 rounded-full bg-gray-300 focus:outline-none hover:bg-blue-300"></button>
+      <button class="w-2.5 h-2.5 rounded-full bg-gray-300 focus:outline-none hover:bg-blue-300"></button>
+  </div> -->
+
+
+<!-- Google Maps -->
+<div class="w-full bg-frame-50 py-12">
+  <div class="text-center mb-10 ">
+    <h2 class="text-2xl md:text-3xl text-pr-900 font-semibold font-se pb-4">
+      Location
+    </h2>
+  </div>
+
+  <div class="w-full overflow-hidden">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.288997187388!2d115.08322517479518!3d-8.620788891398926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd18959344c6e99%3A0x7b03d3266a1b727a!2sTanah%20Lot!5e0!3m2!1sid!2sid!4v1715172388978!5m2!1sid!2sid"
+      width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+  // Slider functionality with improved smooth scrolling
+  const slider = document.getElementById('slider');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const cardWidth = 320 + 24; // Card width + margin
+
+  prevBtn.addEventListener('click', () => {
+    slider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    slider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+  });
+
+  // Improved hover effect
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      cards.forEach(c => {
+        if (c !== card) {
+          c.style.opacity = '0.7';
+          c.style.transform = 'scale(0.98)';
+        }
+      });
+    });
+
+    card.addEventListener('mouseleave', () => {
+      cards.forEach(c => {
+        c.style.opacity = '1';
+        c.style.transform = '';
+      });
+    });
+  });
+
+  // Pagination dots functionality
+  const dots = document.querySelectorAll('.rounded-full');
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      // Reset all dots
+      dots.forEach(d => {
+        d.classList.remove('bg-blue-500');
+        d.classList.add('bg-gray-300');
+      });
+
+      // Activate current dot
+      dot.classList.remove('bg-gray-300');
+      dot.classList.add('bg-blue-500');
+
+      // Scroll to position
+      slider.scrollTo({
+        left: index * cardWidth,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+{% endblock body %}
+
+<!-- {% include "snippets/scripts.html"%} -->
+<!-- </body>
+
+</html> -->

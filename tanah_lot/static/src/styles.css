@@ -1,0 +1,153 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../../node_modules/flowbite";
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@400..700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+@theme {
+    /* --font-family: "Kalam", cursive; */
+    --font-primary: "League Spartan", sans-serif;
+    /* --font-family: "Edu QLD Beginner", cursive; */
+    --font-se: "Inter", sans-serif;
+    --color-pr-50: ##FFFFFF;
+    --color-pr-100: #EEF3F6;
+    --color-pr-200: #EBF1F5;
+    --color-pr-300: #E6ECF0;
+    --color-pr-400: #CDD9E2;
+    --color-pr-500: #B3C7D3;
+    --color-pr-600: #81A1B6;
+    --color-pr-700: #4F7B99;
+    --color-pr-800: #35698A;
+    --color-pr-900: #03436D;
+    --color-se-50: #ecf4f4;
+    --color-se-100: #c6ddde;
+    --color-se-200: #a0c7c8;
+    --color-se-300: #79b0b2;
+    --color-se-400: #66a5a7;
+    --color-se-500: #408e91;
+    --color-se-600: #3a8083;
+    --color-se-700: #337274;
+    --color-se-800: #2d6366;
+    --color-se-900: #265557;
+    --color-sur-50: #ffffff;
+    --color-sur-100: #ecf4f0;
+    --color-sur-200: #d9e9e2;
+    --color-sur-300: #c6ded3;
+    --color-sur-400: #b3d3c5;
+    --color-neu-50: #ffffff;
+    --color-neu-100: #E9E9E9;
+    --color-neu-200: #D3D3D3;
+    --color-neu-300:  #BCBCBC;
+    --color-neu-400: #A6A6A6;
+    --color-neu-500: #909090;
+    --color-neu-600: #7A7A7A;
+    --color-neu-700: #646464;
+    --color-neu-800: #4d4d4d;
+    --color-neu-900: #212121;
+    --color-frame-50: #F9F9F9;
+  }
+  /* <style> */
+    /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f9ff;
+    }
+    
+    .card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
+        border-radius: 15px;
+    }
+    
+    .card-temple {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      border-radius: 15px;
+    }
+    
+    .card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-image {
+        transition: transform 0.8s;
+    }
+    
+    .card:hover .card-image {
+        transform: scale(1.05);
+    }
+    
+    .card-overlay {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
+    }
+    
+    .slider-container {
+        scroll-behavior: smooth;
+    }
+    
+    .nav-button {
+        transition: all 0.3s;
+        opacity: 0.9;
+    }
+    
+    .nav-button:hover {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    
+    .badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+    
+    .feature-card {
+        transition: all 0.3s ease;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-8px);
+    }
+    
+    .feature-icon {
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover .feature-icon {
+        transform: scale(1.15);
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .gradient-text {
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .blur-backdrop {
+        backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+  /* </style> */

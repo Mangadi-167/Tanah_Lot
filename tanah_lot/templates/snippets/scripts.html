@@ -1,0 +1,96 @@
+{% load static %}
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebar = document.getElementById('default-sidebar');
+            const desktopToggleButton = document.getElementById('toggleSidebar');
+            const mainContent = document.getElementById('main-content');
+
+            // Pastikan semua elemen target ada sebelum melanjutkan
+            if (desktopToggleButton && sidebar && mainContent) {
+
+                function applySidebarState(isWide) {
+                    const menuTexts = sidebar.querySelectorAll('.sidebar-menu-text'); // Ambil di dalam fungsi agar dinamis
+
+                    if (isWide) {
+                        sidebar.classList.remove('w-20');
+                        sidebar.classList.add('w-64');
+                        mainContent.classList.remove('sm:ml-20');
+                        mainContent.classList.add('sm:ml-64');
+                        menuTexts.forEach(textElement => {
+                            textElement.classList.remove('hidden');
+                        });
+                        desktopToggleButton.setAttribute('aria-expanded', 'true');
+                    } else { // Jika ingin diperkecil
+                        sidebar.classList.remove('w-64');
+                        sidebar.classList.add('w-20');
+                        mainContent.classList.remove('sm:ml-64');
+                        mainContent.classList.add('sm:ml-20');
+                        menuTexts.forEach(textElement => {
+                            textElement.classList.add('hidden');
+                        });
+                        desktopToggleButton.setAttribute('aria-expanded', 'false');
+                    }
+                }
+
+                desktopToggleButton.addEventListener('click', function () {
+                    const isCurrentlyWide = sidebar.classList.contains('w-64');
+                    applySidebarState(!isCurrentlyWide); // Toggle state
+                });
+
+                function adjustLayoutOnResize() {
+                    if (!sidebar || !mainContent) return;
+
+                    if (window.innerWidth < 1024) { // Breakpoint lg Tailwind
+                        // Jika di mobile dan sidebar sebelumnya diperkecil (w-20), kembalikan ke lebar
+                        if (sidebar.classList.contains('w-20')) {
+                            applySidebarState(true);
+                        }
+                        mainContent.classList.remove('sm:ml-64', 'sm:ml-20'); // Hapus margin desktop
+                        if (desktopToggleButton) { // Set aria-expanded default untuk tombol desktop (meskipun hidden)
+                            desktopToggleButton.setAttribute('aria-expanded', 'true');
+                        }
+                    } else { // Desktop
+                        // Jika dari mobile ke desktop, atau state awal tidak jelas, set default lebar
+                        if (!sidebar.classList.contains('w-64') && !sidebar.classList.contains('w-20')) {
+                            applySidebarState(true);
+                        } else {
+                            // Terapkan margin konten yang sesuai dengan lebar sidebar saat ini
+                            if (sidebar.classList.contains('w-64')) {
+                                mainContent.classList.remove('sm:ml-20');
+                                mainContent.classList.add('sm:ml-64');
+                                if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'true');
+                            } else if (sidebar.classList.contains('w-20')) {
+                                mainContent.classList.remove('sm:ml-64');
+                                mainContent.classList.add('sm:ml-20');
+                                if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'false');
+                            }
+                        }
+                    }
+                }
+
+                window.addEventListener('resize', adjustLayoutOnResize);
+
+                // Panggil saat load untuk set state awal yang benar
+                // Ini penting agar saat halaman dimuat di desktop, state awalnya benar
+                if (window.innerWidth >= 1024) {
+                    // Jika sidebar tidak w-20 (berarti harusnya w-64 atau state default), set ke lebar
+                    if (!sidebar.classList.contains('w-20')) {
+                        applySidebarState(true);
+                    } else {
+                        // Jika memang awalnya w-20 (mungkin dari refresh halaman saat state kecil)
+                        applySidebarState(false);
+                    }
+                } else {
+                    // Untuk mobile, pastikan tombol desktop (meskipun tersembunyi) memiliki aria-expanded yang sesuai
+                    if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'true');
+                }
+            } else {
+                // Tambahkan console log jika salah satu elemen penting tidak ditemukan
+                if (!desktopToggleButton) console.error('Tombol Desktop (id="toggleSidebar") tidak ditemukan.');
+                if (!sidebar) console.error('Sidebar (id="default-sidebar") tidak ditemukan.');
+                if (!mainContent) console.error('Konten Utama (id="main-content") tidak ditemukan.');
+            }
+        });
+    </script>
