@@ -6,6 +6,7 @@
             const sidebar = document.getElementById('default-sidebar');
             const desktopToggleButton = document.getElementById('toggleSidebar');
             const mainContent = document.getElementById('main-content');
+            
 
             // Pastikan semua elemen target ada sebelum melanjutkan
             if (desktopToggleButton && sidebar && mainContent) {
@@ -94,3 +95,110 @@
             }
         });
     </script>
+
+    <!-- footer dashboard -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('Sidebar, Main Content & Footer adjustment script loaded.');
+
+    const sidebar = document.getElementById('default-sidebar');
+    const desktopToggleButton = document.getElementById('toggleSidebar');
+    const mainContent = document.getElementById('main-content');
+    const footer = document.getElementById('app-footer'); // ✅ AMBIL ELEMEN FOOTER
+    const menuTexts = sidebar ? sidebar.querySelectorAll('.sidebar-menu-text') : [];
+
+    // Pengecekan elemen
+    if (!sidebar) console.error('Sidebar (id="default-sidebar") not found.');
+    if (!desktopToggleButton) console.error('Desktop toggle button (id="toggleSidebar") not found.');
+    if (!mainContent) console.error('Main content (id="main-content") not found.');
+    if (!footer) console.error('Footer (id="app-footer") not found.'); // ✅ Cek footer
+
+    // Hanya lanjutkan jika semua elemen penting ada
+    if (desktopToggleButton && sidebar && mainContent && footer) { // ✅ Pastikan footer ada di sini
+        console.log('All target elements for desktop sidebar toggle found.');
+        let isDesktopSidebarMinimized = false; // Default sidebar tidak diperkecil
+
+        function applyDesktopSidebarState(minimize) {
+            console.log('applyDesktopSidebarState called. Minimize:', minimize);
+            
+            if (minimize) { // Perkecil sidebar
+                sidebar.classList.remove('w-64');
+                sidebar.classList.add('w-20');
+
+                mainContent.classList.remove('sm:ml-64');
+                mainContent.classList.add('sm:ml-20');
+                footer.classList.remove('sm:ml-64'); // ✅ SESUAIKAN FOOTER
+                footer.classList.add('sm:ml-20');    // ✅ SESUAIKAN FOOTER
+
+                menuTexts.forEach(textElement => {
+                    textElement.classList.add('hidden');
+                });
+                desktopToggleButton.setAttribute('aria-expanded', 'false');
+            } else { // Perbesar sidebar (kembali ke normal)
+                sidebar.classList.remove('w-20');
+                sidebar.classList.add('w-64');
+
+                mainContent.classList.remove('sm:ml-20');
+                mainContent.classList.add('sm:ml-64');
+                footer.classList.remove('sm:ml-20'); // ✅ SESUAIKAN FOOTER
+                footer.classList.add('sm:ml-64');    // ✅ SESUAIKAN FOOTER
+
+                menuTexts.forEach(textElement => {
+                    textElement.classList.remove('hidden');
+                });
+                desktopToggleButton.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        desktopToggleButton.addEventListener('click', function () {
+            console.log('Desktop toggleButton clicked.');
+            if (window.innerWidth >= 1024) { // Hanya bekerja di layar lg ke atas
+                isDesktopSidebarMinimized = !isDesktopSidebarMinimized;
+                applyDesktopSidebarState(isDesktopSidebarMinimized);
+            }
+        });
+
+        function handleWindowResize() {
+            console.log('Window resized. Current width:', window.innerWidth);
+            if (!sidebar || !mainContent || !footer) return;
+
+            if (window.innerWidth < 1024) { // Di bawah lg (tablet/mobile)
+                if (sidebar.classList.contains('w-20')) { 
+                    applyDesktopSidebarState(false); 
+                }
+                // Untuk mobile/tablet, margin diatur oleh CSS atau state drawer Flowbite.
+                // Hapus kelas margin JS agar tidak konflik.
+                mainContent.classList.remove('sm:ml-20');
+                footer.classList.remove('sm:ml-20');
+
+                if (window.innerWidth < 640) { // Di bawah sm (mobile, drawer overlay)
+                    mainContent.classList.remove('sm:ml-64');
+                    footer.classList.remove('sm:ml-64');
+                } else { // Antara sm dan lg (tablet)
+                    // Jika sidebar terlihat karena sm:translate-x-0, pastikan margin diterapkan
+                    if (sidebar.classList.contains('sm:translate-x-0')) {
+                        mainContent.classList.add('sm:ml-64');
+                        footer.classList.add('sm:ml-64');
+                    } else { // Jika sidebar tersembunyi (misal oleh drawer)
+                        mainContent.classList.remove('sm:ml-64');
+                        footer.classList.remove('sm:ml-64');
+                    }
+                }
+                desktopToggleButton.setAttribute('aria-expanded', 'true');
+            } else { // Desktop (lg ke atas)
+                applyDesktopSidebarState(isDesktopSidebarMinimized);
+            }
+        }
+        window.addEventListener('resize', handleWindowResize);
+        
+        // Set state awal saat halaman dimuat
+        if (window.innerWidth >= 1024) {
+            applyDesktopSidebarState(isDesktopSidebarMinimized); // Default: sidebar lebar
+        } else {
+            handleWindowResize(); // Atur untuk mobile/tablet dengan benar
+        }
+    } else {
+        console.warn('One or more critical elements for sidebar/footer interaction are missing.');
+    }
+});
+</script>

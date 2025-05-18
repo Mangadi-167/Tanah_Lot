@@ -228,11 +228,13 @@
         </div>
     </div> -->
 
-    <div id="main-content" class="p-4 sm:ml-64 transition-all duration-300 ease-in-out py-20">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+
+    
+    <div id="main-content" class=" p-4 sm:ml-64 transition-all duration-300 ease-in-out py-20  h-screen bg-frame-50">
+        <div class="p-2 ">
 
             <!-- Isi Konten Muali dari sni -->
-            <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+            <div class="px-4 sm:px-6 lg:px-8 py-6 w-full max-w-9xl mx-auto">
 
                 <div class="sm:flex sm:justify-between sm:items-center mb-6">
                     <div class="mb-4 sm:mb-0">
@@ -243,7 +245,7 @@
                         <nav class="flex" aria-label="Breadcrumb">
                             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                                 <li class="inline-flex items-center">
-                                    <a href="#"
+                                    <a href="{% url 'article_data' %}"
                                         class="inline-flex items-center text-sm font-medium text-dark-primary hover:text-primary-hover dark:text-gray-400 dark:hover:text-white">
                                         Data Content
                                     </a>
@@ -335,7 +337,7 @@
                                     1</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <img class="h-10 w-16 object-cover rounded"
-                                        src="https://via.placeholder.com/150/FFC107/000000?Text=Image1"
+                                        src="{% static 'image/news2.jpg' %}"
                                         alt="Content Image">
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
@@ -349,7 +351,7 @@
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                    <button class="text-center text-neu-900 bg-yellow-300 rounded h-8 w-8 ">
+                                    <button class="text-center text-neu-900 bg-amber-300 rounded h-8 w-8 ">
                                         <svg class="w-6 h-6 mx-auto text-gray-800 dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                             viewBox="0 0 24 24">
@@ -359,10 +361,11 @@
                                         </svg>
 
                                     </button>
-                                    <button class="text-red-500 hover:text-red-700 dark:hover:text-red-400 bg-red-700 h-8 w-8 rounded ">
-                                        <svg class="w-6 h-6 text-center mx-auto text-white dark:text-white bg-red-700 " aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                            viewBox="0 0 24 24">
+                                    <button
+                                        class="text-red-500 hover:text-red-700 dark:hover:text-red-400 bg-red-700 h-8 w-8 rounded ">
+                                        <svg class="w-6 h-6 text-center mx-auto text-white dark:text-white bg-red-700 "
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                 stroke-width="2"
                                                 d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
@@ -384,13 +387,71 @@
 
 
         </div>
+
+
+
     </div>
 
 
 
 
 
+
+
+
+
+
+
+    <footer id="app-footer" class="bg-white p-4 sm:p-6 xl:p-8 dark:bg-gray-800 antialiased shadow">
+        <div class="mx-auto w-full max-w-screen-xl">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <p class="mb-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:text-left sm:mb-0">
+                    &copy; {% now "Y" %} <a href="#" class="hover:underline">Tanah Lot</a>. All rights reserved.
+                </p>
+                <div class="flex justify-center items-center space-x-1 sm:justify-start">
+                    <a href="https://www.facebook.com/tanahlot.id/" data-tooltip-target="tooltip-facebook"
+                        class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 8 19">
+                            <path fill-rule="evenodd"
+                                d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                    <div id="tooltip-facebook" role="tooltip"
+                        class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Follow facebook Tanah Lot
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+
+                    <a href="https://www.instagram.com/tanahlotid/" data-tooltip-target="tooltip-instagram"
+                        class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600">
+                        <svg class="w-6 h-6 text-gray-500 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                        <span class="sr-only">Twitter</span>
+                    </a>
+                    <div id="tooltip-instagram" role="tooltip"
+                        class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                        Follow instagram Tanah Lot
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
     {% include "snippets/scripts.html"%}
+
 
 </body>
 
