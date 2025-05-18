@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    {% include "snippets/styles.html" %}
+    <title>{{ judul}}</title>
+</head>
+
+<body>
+
+
+    {% include "snippets-dashboard/navbar.html"%}
+
+    {% include "snippets-dashboard/sidebar.html"%}
+
+    <!-- <div class="p-4 sm:ml-64 mt-14 py-12 ">
+        <div class="p-4 ">
+            <div>
+                <h1 class="text-pr-900">Hai</h1>
+            </div>
+        </div>
+    </div> -->
+
+    <div id="main-content" class=" p-4 sm:ml-64 transition-all duration-300 ease-in-out py-20  h-screen bg-frame-50">
+        <div class="p-2 ">
+            {% block body %}
+
+            {% endblock body %}
+
+        </div>
+
+    </div>
+
+    {% include "snippets-dashboard/footer.html"%}
+
+
+    {% include "snippets/scripts.html"%}
+
+
+</body>
+
+</html>
