@@ -7,7 +7,7 @@
 
     <div class="sm:flex sm:justify-between sm:items-center mb-6">
         <div class="mb-4 sm:mb-0">
-            <h1 class="text-2xl md:text-3xl text-dark-primary dark:text-gray-100 font-bold">Data Content
+            <h1 class="text-2xl md:text-3xl text-dark-primary dark:text-gray-100 font-bold font-se">Data Content
             </h1>
         </div>
         <div class="mb-4 sm:mb-0">
@@ -15,7 +15,7 @@
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
                         <a href="{% url 'article_data' %}"
-                            class="inline-flex items-center text-sm font-medium text-dark-primary hover:text-primary-hover dark:text-gray-400 dark:hover:text-white">
+                            class="inline-flex items-center font-se text-sm font-medium text-dark-primary hover:text-primary-hover dark:text-gray-400 dark:hover:text-white">
                             Data Content
                         </a>
                     </li>
@@ -55,7 +55,7 @@
                 type="search" placeholder="Search Content..." />
         </div>
 
-        <button type="button"
+        <a href="{% url 'add_article' %}"
             class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-pr-900 hover:bg-pr-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pr-900 dark:bg-indigo-500 dark:hover:bg-indigo-600">
             <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                 aria-hidden="true">
@@ -64,7 +64,7 @@
                     clip-rule="evenodd" />
             </svg>
             Add Content
-        </button>
+        </a>
     </div>
 
 

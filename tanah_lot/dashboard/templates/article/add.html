@@ -1,0 +1,45 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block body %}
+<div class="px-4 sm:px-6 lg:px-8 py-6 w-full max-w-9xl mx-auto">
+
+    <div class="sm:flex sm:justify-between sm:items-center mb-6">
+        <div class="mb-4 sm:mb-0">
+            <h1 class="text-2xl md:text-3xl text-dark-primary dark:text-gray-100 font-bold font-se">Add Content
+            </h1>
+        </div>
+        <div class="mb-4 sm:mb-0">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <a href="{% url 'article_data' %}"
+                            class="inline-flex items-center text-neu-200 font-se text-sm font-medium  ">
+                            Data Content
+                        </a>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <span
+                                class="ms-1 text-sm font-medium text-dark-secondary md:ms-2 dark:text-neu-900">
+                                Add Content
+                            </span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<!-- form -->
+ 
+
+
+{% endblock body %}

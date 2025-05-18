@@ -8,6 +8,14 @@ def index(request):
     }
     return render(request,"article/data.html", context)
 
+def addArticle(request):
+    context={
+        'judul':'Add Content',
+    }
+    return render(request,"article/add.html", context)
+
+
+# ---------------------------------------------------------------------------------
 
 # khusus users
 def user(request):

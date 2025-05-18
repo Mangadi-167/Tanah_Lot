@@ -6,6 +6,8 @@ urlpatterns = [
 
     # khusus article
     path("", views.index, name="article_data"),
+    
+    path("article/add", views.addArticle, name="add_article"),
   
     
 
