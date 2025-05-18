@@ -202,3 +202,70 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+
+
+<!-- gambar pada form add conten article -->
+ <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const imageInput = document.getElementById('id_image');
+    const imagePreview = document.getElementById('image-preview');
+    const imageFilenameDisplay = document.getElementById('image-filename-display'); // Dari HTML yang saya berikan sebelumnya
+    const removeImageButton = document.getElementById('remove-image-btn');
+    const imageUploadUIPlaceholder = document.getElementById('image-upload-ui-placeholder');
+    const imagePreviewContainer = document.getElementById('image-preview-container');
+
+    // Pastikan semua elemen ada sebelum menambahkan event listener
+    if (imageInput && imagePreview && imageFilenameDisplay && removeImageButton && imageUploadUIPlaceholder && imagePreviewContainer) {
+
+        imageInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imageFilenameDisplay.textContent = file.name; // Tampilkan nama file
+                    imagePreviewContainer.classList.remove('hidden'); // Tampilkan kontainer preview
+                    imageUploadUIPlaceholder.classList.add('hidden'); // Sembunyikan placeholder awal
+                }
+                reader.readAsDataURL(file);
+            } else {
+                // Jika tidak ada file dipilih (misalnya, pengguna membatalkan dialog)
+                // Kembalikan ke state awal jika perlu
+                imagePreview.src = '#';
+                imageFilenameDisplay.textContent = 'PNG, JPG, JPEG (Ukuran Maks ...MB)'; // Atau teks placeholder awal Anda
+                imagePreviewContainer.classList.add('hidden');
+                imageUploadUIPlaceholder.classList.remove('hidden');
+            }
+        });
+
+        removeImageButton.addEventListener('click', function() {
+            imageInput.value = ''; // Hapus file dari input
+            imagePreview.src = '#'; // Reset src gambar preview
+            imageFilenameDisplay.textContent = 'PNG, JPG, JPEG (Ukuran Maks ...MB)'; // Reset nama file
+            imagePreviewContainer.classList.add('hidden'); // Sembunyikan kontainer preview
+            imageUploadUIPlaceholder.classList.remove('hidden'); // Tampilkan kembali placeholder awal
+        });
+
+    } else {
+        console.warn('Satu atau lebih elemen untuk preview gambar tidak ditemukan. Pastikan ID elemen HTML sudah benar.');
+    }
+
+    // Jika Anda menggunakan Alpine.js untuk drag & drop
+    // Anda perlu mengintegrasikan logika preview ini ke dalam dropHandler Alpine.js Anda
+    // Contoh:
+    // Di dalam dropHandler Alpine.js Anda, setelah mendapatkan file:
+    // const file = event.dataTransfer.files[0];
+    // if (file) {
+    //     const reader = new FileReader();
+    //     reader.onload = (e) => {
+    //         document.getElementById('image-preview').src = e.target.result;
+    //         document.getElementById('image-filename-display').textContent = file.name;
+    //         document.getElementById('image-preview-container').classList.remove('hidden');
+    //         document.getElementById('image-upload-ui-placeholder').classList.add('hidden');
+    //     };
+    //     reader.readAsDataURL(file);
+    //     // Juga, set file ke input tersembunyi jika perlu untuk submit form
+    //     document.getElementById('id_image').files = event.dataTransfer.files;
+    // }
+});
+</script>
