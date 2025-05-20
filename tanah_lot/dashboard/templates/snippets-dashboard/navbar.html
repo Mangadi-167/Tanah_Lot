@@ -104,7 +104,7 @@
                         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                         <span class="sr-only">Open user menu</span>
                         <img class="w-8 h-8 rounded-full"
-                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                            src="{% static 'image/profile.png' %}" alt="user photo">
                     </button>
                     <!-- Dropdown menu -->
                     <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
@@ -132,7 +132,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#"
+                                <a href="{% url 'reset_password' %}"
                                     class="flex items-center py-2 px-4 text-sm gap-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white font-se">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                         class="bi bi-key text-gray-700" viewBox="0 0 16 16">

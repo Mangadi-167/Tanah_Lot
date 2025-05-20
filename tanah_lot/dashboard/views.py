@@ -29,3 +29,13 @@ def addUser(request):
         'judul' : 'Add User',
     }
     return render (request, "users/add.html", context)
+
+
+#----------------------------------------------------------------------------------
+
+# khusus reset password
+def resetPassword(request):
+    context={
+        'judul' : 'Change Password'
+    }
+    return render (request, "reset-password.html", context)
