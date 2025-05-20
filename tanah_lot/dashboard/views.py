@@ -23,3 +23,9 @@ def user(request):
         'judul':'Data User',
     }
     return render(request,"users/data.html", context)
+
+def addUser(request):
+    context={
+        'judul' : 'Add User',
+    }
+    return render (request, "users/add.html", context)

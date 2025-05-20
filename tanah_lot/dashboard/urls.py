@@ -13,4 +13,5 @@ urlpatterns = [
 
     # khusus user
     path("users/data/", views.user, name="users_data"),
+    path("users/data/add", views.addUser, name="add_user"),
 ]

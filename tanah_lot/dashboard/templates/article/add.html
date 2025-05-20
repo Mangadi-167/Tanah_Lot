@@ -14,7 +14,7 @@
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
                         <a href="{% url 'article_data' %}"
-                            class="inline-flex items-center text-neu-200 font-se text-sm font-medium  ">
+                            class="inline-flex items-center text-neu-600 font-se text-sm font-medium  ">
                             Data Content
                         </a>
                     </li>
@@ -38,13 +38,13 @@
 
 
 <!-- form -->
-{% load static %}
+
 
 
 <form class="w-full space-y-8" method="POST" action="#" enctype="multipart/form-data ">
     {% csrf_token %}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
-        <div class="md:col-span-2 space-y-6">
+        <div class="md:col-span-1 space-y-6">
             <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
                 <div>
                     <label for="name"
@@ -131,7 +131,7 @@
                 <label for="content_type" class="block text-sm font-se font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Content Type<span class="text-red-500">*</span>
                 </label>
-                <select id="countries"
+                <select id="type"
                     class="bg-gray-50 border font-se border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900">
 
                     <option selected>News & Event</option>
