@@ -3,15 +3,14 @@
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
-/* @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@400..700&display=swap'); */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 
 @theme {
-    /* --font-family: "Kalam", cursive; */
+    
     --font-primary: "League Spartan", sans-serif;
-    /* --font-family: "Edu QLD Beginner", cursive; */
+    
     --font-se: "Inter", sans-serif;
     --color-pr-50: ##FFFFFF;
     --color-pr-100: #EEF3F6;
@@ -54,7 +53,9 @@
     /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
     
     body {
-        font-family: 'Poppins', sans-serif;
+        /* font-primary: "League Spartan", sans-serif;
+    
+        font-se: "Inter", sans-serif; */
         background-color: #f8f9ff;
     }
     
