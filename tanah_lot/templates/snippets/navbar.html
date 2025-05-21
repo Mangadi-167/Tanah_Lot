@@ -30,27 +30,29 @@
             let classes = 'block py-2 px-3 md:p-0 rounded-sm transition-colors duration-300 ease-in-out ';
 
             if (isHomePageLink && isCurrentPage) {
-                classes += 'text-white font-semibold  ';
+                classes += 'font-semibold ';
                 if (this.isTransparent) {
+                    classes += 'text-white '; // Sesuai solusi sebelumnya: putih jika transparan
                     classes += 'md:hover:text-pr-900 ';
                 } else {
-                    classes += 'md:hover:text-pr-900  ';
+                    classes += 'text-pr-900 '; // pr-900 jika tidak transparan
+                    classes += 'md:hover:text-pr-900 ';
                 }
-            } else {
-                if (this.isTransparent) {
-                    classes += 'text-white f ';
-                    classes += 'md:hover:text-pr-900  ';
                 } else {
-                    if (isCurrentPage) {
-                        classes += 'text-white bg-pr-900 md:bg-transparent md:text-pr-900 dark:text-white md:dark:text-blue-500 ';
+                    if (this.isTransparent) {
+                        classes += 'text-white  ';
+                        classes += 'md:hover:text-pr-900  ';
                     } else {
-                        classes += 'text-gray-900 dark:text-white ';
+                        if (isCurrentPage) {
+                            classes += 'text-white bg-pr-900 md:bg-transparent md:text-pr-900 dark:text-white md:dark:text-blue-500 ';
+                        } else {
+                            classes += 'text-gray-900 dark:text-white ';
+                        }
+                        classes += 'md:hover:text-pr-900  ';
                     }
-                    classes += 'md:hover:text-pr-900  ';
                 }
-            }
-            return classes;
-        },
+                return classes;
+            },
 
         getAboutButtonClasses() {
             let classes = 'flex items-center justify-between w-full py-2 px-3 rounded-sm md:border-0 md:p-0 md:w-auto transition-colors duration-300 ease-in-out ';
