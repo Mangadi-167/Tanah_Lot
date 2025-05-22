@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "attractions",
     "dashboard",
     "about",
+    "login",
 ]
 
 MIDDLEWARE = [
