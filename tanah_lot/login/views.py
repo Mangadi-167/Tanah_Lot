@@ -6,3 +6,9 @@ def index(request):
         'judul' : 'Login',
     }
     return render(request, "login.html", context)
+
+def register(request):
+    context={
+        'judul' : 'Register',
+    }
+    return render(request, "register.html", context)
