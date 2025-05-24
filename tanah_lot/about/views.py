@@ -11,14 +11,20 @@ def index(request):
     }
     return render(request,"history.html", context)
 
-# def detail_artikel(request, artikel_id):
-#     artikel = get_object_or_404(Artikel, pk=artikel_id)
-#     return render(request, 'news/detail/detail.html', {'artikel': artikel})
-
-def detail(request):
-
+def facilities(request):
     context={
-        'judul' : 'News | Event Tanah Lot',
+        'judul':'About | Facilities',
     }
-  
-    return render(request, 'news/detail.html', context)
+    return render(request,"facilities.html", context)
+
+def tickets(request):
+    context={
+        'judul':'About | Tickets',
+    }
+    return render(request,"tickets.html", context)
+
+def sitemaps(request):
+    context={
+        'judul':'About | Site Map',
+    }
+    return render(request,"sitemaps.html", context)
