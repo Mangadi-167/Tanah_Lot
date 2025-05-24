@@ -2,6 +2,62 @@
 {% load static %}
 
 {% block body %}
+<div class="bg-gray-50 py-10 px-4 sm:px-10">
+  <h2 class="text-center text-xl font-semibold text-blue-800 mt-18">Ticket Price</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
+    <!-- Domestic Tourist -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h3 class="font-semibold text-lg mb-2">Domestic Tourist</h3>
+      <div class="flex justify-between text-sm text-gray-700">
+        <span>Child (5-10 Years old)</span>
+        <span>IDR 20.000</span>
+      </div>
+      <div class="flex justify-between text-sm text-gray-700 mt-1">
+        <span>Adult</span>
+        <span>IDR 30.000</span>
+      </div>
+    </div>
+
+    <!-- Foreigner Tourist -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h3 class="font-semibold text-lg mb-2">Foreigner Tourist</h3>
+      <div class="flex justify-between text-sm text-gray-700">
+        <span>Child (5-10 Years old)</span>
+        <span>IDR 40.000</span>
+      </div>
+      <div class="flex justify-between text-sm text-gray-700 mt-1">
+        <span>Adult</span>
+        <span>IDR 75.000</span>
+      </div>
+    </div>
+
+    <!-- Vehicle -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h3 class="font-semibold text-lg mb-2">Vehicle</h3>
+      <div class="flex justify-between text-sm text-gray-700">
+        <span>4 Wheels</span>
+        <span>Rp 5.000</span>
+      </div>
+      <div class="flex justify-between text-sm text-gray-700 mt-1">
+        <span>2 Wheels</span>
+        <span>Rp 3.000</span>
+      </div>
+      <div class="flex justify-between text-sm text-gray-700 mt-1">
+        <span>6 Wheels</span>
+        <span>Rp 10.000</span>
+      </div>
+    </div>
+
+    <!-- Note -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h3 class="font-semibold text-lg mb-2">Note</h3>
+      <p class="text-sm text-gray-700">
+        Visitors who want to do photo sessions, flying drone and shooting or other commercial purposes are expected to report to the management.
+      </p>
+    </div>
+  </div>
+</div>
 
 
 {% endblock %}

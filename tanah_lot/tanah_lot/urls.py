@@ -13,5 +13,9 @@ urlpatterns = [
     path("login/", include("login.urls")),
     path("chatbot/", include("chatbot.urls")),
     path('', views.index,name='/'),
+    
+    path('pakendungan/', views.pakendungan,name='pakendungan'),
+    path('penataranmadya/', views.penataranmadya,name='penataranmadya'),
+
     path("calender/", views.calender, name='calender'),
 ]

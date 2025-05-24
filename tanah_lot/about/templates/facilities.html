@@ -2,6 +2,55 @@
 {% load static %}
 
 {% block body %}
+<div class="bg-gray-50 py-10 px-4 sm:px-10">
+  <h2 class="text-2xl font-semibold text-center text-blue-800 mt-18">Facilities</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 max-w-6xl mx-auto">
+    <!-- Parking Area -->
+    <div class="flex bg-white rounded-lg shadow-md overflow-hidden">
+      <img src="{% static 'image/news1.png' %}" alt="Parking Area" class="w-1/2 object-cover">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">Parking Area</h3>
+        <p class="text-gray-600 text-sm mt-1">
+          The temple have a big parking area for your vehicles car or motorcycle
+        </p>
+      </div>
+    </div>
+
+    <!-- Public Bathroom -->
+    <div class="flex bg-white rounded-lg shadow-md overflow-hidden">
+      <img src="{% static 'image/news1.png' %}" alt="Public Bathroom" class="w-1/2 object-cover">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">Public Bathroom</h3>
+        <p class="text-gray-600 text-sm mt-1">
+          A clean toilet provides comfort and convenience for our guests.
+        </p>
+      </div>
+    </div>
+
+    <!-- Hand Washing -->
+    <div class="flex bg-white rounded-lg shadow-md overflow-hidden">
+      <img src="{% static 'image/news1.png' %}" alt="Hand Washing" class="w-1/2 object-cover">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">Hand washing</h3>
+        <p class="text-gray-600 text-sm mt-1">
+          Hand washing facilities provide comfort and convenience for our guests.
+        </p>
+      </div>
+    </div>
+
+    <!-- Parking Area (Duplicate) -->
+    <div class="flex bg-white rounded-lg shadow-md overflow-hidden">
+      <img src="{% static 'image/news1.png' %}" alt="Parking Area" class="w-1/2 object-cover">
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">Parking Area</h3>
+        <p class="text-gray-600 text-sm mt-1">
+          The temple have a big parking area for your vehicles car or motorcycle
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {% endblock %}
