@@ -12,3 +12,16 @@ def calender(request):
         'judul' : 'Event Calender',
     }
     return render(request, "calender.html", context)
+
+
+def pakendungan(request):
+    context={
+        'judul' : 'Pakendungan',
+    }
+    return render(request, "pakendungan.html", context)
+
+def penataranmadya(request):
+    context={
+        'judul' : 'Penataran Madya',
+    }
+    return render(request, "penataranmadya.html", context)
