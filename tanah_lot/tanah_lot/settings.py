@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "dashboard",
     "about",
     "login",
+    "chatbot",
 ]
 
 MIDDLEWARE = [

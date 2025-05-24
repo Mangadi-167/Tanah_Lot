@@ -11,6 +11,7 @@ urlpatterns = [
     path("dashboard/", include("dashboard.urls")),
     path("about/", include("about.urls")),
     path("login/", include("login.urls")),
+    path("chatbot/", include("chatbot.urls")),
     path('', views.index,name='/'),
     path("calender/", views.calender, name='calender'),
 ]
