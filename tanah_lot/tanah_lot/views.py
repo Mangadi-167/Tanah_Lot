@@ -16,18 +16,36 @@ def calender(request):
 
 def pakendungan(request):
     context={
-        'judul' : 'Pura Pakendungan',
+        'judul' : 'Pakendungan Temple',
     }
     return render(request, "pakendungan.html", context)
 
 def penataranmadya(request):
     context={
-        'judul' : 'Pura Penataran Madya',
+        'judul' : 'Penataran Madya Temple',
     }
     return render(request, "penataranmadya.html", context)
 
 def jrokandang(request):
     context={
-        'judul' : 'Pura Jro Kandang '
+        'judul' : 'Jro Kandang Temple'
     }
     return render(request,"jrokandang.html", context)
+
+def njunggaluh(request):
+    context={
+        'judul' : 'Njung Galuh Temple '
+    }
+    return render(request,"njunggaluh.html", context)
+
+def batubolong(request):
+    context={
+        'judul' : 'Batu Bolong Temple '
+    }
+    return render(request,"batubolong.html", context)
+
+def batumejan(request):
+    context={
+        'judul' : 'Batu Mejan Temple '
+    }
+    return render(request,"batumejan.html", context)
