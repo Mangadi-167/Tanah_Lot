@@ -12,19 +12,11 @@
     --color-red-600: #DC2626;
     --color-red-700: #B91C1C;
     --color-amber-300: oklch(87.9% 0.169 91.605);
-    --color-cyan-100: #CFFAFE;
-    --color-cyan-200: #A5F3FC;
-    --color-cyan-400: #22D3EE;
-    --color-cyan-500: #06B6D4;
-    --color-cyan-600: #0891B2;
-    --color-cyan-700: #0E7490;
-    --color-cyan-800: #155E75;
     --color-blue-300: #93C5FD;
     --color-blue-500: #3B82F6;
     --color-blue-600: #2563EB;
     --color-blue-700: #1D4ED8;
     --color-blue-800: #1E40AF;
-    --color-blue-900: #1E3A8A;
     --color-indigo-500: #6366F1;
     --color-indigo-600: #4F46E5;
     --color-gray-50: #F9FAFB;
@@ -85,12 +77,10 @@
     --default-mono-font-family: var(--font-mono);
     --font-primary: "League Spartan", sans-serif;
     --font-se: "Inter", sans-serif;
-    --color-pr-400: #CDD9E2;
     --color-pr-600: #81A1B6;
     --color-pr-700: #4F7B99;
     --color-pr-800: #35698A;
     --color-pr-900: #03436D;
-    --color-neu-500: #909090;
     --color-neu-600: #7A7A7A;
     --color-neu-700: #646464;
     --color-neu-800: #4d4d4d;
@@ -253,595 +243,6 @@
   .invisible {
     visibility: hidden;
   }
-  .datatable-wrapper {
-    width: 100%;
-    & .datatable-top {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column-reverse;
-      align-items: start;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      @media (min-width: 640px) {
-        flex-direction: row-reverse;
-        align-items: center;
-      }
-    }
-    & .datatable-search .datatable-input {
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      background-color: var(--color-gray-50);
-      min-width: 16rem;
-    }
-    & .datatable-input {
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      background-color: var(--color-gray-50);
-      min-width: 16rem;
-    }
-    .dark & .datatable-search .datatable-input {
-      color: white;
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-    }
-    .dark & .datatable-input {
-      color: white;
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-    }
-    & thead th .datatable-input {
-      background-color: white;
-      font-weight: 400;
-      color: var(--color-gray-900);
-      padding-top: .35rem;
-      padding-bottom: .35rem;
-      min-width: 0;
-    }
-    .dark & thead th .datatable-input {
-      background-color: var(--color-gray-700);
-      border-color: var(--color-gray-600);
-      color: white;
-    }
-    & .datatable-top .datatable-dropdown {
-      color: var(--color-gray-500);
-      font-size: 0.875rem;
-    }
-    .dark & .datatable-top .datatable-dropdown {
-      color: var(--color-gray-400);
-    }
-    & .datatable-top .datatable-dropdown .datatable-selector {
-      background-color: var(--color-gray-50);
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      margin-right: 0.25rem;
-      min-width: 4rem;
-    }
-    .dark & .datatable-top .datatable-dropdown .datatable-selector {
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-      color: white;
-    }
-    & .datatable-container thead tr.search-filtering-row th {
-      padding-top: 0;
-    }
-    & .datatable-search .datatable-input:focus {
-      border-color: var(--color-blue-600);
-    }
-    & .datatable-container {
-      overflow-x: auto;
-    }
-    & .datatable-table {
-      width: 100%;
-      font-size: 0.875rem;
-      color: var(--color-gray-500);
-      text-align: left;
-    }
-    .dark & .datatable-table {
-      color: var(--color-gray-400);
-    }
-    & .datatable-table thead {
-      font-size: 0.75rem;
-      color: var(--color-gray-500);
-      background-color: var(--color-gray-50);
-    }
-    .dark & .datatable-table thead {
-      color: var(--color-gray-400);
-      background-color: var(--color-gray-800);
-    }
-    & .datatable-table thead th {
-      white-space: nowrap;
-    }
-    & .datatable-table thead th {
-      width: auto !important;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    & .datatable-table tbody th {
-      width: auto !important;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    & .datatable-table tbody td {
-      width: auto !important;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    & .datatable-table thead th .datatable-sorter {
-      text-transform: uppercase;
-    }
-    & .datatable-table thead th {
-      text-transform: uppercase;
-    }
-    & .datatable-table thead th .datatable-sorter:hover {
-      color: var(--color-gray-900);
-    }
-    & .datatable-table thead th.datatable-ascending .datatable-sorter {
-      color: var(--color-gray-900);
-    }
-    & .datatable-table thead th.datatable-descending .datatable-sorter {
-      color: var(--color-gray-900);
-    }
-    .dark & .datatable-table thead th .datatable-sorter:hover {
-      color: white;
-    }
-    .dark & .datatable-table thead th.datatable-ascending .datatable-sorter {
-      color: white;
-    }
-    .dark & .datatable-table thead th.datatable-descending .datatable-sorter {
-      color: white;
-    }
-    & .datatable-table tbody tr.selected {
-      background-color: var(--color-gray-100);
-    }
-    .dark & .datatable-table tbody tr.selected {
-      background-color: var(--color-gray-700);
-    }
-    & .datatable-table tbody tr {
-      border-bottom: 1px solid var(--color-gray-200);
-    }
-    .dark & .datatable-table tbody tr {
-      border-bottom: 1px solid var(--color-gray-700);
-    }
-    & .datatable-table .datatable-empty {
-      text-align: center;
-    }
-    & .datatable-bottom {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: start;
-      margin-top: 1rem;
-      gap: 1rem;
-      @media (min-width: 640px) {
-        flex-direction: row;
-        align-items: center;
-      }
-    }
-    & .datatable-bottom .datatable-info {
-      color: var(--color-gray-500);
-      font-size: 0.875rem;
-    }
-    .dark & .datatable-bottom .datatable-info {
-      color: var(--color-gray-400);
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list {
-      display: flex;
-      align-items: center;
-      height: 2rem;
-      font-size: 0.875rem;
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item-link {
-      display: flex;
-      align-items: center;
-      color: var(--color-gray-500);
-      font-weight: 500;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-      height: 2rem;
-      font-size: 0.875rem;
-      border-top: 1px solid var(--color-gray-300);
-      border-bottom: 1px solid var(--color-gray-300);
-      border-right: 1px solid var(--color-gray-300);
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item-link {
-      color: var(--color-gray-400);
-      border-color: var(--color-gray-700);
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type {
-      position: relative;
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type {
-      position: relative;
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1.3rem;
-      height: 1.3rem;
-      transform: translate(-50%, -50%);
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      width: 1.3rem;
-      height: 1.3rem;
-      transform: translate(50%, -50%);
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      border-top-left-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
-      border-left: 1px solid var(--color-gray-300);
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      border-left: 1px solid var(--color-gray-700);
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      border-top-right-radius: 0.5rem;
-      border-bottom-right-radius: 0.5rem;
-      border-left: 0;
-    }
-    & .datatable-bottom .datatable-pagination .datatable-pagination-list-item-link:hover {
-      background-color: var(--color-gray-50);
-      color: var(--color-gray-700);
-    }
-    .dark & .datatable-bottom .datatable-pagination .datatable-pagination-list-item-link:hover {
-      background-color: var(--color-gray-700);
-      color: white;
-    }
-  }
-  .datatable-bottom {
-    .datatable-wrapper & {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: start;
-      margin-top: 1rem;
-      gap: 1rem;
-      @media (min-width: 640px) {
-        flex-direction: row;
-        align-items: center;
-      }
-    }
-    .datatable-wrapper & .datatable-info {
-      color: var(--color-gray-500);
-      font-size: 0.875rem;
-    }
-    .dark .datatable-wrapper & .datatable-info {
-      color: var(--color-gray-400);
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list {
-      display: flex;
-      align-items: center;
-      height: 2rem;
-      font-size: 0.875rem;
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item-link {
-      display: flex;
-      align-items: center;
-      color: var(--color-gray-500);
-      font-weight: 500;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-      height: 2rem;
-      font-size: 0.875rem;
-      border-top: 1px solid var(--color-gray-300);
-      border-bottom: 1px solid var(--color-gray-300);
-      border-right: 1px solid var(--color-gray-300);
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item-link {
-      color: var(--color-gray-400);
-      border-color: var(--color-gray-700);
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type {
-      position: relative;
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:last-of-type {
-      position: relative;
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1.3rem;
-      height: 1.3rem;
-      transform: translate(-50%, -50%);
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      width: 1.3rem;
-      height: 1.3rem;
-      transform: translate(50%, -50%);
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      border-top-left-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
-      border-left: 1px solid var(--color-gray-300);
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      border-left: 1px solid var(--color-gray-700);
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      border-top-right-radius: 0.5rem;
-      border-bottom-right-radius: 0.5rem;
-      border-left: 0;
-    }
-    .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item-link:hover {
-      background-color: var(--color-gray-50);
-      color: var(--color-gray-700);
-    }
-    .dark .datatable-wrapper & .datatable-pagination .datatable-pagination-list-item-link:hover {
-      background-color: var(--color-gray-700);
-      color: white;
-    }
-  }
-  .datatable-pagination {
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list {
-      display: flex;
-      align-items: center;
-      height: 2rem;
-      font-size: 0.875rem;
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item-link {
-      display: flex;
-      align-items: center;
-      color: var(--color-gray-500);
-      font-weight: 500;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-      height: 2rem;
-      font-size: 0.875rem;
-      border-top: 1px solid var(--color-gray-300);
-      border-bottom: 1px solid var(--color-gray-300);
-      border-right: 1px solid var(--color-gray-300);
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item-link {
-      color: var(--color-gray-400);
-      border-color: var(--color-gray-700);
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type {
-      position: relative;
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:last-of-type {
-      position: relative;
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      color: transparent;
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1.3rem;
-      height: 1.3rem;
-      transform: translate(-50%, -50%);
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      width: 1.3rem;
-      height: 1.3rem;
-      transform: translate(50%, -50%);
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      border-top-left-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
-      border-left: 1px solid var(--color-gray-300);
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:first-of-type .datatable-pagination-list-item-link {
-      border-left: 1px solid var(--color-gray-700);
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item:last-of-type .datatable-pagination-list-item-link {
-      border-top-right-radius: 0.5rem;
-      border-bottom-right-radius: 0.5rem;
-      border-left: 0;
-    }
-    .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item-link:hover {
-      background-color: var(--color-gray-50);
-      color: var(--color-gray-700);
-    }
-    .dark .datatable-wrapper .datatable-bottom & .datatable-pagination-list-item-link:hover {
-      background-color: var(--color-gray-700);
-      color: white;
-    }
-  }
-  .datatable-pagination-list-item-link {
-    .datatable-wrapper .datatable-bottom .datatable-pagination & {
-      display: flex;
-      align-items: center;
-      color: var(--color-gray-500);
-      font-weight: 500;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-      height: 2rem;
-      font-size: 0.875rem;
-      border-top: 1px solid var(--color-gray-300);
-      border-bottom: 1px solid var(--color-gray-300);
-      border-right: 1px solid var(--color-gray-300);
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination & {
-      color: var(--color-gray-400);
-      border-color: var(--color-gray-700);
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type & {
-      color: transparent;
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type & {
-      color: transparent;
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type & {
-      color: transparent;
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type & {
-      color: transparent;
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type &::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1.3rem;
-      height: 1.3rem;
-      transform: translate(-50%, -50%);
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type &:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type &::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type &:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m14 8-4 4 4 4'/%3e %3c/svg%3e");
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type &::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      width: 1.3rem;
-      height: 1.3rem;
-      transform: translate(50%, -50%);
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type &:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type &::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='%239CA3AF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type &:hover::after {
-      content: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m10 16 4-4-4-4'/%3e %3c/svg%3e");
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type & {
-      border-top-left-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
-      border-left: 1px solid var(--color-gray-300);
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:first-of-type & {
-      border-left: 1px solid var(--color-gray-700);
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination .datatable-pagination-list-item:last-of-type & {
-      border-top-right-radius: 0.5rem;
-      border-bottom-right-radius: 0.5rem;
-      border-left: 0;
-    }
-    .datatable-wrapper .datatable-bottom .datatable-pagination &:hover {
-      background-color: var(--color-gray-50);
-      color: var(--color-gray-700);
-    }
-    .dark .datatable-wrapper .datatable-bottom .datatable-pagination &:hover {
-      background-color: var(--color-gray-700);
-      color: white;
-    }
-  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -880,20 +281,8 @@
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
-  .right-2 {
-    right: calc(var(--spacing) * 2);
-  }
-  .right-3 {
-    right: calc(var(--spacing) * 3);
-  }
   .right-4 {
     right: calc(var(--spacing) * 4);
-  }
-  .right-6 {
-    right: calc(var(--spacing) * 6);
-  }
-  .right-8 {
-    right: calc(var(--spacing) * 8);
   }
   .right-10 {
     right: calc(var(--spacing) * 10);
@@ -904,26 +293,11 @@
   .bottom-2 {
     bottom: calc(var(--spacing) * 2);
   }
-  .bottom-6 {
-    bottom: calc(var(--spacing) * 6);
-  }
-  .bottom-8 {
-    bottom: calc(var(--spacing) * 8);
-  }
   .bottom-10 {
     bottom: calc(var(--spacing) * 10);
   }
-  .bottom-12 {
-    bottom: calc(var(--spacing) * 12);
-  }
   .bottom-18 {
     bottom: calc(var(--spacing) * 18);
-  }
-  .bottom-20 {
-    bottom: calc(var(--spacing) * 20);
-  }
-  .bottom-28 {
-    bottom: calc(var(--spacing) * 28);
   }
   .-left-\[calc\(0\.375rem-1px\)\] {
     left: calc(calc(0.375rem - 1px) * -1);
@@ -1018,9 +392,6 @@
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
   }
-  .mt-12 {
-    margin-top: calc(var(--spacing) * 12);
-  }
   .mt-18 {
     margin-top: calc(var(--spacing) * 18);
   }
@@ -1029,292 +400,6 @@
   }
   .mt-22 {
     margin-top: calc(var(--spacing) * 22);
-  }
-  .apexcharts-canvas {
-    & .apexcharts-tooltip {
-      background-color: white !important;
-      color: var(--color-gray-700) !important;
-      border: 0 !important;
-      border-radius: 0.25rem !important;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
-    }
-    .dark & .apexcharts-tooltip {
-      background-color: var(--color-gray-700) !important;
-      color: var(--color-gray-400) !important;
-      border-color: transparent !important;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
-    }
-    & .apexcharts-tooltip .apexcharts-tooltip-title {
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
-      padding-right: 0.75rem !important;
-      padding-left: 0.75rem !important;
-      margin-bottom: 0.75rem !important;
-      background-color: var(--color-gray-100) !important;
-      border-bottom-color: var(--color-gray-200) !important;
-      font-size: 0.875rem !important;
-      font-weight: 400 !important;
-      color: var(--color-gray-500) !important;
-    }
-    .dark & .apexcharts-tooltip .apexcharts-tooltip-title {
-      background-color: var(--color-gray-600) !important;
-      border-color: var(--color-gray-500) !important;
-      color: var(--color-gray-500) !important;
-    }
-    & .apexcharts-xaxistooltip {
-      color: var(--color-gray-500) !important;
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
-      padding-right: 0.75rem !important;
-      padding-left: 0.75rem !important;
-      border-color: transparent !important;
-      background-color: white !important;
-      border-radius: 0.25rem !important;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
-    }
-    .dark & .apexcharts-xaxistooltip {
-      color: var(--color-gray-400) !important;
-      background-color: var(--color-gray-700) !important;
-    }
-    & .apexcharts-tooltip .apexcharts-tooltip-text-y-label {
-      color: var(--color-gray-500) !important;
-      font-size: 0.875rem !important;
-    }
-    .dark & .apexcharts-tooltip .apexcharts-tooltip-text-y-label {
-      color: var(--color-gray-400) !important;
-    }
-    & .apexcharts-tooltip .apexcharts-tooltip-text-y-value {
-      color: var(--color-gray-900);
-      font-size: 0.875rem !important;
-    }
-    .dark & .apexcharts-tooltip .apexcharts-tooltip-text-y-value {
-      color: white !important;
-    }
-    & .apexcharts-xaxistooltip-text {
-      font-weight: 400 !important;
-      font-size: 0.875rem !important;
-    }
-    & .apexcharts-xaxistooltip:after {
-      border-bottom-color: white !important;
-    }
-    & .apexcharts-xaxistooltip:before {
-      border-bottom-color: white !important;
-    }
-    & .apexcharts-xaxistooltip:after {
-      border-width: 8px !important;
-      margin-left: -8px !important;
-    }
-    & .apexcharts-xaxistooltip:before {
-      border-width: 10px !important;
-      margin-left: -10px !important;
-    }
-    .dark & .apexcharts-xaxistooltip:after {
-      border-bottom-color: var(--color-gray-700) !important;
-    }
-    .dark & .apexcharts-xaxistooltip:before {
-      border-bottom-color: var(--color-gray-700) !important;
-    }
-    & .apexcharts-tooltip-series-group.apexcharts-active .apexcharts-tooltip-y-group {
-      padding: 0 !important;
-    }
-    & .apexcharts-tooltip-series-group.apexcharts-active {
-      padding-left: 0.75rem !important;
-      padding-right: 0.75rem !important;
-      padding-bottom: 0.75rem !important;
-      background-color: white !important;
-      color: var(--color-gray-500) !important;
-    }
-    .dark & .apexcharts-tooltip-series-group.apexcharts-active {
-      background-color: var(--color-gray-700) !important;
-      color: var(--color-gray-400) !important;
-    }
-    & .apexcharts-tooltip-series-group.apexcharts-active:first-of-type {
-      padding-top: 0.75rem !important;
-    }
-    & .apexcharts-legend {
-      padding: 0 !important;
-    }
-    & .apexcharts-legend-text {
-      font-size: 0.75rem !important;
-      font-weight: 500 !important;
-      padding-left: 1.25rem !important;
-      color: var(--color-gray-500) !important;
-    }
-    :is([dir=rtl]) & .apexcharts-legend-text {
-      padding-right: 0.5rem !important;
-    }
-    & .apexcharts-legend-text:not(.apexcharts-inactive-legend):hover {
-      color: var(--color-gray-900) !important;
-    }
-    .dark & .apexcharts-legend-text {
-      color: var(--color-gray-400) !important;
-    }
-    .dark & .apexcharts-legend-text:not(.apexcharts-inactive-legend):hover {
-      color: white !important;
-    }
-    & .apexcharts-legend-series {
-      margin-left: 0.5rem !important;
-      margin-right: 0.5rem !important;
-      margin-bottom: 0.25rem !important;
-      display: flex !important;
-      align-items: center !important;
-    }
-    .dark & .apexcharts-datalabels-group .apexcharts-text.apexcharts-datalabel-value {
-      fill: white !important;
-    }
-    & .apexcharts-datalabels-group .apexcharts-text.apexcharts-datalabel-label {
-      fill: var(--color-gray-500) !important;
-      font-size: 1rem,[object Object] !important;
-      font-weight: 400 !important;
-    }
-    .dark & .apexcharts-datalabels-group .apexcharts-text.apexcharts-datalabel-label {
-      fill: var(--color-gray-400) !important;
-    }
-    & .apexcharts-datalabels .apexcharts-text.apexcharts-pie-label {
-      font-size: 0.75rem,[object Object] !important;
-      font-weight: 600 !important;
-      text-shadow: none !important;
-      filter: none !important;
-    }
-  }
-  .apexcharts-legend-series {
-    .apexcharts-canvas & {
-      margin-left: 0.5rem !important;
-      margin-right: 0.5rem !important;
-      margin-bottom: 0.25rem !important;
-      display: flex !important;
-      align-items: center !important;
-    }
-  }
-  .apexcharts-tooltip {
-    .apexcharts-canvas & {
-      background-color: white !important;
-      color: var(--color-gray-700) !important;
-      border: 0 !important;
-      border-radius: 0.25rem !important;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
-    }
-    .dark .apexcharts-canvas & {
-      background-color: var(--color-gray-700) !important;
-      color: var(--color-gray-400) !important;
-      border-color: transparent !important;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
-    }
-    .apexcharts-canvas & .apexcharts-tooltip-title {
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
-      padding-right: 0.75rem !important;
-      padding-left: 0.75rem !important;
-      margin-bottom: 0.75rem !important;
-      background-color: var(--color-gray-100) !important;
-      border-bottom-color: var(--color-gray-200) !important;
-      font-size: 0.875rem !important;
-      font-weight: 400 !important;
-      color: var(--color-gray-500) !important;
-    }
-    .dark .apexcharts-canvas & .apexcharts-tooltip-title {
-      background-color: var(--color-gray-600) !important;
-      border-color: var(--color-gray-500) !important;
-      color: var(--color-gray-500) !important;
-    }
-    .apexcharts-canvas & .apexcharts-tooltip-text-y-label {
-      color: var(--color-gray-500) !important;
-      font-size: 0.875rem !important;
-    }
-    .dark .apexcharts-canvas & .apexcharts-tooltip-text-y-label {
-      color: var(--color-gray-400) !important;
-    }
-    .apexcharts-canvas & .apexcharts-tooltip-text-y-value {
-      color: var(--color-gray-900);
-      font-size: 0.875rem !important;
-    }
-    :is([dir=rtl]) & .apexcharts-tooltip-marker {
-      margin-right: 0px !important;
-      margin-left: e !important;
-    }
-    .dark .apexcharts-canvas & .apexcharts-tooltip-text-y-value {
-      color: white !important;
-    }
-  }
-  .datatable-top {
-    .datatable-wrapper & {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column-reverse;
-      align-items: start;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      @media (min-width: 640px) {
-        flex-direction: row-reverse;
-        align-items: center;
-      }
-    }
-    .datatable-wrapper & .datatable-dropdown {
-      color: var(--color-gray-500);
-      font-size: 0.875rem;
-    }
-    .dark .datatable-wrapper & .datatable-dropdown {
-      color: var(--color-gray-400);
-    }
-    .datatable-wrapper & .datatable-dropdown .datatable-selector {
-      background-color: var(--color-gray-50);
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      margin-right: 0.25rem;
-      min-width: 4rem;
-    }
-    .dark .datatable-wrapper & .datatable-dropdown .datatable-selector {
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-      color: white;
-    }
-  }
-  .apexcharts-tooltip-marker {
-    :is([dir=rtl]) .apexcharts-tooltip & {
-      margin-right: 0px !important;
-      margin-left: e !important;
-    }
-  }
-  .datatable-dropdown {
-    .datatable-wrapper .datatable-top & {
-      color: var(--color-gray-500);
-      font-size: 0.875rem;
-    }
-    .dark .datatable-wrapper .datatable-top & {
-      color: var(--color-gray-400);
-    }
-    .datatable-wrapper .datatable-top & .datatable-selector {
-      background-color: var(--color-gray-50);
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      margin-right: 0.25rem;
-      min-width: 4rem;
-    }
-    .dark .datatable-wrapper .datatable-top & .datatable-selector {
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-      color: white;
-    }
-  }
-  .datatable-selector {
-    .datatable-wrapper .datatable-top .datatable-dropdown & {
-      background-color: var(--color-gray-50);
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      margin-right: 0.25rem;
-      min-width: 4rem;
-    }
-    .dark .datatable-wrapper .datatable-top .datatable-dropdown & {
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-      color: white;
-    }
   }
   .mr-1 {
     margin-right: calc(var(--spacing) * 1);
@@ -1331,25 +416,6 @@
   .mr-4 {
     margin-right: calc(var(--spacing) * 4);
   }
-  .apexcharts-tooltip-title {
-    .apexcharts-canvas .apexcharts-tooltip & {
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
-      padding-right: 0.75rem !important;
-      padding-left: 0.75rem !important;
-      margin-bottom: 0.75rem !important;
-      background-color: var(--color-gray-100) !important;
-      border-bottom-color: var(--color-gray-200) !important;
-      font-size: 0.875rem !important;
-      font-weight: 400 !important;
-      color: var(--color-gray-500) !important;
-    }
-    .dark .apexcharts-canvas .apexcharts-tooltip & {
-      background-color: var(--color-gray-600) !important;
-      border-color: var(--color-gray-500) !important;
-      color: var(--color-gray-500) !important;
-    }
-  }
   .-mb-44 {
     margin-bottom: calc(var(--spacing) * -44);
   }
@@ -1361,9 +427,6 @@
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
-  }
-  .mb-3 {
-    margin-bottom: calc(var(--spacing) * 3);
   }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
@@ -1392,43 +455,6 @@
   .mb-30 {
     margin-bottom: calc(var(--spacing) * 30);
   }
-  .apexcharts-xaxistooltip {
-    .apexcharts-canvas & {
-      color: var(--color-gray-500) !important;
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
-      padding-right: 0.75rem !important;
-      padding-left: 0.75rem !important;
-      border-color: transparent !important;
-      background-color: white !important;
-      border-radius: 0.25rem !important;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
-    }
-    .dark .apexcharts-canvas & {
-      color: var(--color-gray-400) !important;
-      background-color: var(--color-gray-700) !important;
-    }
-    .apexcharts-canvas &:after {
-      border-bottom-color: white !important;
-    }
-    .apexcharts-canvas &:before {
-      border-bottom-color: white !important;
-    }
-    .apexcharts-canvas &:after {
-      border-width: 8px !important;
-      margin-left: -8px !important;
-    }
-    .apexcharts-canvas &:before {
-      border-width: 10px !important;
-      margin-left: -10px !important;
-    }
-    .dark .apexcharts-canvas &:after {
-      border-bottom-color: var(--color-gray-700) !important;
-    }
-    .dark .apexcharts-canvas &:before {
-      border-bottom-color: var(--color-gray-700) !important;
-    }
-  }
   .-ml-1 {
     margin-left: calc(var(--spacing) * -1);
   }
@@ -1437,14 +463,6 @@
   }
   .ml-8 {
     margin-left: calc(var(--spacing) * 8);
-  }
-  .datatable-pagination-list {
-    .datatable-wrapper .datatable-bottom .datatable-pagination & {
-      display: flex;
-      align-items: center;
-      height: 2rem;
-      font-size: 0.875rem;
-    }
   }
   .line-clamp-1 {
     overflow: hidden;
@@ -1512,9 +530,6 @@
   .h-18 {
     height: calc(var(--spacing) * 18);
   }
-  .h-20 {
-    height: calc(var(--spacing) * 20);
-  }
   .h-30 {
     height: calc(var(--spacing) * 30);
   }
@@ -1532,9 +547,6 @@
   }
   .h-\[18px\] {
     height: 18px;
-  }
-  .h-\[70px\] {
-    height: 70px;
   }
   .h-\[400px\] {
     height: 400px;
@@ -1559,89 +571,6 @@
   }
   .min-h-screen {
     min-height: 100vh;
-  }
-  .datatable-table {
-    .datatable-wrapper & {
-      width: 100%;
-      font-size: 0.875rem;
-      color: var(--color-gray-500);
-      text-align: left;
-    }
-    .dark .datatable-wrapper & {
-      color: var(--color-gray-400);
-    }
-    .datatable-wrapper & thead {
-      font-size: 0.75rem;
-      color: var(--color-gray-500);
-      background-color: var(--color-gray-50);
-    }
-    .dark .datatable-wrapper & thead {
-      color: var(--color-gray-400);
-      background-color: var(--color-gray-800);
-    }
-    .datatable-wrapper & thead th {
-      white-space: nowrap;
-    }
-    .datatable-wrapper & thead th {
-      width: auto !important;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    .datatable-wrapper & tbody th {
-      width: auto !important;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    .datatable-wrapper & tbody td {
-      width: auto !important;
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-    .datatable-wrapper & thead th .datatable-sorter {
-      text-transform: uppercase;
-    }
-    .datatable-wrapper & thead th {
-      text-transform: uppercase;
-    }
-    .datatable-wrapper & thead th .datatable-sorter:hover {
-      color: var(--color-gray-900);
-    }
-    .datatable-wrapper & thead th.datatable-ascending .datatable-sorter {
-      color: var(--color-gray-900);
-    }
-    .datatable-wrapper & thead th.datatable-descending .datatable-sorter {
-      color: var(--color-gray-900);
-    }
-    .dark .datatable-wrapper & thead th .datatable-sorter:hover {
-      color: white;
-    }
-    .dark .datatable-wrapper & thead th.datatable-ascending .datatable-sorter {
-      color: white;
-    }
-    .dark .datatable-wrapper & thead th.datatable-descending .datatable-sorter {
-      color: white;
-    }
-    .datatable-wrapper & tbody tr.selected {
-      background-color: var(--color-gray-100);
-    }
-    .dark .datatable-wrapper & tbody tr.selected {
-      background-color: var(--color-gray-700);
-    }
-    .datatable-wrapper & tbody tr {
-      border-bottom: 1px solid var(--color-gray-200);
-    }
-    .dark .datatable-wrapper & tbody tr {
-      border-bottom: 1px solid var(--color-gray-700);
-    }
-    .datatable-wrapper & .datatable-empty {
-      text-align: center;
-    }
   }
   .w-0 {
     width: calc(var(--spacing) * 0);
@@ -1712,9 +641,6 @@
   .w-\[18px\] {
     width: 18px;
   }
-  .w-\[70px\] {
-    width: 70px;
-  }
   .w-auto {
     width: auto;
   }
@@ -1736,9 +662,6 @@
   .max-w-6xl {
     max-width: var(--container-6xl);
   }
-  .max-w-\[550px\] {
-    max-width: 550px;
-  }
   .max-w-\[800px\] {
     max-width: 800px;
   }
@@ -1753,68 +676,6 @@
   }
   .max-w-xl {
     max-width: var(--container-xl);
-  }
-  .datatable-input {
-    .datatable-wrapper .datatable-search & {
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      background-color: var(--color-gray-50);
-      min-width: 16rem;
-    }
-    .datatable-wrapper & {
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      background-color: var(--color-gray-50);
-      min-width: 16rem;
-    }
-    .dark .datatable-wrapper .datatable-search & {
-      color: white;
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-    }
-    .dark .datatable-wrapper & {
-      color: white;
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-    }
-    .datatable-wrapper thead th & {
-      background-color: white;
-      font-weight: 400;
-      color: var(--color-gray-900);
-      padding-top: .35rem;
-      padding-bottom: .35rem;
-      min-width: 0;
-    }
-    .dark .datatable-wrapper thead th & {
-      background-color: var(--color-gray-700);
-      border-color: var(--color-gray-600);
-      color: white;
-    }
-    .datatable-wrapper .datatable-search &:focus {
-      border-color: var(--color-blue-600);
-    }
-  }
-  .datatable-search {
-    .datatable-wrapper & .datatable-input {
-      color: var(--color-gray-900);
-      font-size: 0.875rem;
-      border: 1px solid var(--color-gray-300);
-      border-radius: 0.5rem;
-      background-color: var(--color-gray-50);
-      min-width: 16rem;
-    }
-    .dark .datatable-wrapper & .datatable-input {
-      color: white;
-      background-color: var(--color-gray-800);
-      border: 1px solid var(--color-gray-700);
-    }
-    .datatable-wrapper & .datatable-input:focus {
-      border-color: var(--color-blue-600);
-    }
   }
   .min-w-full {
     min-width: 100%;
@@ -1865,9 +726,6 @@
   }
   .resize {
     resize: both;
-  }
-  .resize-none {
-    resize: none;
   }
   .snap-x {
     scroll-snap-type: x var(--tw-scroll-snap-strictness);
@@ -1991,13 +849,6 @@
       margin-inline-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
-  .space-x-5 {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 5) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 5) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
   .space-x-6 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
@@ -2035,14 +886,6 @@
   .overflow-hidden {
     overflow: hidden;
   }
-  .datatable-container {
-    .datatable-wrapper & thead tr.search-filtering-row th {
-      padding-top: 0;
-    }
-    .datatable-wrapper & {
-      overflow-x: auto;
-    }
-  }
   .overflow-x-auto {
     overflow-x: auto;
   }
@@ -2072,10 +915,6 @@
   }
   .rounded-xl {
     border-radius: var(--radius-xl);
-  }
-  .rounded-t-lg {
-    border-top-left-radius: var(--radius-lg);
-    border-top-right-radius: var(--radius-lg);
   }
   .rounded-b-2xl {
     border-bottom-right-radius: var(--radius-2xl);
@@ -2240,9 +1079,6 @@
       color: white;
     }
   }
-  .border-\[\#e0e0e0\] {
-    border-color: #e0e0e0;
-  }
   .border-gray-100 {
     border-color: var(--color-gray-100);
   }
@@ -2264,42 +1100,6 @@
   .border-white {
     border-color: var(--color-white);
   }
-  .apexcharts-active {
-    .apexcharts-canvas .apexcharts-tooltip-series-group& .apexcharts-tooltip-y-group {
-      padding: 0 !important;
-    }
-    .apexcharts-canvas .apexcharts-tooltip-series-group& {
-      padding-left: 0.75rem !important;
-      padding-right: 0.75rem !important;
-      padding-bottom: 0.75rem !important;
-      background-color: white !important;
-      color: var(--color-gray-500) !important;
-    }
-    .dark .apexcharts-canvas .apexcharts-tooltip-series-group& {
-      background-color: var(--color-gray-700) !important;
-      color: var(--color-gray-400) !important;
-    }
-    .apexcharts-canvas .apexcharts-tooltip-series-group&:first-of-type {
-      padding-top: 0.75rem !important;
-    }
-  }
-  .selected {
-    .datatable-wrapper .datatable-table tbody tr& {
-      background-color: var(--color-gray-100);
-    }
-    .dark .datatable-wrapper .datatable-table tbody tr& {
-      background-color: var(--color-gray-700);
-    }
-  }
-  .selectedCell {
-    background-color: var(--color-gray-50);
-    .dark & {
-      background-color: var(--color-gray-700);
-    }
-  }
-  .bg-\[\#6A64F1\] {
-    background-color: #6A64F1;
-  }
   .bg-amber-300 {
     background-color: var(--color-amber-300);
   }
@@ -2308,9 +1108,6 @@
   }
   .bg-blue-500 {
     background-color: var(--color-blue-500);
-  }
-  .bg-blue-600 {
-    background-color: var(--color-blue-600);
   }
   .bg-frame-50 {
     background-color: var(--color-frame-50);
@@ -2332,9 +1129,6 @@
   }
   .bg-neu-900 {
     background-color: var(--color-neu-900);
-  }
-  .bg-pr-600 {
-    background-color: var(--color-pr-600);
   }
   .bg-pr-900 {
     background-color: var(--color-pr-900);
@@ -2432,83 +1226,14 @@
   .bg-no-repeat {
     background-repeat: no-repeat;
   }
-  .apexcharts-datalabels-group {
-    & .apexcharts-text.apexcharts-datalabel-value {
-      fill: var(--color-gray-900) !important;
-      font-size: 1.875rem,[object Object] !important;
-      font-weight: 700 !important;
-    }
-    .dark .apexcharts-canvas & .apexcharts-text.apexcharts-datalabel-value {
-      fill: white !important;
-    }
-    .apexcharts-canvas & .apexcharts-text.apexcharts-datalabel-label {
-      fill: var(--color-gray-500) !important;
-      font-size: 1rem,[object Object] !important;
-      font-weight: 400 !important;
-    }
-    .dark .apexcharts-canvas & .apexcharts-text.apexcharts-datalabel-label {
-      fill: var(--color-gray-400) !important;
-    }
-  }
-  .apexcharts-datalabel-label {
-    .apexcharts-canvas .apexcharts-datalabels-group .apexcharts-text& {
-      fill: var(--color-gray-500) !important;
-      font-size: 1rem,[object Object] !important;
-      font-weight: 400 !important;
-    }
-    .dark .apexcharts-canvas .apexcharts-datalabels-group .apexcharts-text& {
-      fill: var(--color-gray-400) !important;
-    }
-  }
-  .apexcharts-datalabel-value {
-    .apexcharts-datalabels-group .apexcharts-text& {
-      fill: var(--color-gray-900) !important;
-      font-size: 1.875rem,[object Object] !important;
-      font-weight: 700 !important;
-    }
-    .dark .apexcharts-canvas .apexcharts-datalabels-group .apexcharts-text& {
-      fill: white !important;
-    }
-  }
-  .fill-current {
-    fill: currentcolor;
-  }
   .fill-white {
     fill: var(--color-white);
-  }
-  .apexcharts-gridline {
-    stroke: var(--color-gray-200) !important;
-    .dark & {
-      stroke: var(--color-gray-700) !important;
-    }
-  }
-  .apexcharts-xcrosshairs {
-    stroke: var(--color-gray-200) !important;
-    .dark & {
-      stroke: var(--color-gray-700) !important;
-    }
-  }
-  .apexcharts-ycrosshairs {
-    stroke: var(--color-gray-200) !important;
-    .dark & {
-      stroke: var(--color-gray-700) !important;
-    }
   }
   .object-contain {
     object-fit: contain;
   }
   .object-cover {
     object-fit: cover;
-  }
-  .apexcharts-legend {
-    .apexcharts-canvas & {
-      padding: 0 !important;
-    }
-  }
-  .apexcharts-tooltip-y-group {
-    .apexcharts-canvas .apexcharts-tooltip-series-group.apexcharts-active & {
-      padding: 0 !important;
-    }
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
@@ -2545,12 +1270,6 @@
   }
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
-  }
-  .px-8 {
-    padding-inline: calc(var(--spacing) * 8);
-  }
-  .px-9 {
-    padding-inline: calc(var(--spacing) * 9);
   }
   .py-0 {
     padding-block: calc(var(--spacing) * 0);
@@ -2621,31 +1340,6 @@
   .pt-\[64px\] {
     padding-top: 64px;
   }
-  .search-filtering-row {
-    .datatable-wrapper .datatable-container thead tr& th {
-      padding-top: 0;
-    }
-  }
-  .apexcharts-legend-text {
-    .apexcharts-canvas & {
-      font-size: 0.75rem !important;
-      font-weight: 500 !important;
-      padding-left: 1.25rem !important;
-      color: var(--color-gray-500) !important;
-    }
-    :is([dir=rtl]) .apexcharts-canvas & {
-      padding-right: 0.5rem !important;
-    }
-    .apexcharts-canvas &:not(.apexcharts-inactive-legend):hover {
-      color: var(--color-gray-900) !important;
-    }
-    .dark .apexcharts-canvas & {
-      color: var(--color-gray-400) !important;
-    }
-    .dark .apexcharts-canvas &:not(.apexcharts-inactive-legend):hover {
-      color: white !important;
-    }
-  }
   .pr-3 {
     padding-right: calc(var(--spacing) * 3);
   }
@@ -2675,11 +1369,6 @@
   }
   .pl-10 {
     padding-left: calc(var(--spacing) * 10);
-  }
-  .datatable-empty {
-    .datatable-wrapper .datatable-table & {
-      text-align: center;
-    }
   }
   .text-center {
     text-align: center;
@@ -2728,55 +1417,6 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
-  .apexcharts-datalabels {
-    .apexcharts-canvas & .apexcharts-text.apexcharts-pie-label {
-      font-size: 0.75rem,[object Object] !important;
-      font-weight: 600 !important;
-      text-shadow: none !important;
-      filter: none !important;
-    }
-  }
-  .apexcharts-pie-label {
-    .apexcharts-canvas .apexcharts-datalabels .apexcharts-text& {
-      font-size: 0.75rem,[object Object] !important;
-      font-weight: 600 !important;
-      text-shadow: none !important;
-      filter: none !important;
-    }
-  }
-  .apexcharts-xaxistooltip-text {
-    .apexcharts-canvas & {
-      font-weight: 400 !important;
-      font-size: 0.875rem !important;
-    }
-  }
-  .apexcharts-tooltip-text-y-label {
-    .apexcharts-canvas .apexcharts-tooltip & {
-      color: var(--color-gray-500) !important;
-      font-size: 0.875rem !important;
-    }
-    .dark .apexcharts-canvas .apexcharts-tooltip & {
-      color: var(--color-gray-400) !important;
-    }
-  }
-  .apexcharts-tooltip-text-y-value {
-    .apexcharts-canvas .apexcharts-tooltip & {
-      color: var(--color-gray-900);
-      font-size: 0.875rem !important;
-    }
-    .dark .apexcharts-canvas .apexcharts-tooltip & {
-      color: white !important;
-    }
-  }
-  .datatable-info {
-    .datatable-wrapper .datatable-bottom & {
-      color: var(--color-gray-500);
-      font-size: 0.875rem;
-    }
-    .dark .datatable-wrapper .datatable-bottom & {
-      color: var(--color-gray-400);
-    }
-  }
   .leading-5 {
     --tw-leading: calc(var(--spacing) * 5);
     line-height: calc(var(--spacing) * 5);
@@ -2815,51 +1455,6 @@
   }
   .whitespace-nowrap {
     white-space: nowrap;
-  }
-  .datatable-sorter {
-    .datatable-wrapper .datatable-table thead th & {
-      text-transform: uppercase;
-    }
-    .datatable-wrapper .datatable-table thead th &:hover {
-      color: var(--color-gray-900);
-    }
-    .datatable-wrapper .datatable-table thead th.datatable-ascending & {
-      color: var(--color-gray-900);
-    }
-    .datatable-wrapper .datatable-table thead th.datatable-descending & {
-      color: var(--color-gray-900);
-    }
-    .dark .datatable-wrapper .datatable-table thead th &:hover {
-      color: white;
-    }
-    .dark .datatable-wrapper .datatable-table thead th.datatable-ascending & {
-      color: white;
-    }
-    .dark .datatable-wrapper .datatable-table thead th.datatable-descending & {
-      color: white;
-    }
-  }
-  .datatable-ascending {
-    .datatable-wrapper .datatable-table thead th& .datatable-sorter {
-      color: var(--color-gray-900);
-    }
-    .dark .datatable-wrapper .datatable-table thead th& .datatable-sorter {
-      color: white;
-    }
-  }
-  .datatable-descending {
-    .datatable-wrapper .datatable-table thead th& .datatable-sorter {
-      color: var(--color-gray-900);
-    }
-    .dark .datatable-wrapper .datatable-table thead th& .datatable-sorter {
-      color: white;
-    }
-  }
-  .text-\[\#6B7280\] {
-    color: #6B7280;
-  }
-  .text-\[\#07074D\] {
-    color: #07074D;
   }
   .text-gray-100 {
     color: var(--color-gray-100);
@@ -2957,9 +1552,6 @@
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
   }
-  .filter {
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
-  }
   .backdrop-filter {
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
@@ -3018,10 +1610,6 @@
   .ease-in-out {
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
-  }
-  .outline-none {
-    --tw-outline-style: none;
-    outline-style: none;
   }
   .group-hover\:mb-0 {
     &:is(:where(.group):hover *) {
@@ -3098,13 +1686,6 @@
       }
     }
   }
-  .hover\:bg-blue-700 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-blue-700);
-      }
-    }
-  }
   .hover\:bg-gray-50 {
     &:hover {
       @media (hover: hover) {
@@ -3116,13 +1697,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-gray-100);
-      }
-    }
-  }
-  .hover\:bg-pr-700 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-pr-700);
       }
     }
   }
@@ -3178,6 +1752,13 @@
       }
     }
   }
+  .hover\:text-pr-800 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-pr-800);
+      }
+    }
+  }
   .hover\:text-pr-900 {
     &:hover {
       @media (hover: hover) {
@@ -3220,11 +1801,6 @@
       }
     }
   }
-  .focus\:border-\[\#6A64F1\] {
-    &:focus {
-      border-color: #6A64F1;
-    }
-  }
   .focus\:border-blue-500 {
     &:focus {
       border-color: var(--color-blue-500);
@@ -3245,12 +1821,6 @@
       &::placeholder {
         color: var(--color-gray-400);
       }
-    }
-  }
-  .focus\:shadow-md {
-    &:focus {
-      --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
-      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
   .focus\:ring-1 {
@@ -3274,11 +1844,6 @@
   .focus\:ring-blue-300 {
     &:focus {
       --tw-ring-color: var(--color-blue-300);
-    }
-  }
-  .focus\:ring-blue-500 {
-    &:focus {
-      --tw-ring-color: var(--color-blue-500);
     }
   }
   .focus\:ring-gray-100 {
@@ -4799,59 +3364,6 @@ body {
   inherits: false;
   initial-value: solid;
 }
-@property --tw-blur {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-brightness {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-contrast {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-grayscale {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-hue-rotate {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-invert {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-opacity {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-saturate {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-sepia {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-drop-shadow {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-drop-shadow-color {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-drop-shadow-alpha {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 100%;
-}
-@property --tw-drop-shadow-size {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-backdrop-blur {
   syntax: "*";
   inherits: false;
@@ -4954,19 +3466,6 @@ body {
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
       --tw-outline-style: solid;
-      --tw-blur: initial;
-      --tw-brightness: initial;
-      --tw-contrast: initial;
-      --tw-grayscale: initial;
-      --tw-hue-rotate: initial;
-      --tw-invert: initial;
-      --tw-opacity: initial;
-      --tw-saturate: initial;
-      --tw-sepia: initial;
-      --tw-drop-shadow: initial;
-      --tw-drop-shadow-color: initial;
-      --tw-drop-shadow-alpha: 100%;
-      --tw-drop-shadow-size: initial;
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;

@@ -16,6 +16,7 @@ urlpatterns = [
     
     path('pakendungan/', views.pakendungan,name='pakendungan'),
     path('penataranmadya/', views.penataranmadya,name='penataranmadya'),
+    path('jrokandang/', views.jrokandang,name='jrokandang'),
 
     path("calender/", views.calender, name='calender'),
 ]
