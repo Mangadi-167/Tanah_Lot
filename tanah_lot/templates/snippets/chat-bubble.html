@@ -1,0 +1,26 @@
+<!-- {% load static %}
+
+<a href="{% url 'chatbot' %}"
+   class="fixed bottom-18 right-10 z-50 flex items-center py-3 px-5 bg-pr-900 text-white rounded-full shadow-lg hover:bg-pr-900 focus:outline-none focus:ring-2  transition-transform transform hover:scale-105"
+   aria-label="Buka Chat AI">
+    
+    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17.668V13.5A7.962 7.962 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.832 14.168L6.4 13.2A6.012 6.012 0 0010 15c3.313 0 6-2.686 6-6s-2.687-6-6-6-6 2.686-6 6c0 1.258.39 2.422 1.054 3.435l-1.62 1.936z" clip-rule="evenodd"></path>
+    </svg>
+    
+    <span class="font-semibold text-base">Chat Ai</span>
+</a> -->
+
+
+{% load static %}
+<div>
+    <a href="{% url 'chatbot' %}"
+        class="fixed bottom-10 right-4 z-50  flex flex-col  items-center py-3 px-5  transition-transform transform hover:scale-105"
+        aria-label="Buka Chat AI">
+
+        <img src="{% static 'image/iconai4.png' %}" class="h-30 w-30">
+
+
+        <span class="text-pr-900 font-se font-semibold"> TL-BOT </span>
+    </a>
+</div>
