@@ -1,0 +1,36 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{judul}}</title>
+    {% include "snippets/styles.html" %}
+</head>
+
+<body class="bg-frame-50">
+
+
+    {% include "snippets-chatbot/navbar.html" %}
+
+    <main class="bg-frame-50 dark:bg-gray-800">
+        <div class="flex flex-col h-[calc(100vh-80px)] max-w-4xl mx-auto px-4">
+            <div id="chat-container" class="flex-grow overflow-y-auto py-8 space-y-6">
+
+                {% block body %}
+
+
+
+                {% endblock body %}
+
+            </div>
+
+            {% include "snippets-chatbot/form-chat.html" %}
+        </div>
+    </main>
+
+    {% include "snippets/scripts.html" %}
+</body>
+
+</html>

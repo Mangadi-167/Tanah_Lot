@@ -15,19 +15,18 @@
                 <h3 class="text-lg font-semibold">Related Sites</h3>
                 <ul class="space-y-2">
                     <li><a href="{% url '/'%}" class="text-gray-400 hover:text-white transition">Home</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Ceremony Calender</a></li>
-                    <li><a href="{% url 'news_index'%}" class="text-gray-400 hover:text-white transition">News &
-                            Event</a></li>
+                    <li><a href="{% url 'calender' %}" class="text-gray-400 hover:text-white transition">Ceremony Calender</a></li>
+                    <li><a href="{% url 'news_index'%}" class="text-gray-400 hover:text-white transition">News & Event</a></li>
                 </ul>
             </div>
 
             <div class="space-y-4">
                 <h3 class="text-lg font-semibold">About Us</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Facilities</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">History</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Ticket Price</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Site Map</a></li>
+                    <li><a href="{% url 'facilities' %}" class="text-gray-400 hover:text-white transition">Facilities</a></li>
+                    <li><a href="{% url 'history_index' %}" class="text-gray-400 hover:text-white transition">History</a></li>
+                    <li><a href="{% url 'tickets' %}" class="text-gray-400 hover:text-white transition">Ticket Price</a></li>
+                    <li><a href="{% url 'sitemaps' %}" class="text-gray-400 hover:text-white transition">Site Map</a></li>
                 </ul>
             </div>
 

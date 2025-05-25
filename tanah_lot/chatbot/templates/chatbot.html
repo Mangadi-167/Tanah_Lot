@@ -1,130 +1,74 @@
-{% load static%}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{judul}}</title>
-    {% include "snippets/styles.html" %}
-</head>
-
-<body>
+{% extends "base-chatbot.html" %}
+{% load static %}
 
 
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="{% url '/' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="{% static 'image/logoutama.png' %}" class="h-12" alt="Flowbite Logo" />
-                <span
-                    class="self-center text-2xl font-semibold whitespace-nowrap text-pr-900 dark:text-white font-primary">TL-Bot</span>
-            </a>
-            <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" class="flex items-center mx-3 text-sm md:mr-0" {# Ditambahkan 'items-center' #}
-                    id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown">
-                    <span class="sr-only">Open user menu</span>
-                    <img class="w-8 h-8 rounded-full" src="{% static 'image/profile.png' %}" alt="user photo">
-                    <span class="ml-2 text-neu-900 font-se font-medium dark:text-gray-300">Mangadi</span>
-                </button>
-                <!-- <button type="button" class="flex text-sm  rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-        <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="{% static 'image/profile.png' %}" alt="user photo">
-        <span class="block text-sm text-gray-900 dark:text-white font-se">Mangadi</span>
-      </button> -->
-                <!-- Dropdown menu -->
-                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600"
-                    id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 dark:text-white font-se">Mangadi</span>
-                        <span
-                            class="block text-sm  text-gray-500 truncate dark:text-gray-400 font-se">mangadi@gmail.com</span>
+{% block body %}
 
-                            <ul class="py-1 text-gray-700 dark:text-gray-400" aria-labelledby="dropdown">
-                        <li>
-                            <a href="#"
-                                class="flex items-center py-2 px-4 text-sm gap-2 font-se hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                    class="bi bi-box-arrow-left text-gray-700" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
-                                    <path fill-rule="evenodd"
-                                        d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
-                                </svg>
-                                Sign out
-                            </a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <main class="bg-gray-50 dark:bg-gray-800">
-    <div class="flex flex-col h-[calc(100vh-80px)] max-w-4xl mx-auto px-4">
-        
-        <div id="chat-container" class="flex-grow overflow-y-auto py-8 space-y-6">
-            
-            <div class="flex justify-end">
-                <div class="max-w-md lg:max-w-lg">
-                    <div class="bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200 p-4 rounded-2xl rounded-br-lg shadow-sm">
-                        <p class="text-sm">Does Tanah Lot have sacred snakes?</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-start items-start gap-3">
-                <div class="flex-shrink-0">
-                    <div class="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="12" width="16" height="8" rx="2"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M12 12v8"/></svg>
-                    </div>
-                </div>
-                <div class="max-w-xl">
-                    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 rounded-2xl rounded-bl-lg shadow-sm">
-                        <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                            Yes, Tanah Lot is believed to have sacred sea snakes that guard the temple from evil spirits and intruders. These snakes are black and white banded sea kraits ( Laticauda colubrina ), and they are said to be the protectors of the temple.
-                        </p>
-                        <p class="mt-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                            Local legend tells the story of a Hindu priest, Dang Hyang Nirartha, who established the Tanah Lot temple in the 16th century. When he meditated on the rock, he was disturbed by the local fishermen. He then used his power to transform his scarf into a sea snake with poisonous venom to protect the temple.
-                        </p>
-                        <p class="mt-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                            While these snakes are venomous, they are generally not aggressive towards humans unless they feel threatened. The priests at Tanah Lot often handle them, and they are considered sacred by the local people. Visitors may sometimes see these snakes around the base of the rock island.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-end">
-                <div class="max-w-md lg:max-w-lg">
-                     <button class="bg-cyan-100 dark:bg-cyan-800 text-gray-800 dark:text-gray-200 p-4 rounded-2xl rounded-br-lg shadow-sm hover:bg-cyan-200 dark:hover:bg-cyan-700 transition-colors duration-200">
-                        <p class="text-sm">Are foreigners allowed to enter Tanah Lot Temple?</p>
-                    </button>
-                </div>
-            </div>
-
-            </div>
-
-        <div class="py-4 px-2 bg-gray-50 dark:bg-gray-800">
-            <div class="relative max-w-4xl mx-auto">
-                <form id="chat-form">
-                    <input type="text"
-                        class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-full py-3 pl-5 pr-14 focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 shadow-sm"
-                        placeholder="Ask more about Tanah Lot...">
-                    
-                    <button type="submit"
-                        class="absolute inset-y-0 right-0 flex items-center justify-center w-12 h-full text-gray-500 hover:text-cyan-600 dark:hover:text-cyan-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                            <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
-                        </svg>
-                    </button>
-                </form>
-            </div>
+<div class="flex justify-end">
+    <div class="max-w-md lg:max-w-lg">
+        <div class="bg-pr-900 dark:bg-pr-900 text-white dark:text-gray-200 p-4 rounded-2xl rounded-br-lg shadow-sm">
+            <p class="text-sm font-se text-justify">Does Tanah Lot have sacred snakes?</p>
         </div>
     </div>
-</main>             
-    
+</div>
 
-    {% include "snippets/scripts.html" %}
-</body>
+<div class="flex justify-start items-start gap-3">
+    <div class="flex-shrink-0">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center">
+            <img class="w-12 h-12 rounded-full" src="{% static 'image/logoutama.png' %}" alt="user photo">
+        </div>
+    </div>
+    <div class="max-w-xl">
+        <div
+            class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 rounded-2xl rounded-bl-lg shadow-sm">
+            <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-se text-justify">
+                Yes, Tanah Lot is believed to have sacred sea snakes that guard the temple from evil
+                spirits and intruders. These snakes are black and white banded sea kraits ( Laticauda
+                colubrina ), and they are said to be the protectors of the temple.
+            </p>
+            <p class="mt-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-se text-justify">
+                Local legend tells the story of a Hindu priest, Dang Hyang Nirartha, who established the
+                Tanah Lot temple in the 16th century. When he meditated on the rock, he was disturbed by
+                the local fishermen. He then used his power to transform his scarf into a sea snake with
+                poisonous venom to protect the temple.
+            </p>
+            <p class="mt-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-se text-justify">
+                While these snakes are venomous, they are generally not aggressive towards humans unless
+                they feel threatened. The priests at Tanah Lot often handle them, and they are
+                considered sacred by the local people. Visitors may sometimes see these snakes around
+                the base of the rock island.
+            </p>
+        </div>
+    </div>
+</div>
 
-</html>
+<div class="flex justify-end">
+    <div class="max-w-md lg:max-w-lg">
+        <button
+            class="bg-pr-900 font-se dark:bg-pr-900 text-white dark:text-gray-200 p-4 rounded-2xl rounded-br-lg shadow-sm  transition-colors duration-200">
+            <p class="text-sm text-justify">Are foreigners allowed to enter Tanah Lot Temple?</p>
+        </button>
+    </div>
+</div>
+
+<div class="flex justify-start items-start gap-3">
+    <div class="flex-shrink-0">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center">
+            <img class="w-12 h-12 rounded-full" src="{% static 'image/logoutama.png' %}" alt="user photo">
+        </div>
+    </div>
+    <div class="max-w-xl">
+        <div
+            class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 rounded-2xl rounded-bl-lg shadow-sm">
+            <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-se text-justify">
+                Yes, foreigners are allowed to enter the Tanah Lot Temple complex.
+                However, there's a distinction to be made:
+                Foreigners can freely explore the outer areas of the temple complex. This includes the
+                pathways, surrounding viewpoints, shops, and restaurants. You can get quite close to the
+                iconic rock formation and enjoy the views, especially during sunset.
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

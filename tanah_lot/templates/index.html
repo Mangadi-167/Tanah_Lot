@@ -72,10 +72,10 @@
               captivates visitors with its dramatic silhouette against the sunset-dappled horizon..
             </p>
             <div class="py-2">
-              <button type="button"
-                class=" text-white font-se  font-medium hover:text-white border border-white hover:bg-pr-900 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+              <a href="{% url 'history_index' %}"
+                class=" text-white font-se  font-medium hover:text-white border border-white hover:bg-pr-900   rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 ">
                 Read more
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -92,10 +92,10 @@
           Fields and Roads.
         </p>
 
-        <button type="button"
-          class="text-pr-900 font-se  font-semibold hover:text-white border border-pr-900 hover:bg-pr-900 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+        <a href="{% url 'history_index' %}"
+          class="text-pr-900 font-se  font-semibold hover:text-white border border-pr-900 hover:bg-pr-900  rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 ">
           Read more
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -118,34 +118,34 @@
 
         <!-- Card pura 1 -->
         <div>
-          <a  href="{% url 'pakendungan' %}"  >
-          <div
-            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
-            <img src="{% static 'image/pura1.jpg' %}" alt="Deskripsi Gambar"
-              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
-            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+          <a href="{% url 'pakendungan' %}">
+            <div
+              class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+              <img src="{% static 'image/pura1.jpg' %}" alt="Deskripsi Gambar"
+                class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+              <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
                                   bg-gradient-to-t from-black/70 via-black/60 to-transparent
                                   opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
-              <div
-                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
-                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
-                  Pura Pakendungan
-                </h3>
-                <p
-                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
-                  Pakendungan Temple is located on the northwest side of Tanah Lot Temple. The origins of...
-                </p>
-                <div class="py-2">
-                  <div
-                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
-                    <span>Read More</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
+                <div
+                  class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                  <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                    Pura Pakendungan
+                  </h3>
+                  <p
+                    class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                    Pakendungan Temple is located on the northwest side of Tanah Lot Temple. The origins of...
+                  </p>
+                  <div class="py-2">
+                    <div
+                      class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                      <span>Read More</span>
+                      <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
           <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Pakendungan Temple</h1>
         </div>
 

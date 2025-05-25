@@ -124,16 +124,17 @@
                         class="absolute z-20 mt-1 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700 dark:divide-gray-600 md:mt-2 left-0"
                         style="display: none;" x-cloak>
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-                            <li><a href="#"
+
+                            <li><a href="{% url 'facilities' %}"
                                     class="block px-4 py-2 hover:text-pr-900 dark:hover:bg-gray-600 dark:hover:text-white font-se">Facilities</a>
                             </li>
-                            <li><a href="#"
+                            <li><a href="{% url 'history_index' %}"
                                     class="block px-4 py-2 hover:text-pr-900 dark:hover:bg-gray-600 dark:hover:text-white font-se">History</a>
                             </li>
-                            <li><a href="#"
+                            <li><a href="{% url 'tickets' %}"
                                     class="block px-4 py-2 hover:text-pr-900 dark:hover:bg-gray-600 dark:hover:text-white font-se">Ticket
                                     Price</a></li>
-                            <li><a href="#"
+                            <li><a href="{% url 'sitemaps' %}"
                                     class="block px-4 py-2 hover:text-pr-900 dark:hover:bg-gray-600 dark:hover:text-white font-se">Site
                                     Map</a></li>
                         </ul>
