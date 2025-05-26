@@ -253,22 +253,5 @@ document.addEventListener('DOMContentLoaded', function() {
         console.warn('Satu atau lebih elemen untuk preview gambar tidak ditemukan. Pastikan ID elemen HTML sudah benar.');
     }
 
-    // Jika Anda menggunakan Alpine.js untuk drag & drop
-    // Anda perlu mengintegrasikan logika preview ini ke dalam dropHandler Alpine.js Anda
-    // Contoh:
-    // Di dalam dropHandler Alpine.js Anda, setelah mendapatkan file:
-    // const file = event.dataTransfer.files[0];
-    // if (file) {
-    //     const reader = new FileReader();
-    //     reader.onload = (e) => {
-    //         document.getElementById('image-preview').src = e.target.result;
-    //         document.getElementById('image-filename-display').textContent = file.name;
-    //         document.getElementById('image-preview-container').classList.remove('hidden');
-    //         document.getElementById('image-upload-ui-placeholder').classList.add('hidden');
-    //     };
-    //     reader.readAsDataURL(file);
-    //     // Juga, set file ke input tersembunyi jika perlu untuk submit form
-    //     document.getElementById('id_image').files = event.dataTransfer.files;
-    // }
 });
 </script>

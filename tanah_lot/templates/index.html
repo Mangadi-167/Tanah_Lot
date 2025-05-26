@@ -1,21 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>{{ judul }}</title>
-  {% include "snippets/styles.html" %}
-
-</head>
-
-<link rel="stylesheet" href="{% static 'dist/styles.css'%}" />
-<body>
-  {% include "snippets/navbar.html"%} -->
 {% block body %}
 <section id="hero" class="bg-cover bg-center bg-no-repeat h-[538.64px] flex items-center"
   style="background-image: url('{% static 'image/home1.jpg' %}')">
@@ -152,33 +137,33 @@
         <!-- Card pura 2 -->
         <div>
           <a href="{% url 'penataranmadya' %}">
-          <div
-            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
-            <img src="{% static 'image/pura2.jpg' %}" alt="Deskripsi Gambar"
-              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
-            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+            <div
+              class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+              <img src="{% static 'image/pura2.jpg' %}" alt="Deskripsi Gambar"
+                class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+              <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
                                   bg-gradient-to-t from-black/70 via-black/60 to-transparent
                                   opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
-              <div
-                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
-                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                <div
+                  class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                  <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
 
-                  Penataran Madya Temple
-                </h3>
-                <p
-                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
-                  Penataran Madya Tanah Lot Temple is located on the west side of Penataran Temple...
-                </p>
-                <div class="py-2">
-                  <button
-                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
-                    <span>Read More</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
-                  </button>
+                    Penataran Madya Temple
+                  </h3>
+                  <p
+                    class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                    Penataran Madya Tanah Lot Temple is located on the west side of Penataran Temple...
+                  </p>
+                  <div class="py-2">
+                    <button
+                      class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                      <span>Read More</span>
+                      <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </a>
           <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Penataran Madya Temple</h1>
         </div>
@@ -186,33 +171,33 @@
         <!-- Card pura 3 -->
         <div>
           <a href="{% url 'jrokandang' %}">
-          <div
-            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
-            <img src="{% static 'image/pura3.jpg' %}" alt="Deskripsi Gambar"
-              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
-            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+            <div
+              class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+              <img src="{% static 'image/pura3.jpg' %}" alt="Deskripsi Gambar"
+                class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+              <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
                                   bg-gradient-to-t from-black/70 via-black/60 to-transparent
                                   opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
-              <div
-                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
-                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
-                  Jro Kandang Temple
-                </h3>
-                <p
-                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
-                  Jro Kandang Temple is located in front of the right side of Njung Galuh. Almost parallel to the path
-                  with Galuh Temple (Pura Enjung Galuh)....
-                </p>
-                <div class="py-2">
-                  <button
-                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
-                    <span>Read More</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
-                  </button>
+                <div
+                  class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                  <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                    Jro Kandang Temple
+                  </h3>
+                  <p
+                    class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                    Jro Kandang Temple is located in front of the right side of Njung Galuh. Almost parallel to the path
+                    with Galuh Temple (Pura Enjung Galuh)....
+                  </p>
+                  <div class="py-2">
+                    <button
+                      class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                      <span>Read More</span>
+                      <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </a>
           <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Jro Kandang Temple</h1>
         </div>
@@ -220,33 +205,33 @@
         <!-- Card pura 4 -->
         <div>
           <a href="{% url 'njunggaluh' %}">
-          <div
-            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
-            <img src="{% static 'image/pura4.jpg' %}" alt="Deskripsi Gambar"
-              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
-            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+            <div
+              class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+              <img src="{% static 'image/pura4.jpg' %}" alt="Deskripsi Gambar"
+                class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+              <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
                                   bg-gradient-to-t from-black/70 via-black/60 to-transparent
                                   opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
-              <div
-                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
-                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
-                  Njung Galuh Temple
-                </h3>
-                <p
-                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
-                  Enjung Galuh Temple is located near Jero Kandang Temple to be exact at Enjung Galuh, “NJUNG” wich is
-                  rock stick out in to the sea.....
-                </p>
-                <div class="py-2">
-                  <button
-                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
-                    <span>Read More</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
-                  </button>
+                <div
+                  class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                  <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                    Njung Galuh Temple
+                  </h3>
+                  <p
+                    class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                    Enjung Galuh Temple is located near Jero Kandang Temple to be exact at Enjung Galuh, “NJUNG” wich is
+                    rock stick out in to the sea.....
+                  </p>
+                  <div class="py-2">
+                    <button
+                      class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                      <span>Read More</span>
+                      <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </a>
           <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Njung Galuh Temple</h1>
         </div>
@@ -254,34 +239,34 @@
         <!-- Card pura 5 -->
         <div>
           <a href="{% url 'batubolong' %}">
-          <div
-            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
-            <img src="{% static 'image/pura5.jpg' %}" alt="Deskripsi Gambar"
-              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
-            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+            <div
+              class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+              <img src="{% static 'image/pura5.jpg' %}" alt="Deskripsi Gambar"
+                class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+              <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
                                   bg-gradient-to-t from-black/70 via-black/60 to-transparent
                                   opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
-              <div
-                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
-                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
-                  Batu Bolong Temple
-                </h3>
-                <p
-                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
-                  Batu Bolong Temple is located on top of one of the Njung (rocks that jut into the sea) in Segara
-                  Kidul
-                  Tanah Lot where this Njung rock has a hole in the middle
-                </p>
-                <div class="py-2">
-                  <button
-                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
-                    <span>Read More</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
-                  </button>
+                <div
+                  class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                  <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                    Batu Bolong Temple
+                  </h3>
+                  <p
+                    class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                    Batu Bolong Temple is located on top of one of the Njung (rocks that jut into the sea) in Segara
+                    Kidul
+                    Tanah Lot where this Njung rock has a hole in the middle
+                  </p>
+                  <div class="py-2">
+                    <button
+                      class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                      <span>Read More</span>
+                      <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </a>
           <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Batu Bolong Temple</h1>
         </div>
@@ -289,34 +274,34 @@
         <!-- Card pura 6 -->
         <div>
           <a href="{% url 'batumejan' %}">
-          <div
-            class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
-            <img src="{% static 'image/pura6.jpg' %}" alt="Deskripsi Gambar"
-              class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
-            <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
+            <div
+              class="card-temple group relative w-80 h-[400px] rounded-xl overflow-hidden shadow-xl cursor-pointer snap-center">
+              <img src="{% static 'image/pura6.jpg' %}" alt="Deskripsi Gambar"
+                class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+              <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-0
                                   bg-gradient-to-t from-black/70 via-black/60 to-transparent
                                   opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out">
-              <div
-                class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
-                <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
-                  Batu Mejan Temple
-                </h3>
-                <p
-                  class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
-                  Batu Mejan Temple is located 100 meters in the west side of Batu Bolong Temple. Batu Mejan Temple
-                  also
-                  known as Beji Temple, “BEJI” means holly place to get holly water for Hindus ceremonial.
-                </p>
-                <div class="py-2">
-                  <button
-                    class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
-                    <span>Read More</span>
-                    <i class="fas fa-arrow-right ml-2"></i>
-                  </button>
+                <div
+                  class="h-32 sm:h-45 transform translate-y-8 group-hover:translate-y-0 transition-all duration-200 ease-in-out delay-0 p-6 py-2">
+                  <h3 class="text-white text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-center">
+                    Batu Mejan Temple
+                  </h3>
+                  <p
+                    class="text-gray-100 text-xs sm:text-sm font-se leading-relaxed line-clamp-2 sm:line-clamp-3 text-justify">
+                    Batu Mejan Temple is located 100 meters in the west side of Batu Bolong Temple. Batu Mejan Temple
+                    also
+                    known as Beji Temple, “BEJI” means holly place to get holly water for Hindus ceremonial.
+                  </p>
+                  <div class="py-2">
+                    <button
+                      class="w-full bg-gradient-to-r from-pr-900 to-pr-900 text-white px-4 py-2.5 rounded-lg hover:opacity-90 transition flex items-center justify-center">
+                      <span>Read More</span>
+                      <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </a>
           <h1 class="py-6 text-center font-se text-xl font-medium text-neu-800">Batu Mejan Temple</h1>
         </div>
@@ -365,16 +350,16 @@
 
     <div class="relative mb-0">
       <!-- Slider Controls -->
-      <!-- <div class="flex justify-between absolute inset-0 items-center z-10 px-4 pointer-events-none">
+      <div class="flex justify-between absolute inset-0 items-center z-10 px-4 pointer-events-none">
         <button id="prev-btn"
-          class="nav-button bg-white p-3 rounded-full shadow-lg text-gray-800 pointer-events-auto focus:outline-none hover:bg-gray-50 transform transition">
-          <i class="fas fa-chevron-left"></i>
+          class="nav-button  p-3 rounded-full shadow-lg text-gray-800 pointer-events-auto focus:outline-none hover:bg-gray-50 transform transition">
+          <!-- <i class="fas fa-chevron-left"></i> -->
         </button>
         <button id="next-btn"
-          class="nav-button bg-white p-3 rounded-full shadow-lg text-gray-800 pointer-events-auto focus:outline-none hover:bg-gray-50 transform transition">
-          <i class="fas fa-chevron-right"></i>
+          class="nav-button  p-3 rounded-full shadow-lg text-gray-800 pointer-events-auto focus:outline-none hover:bg-gray-50 transform transition">
+          <!-- <i class="fas fa-chevron-right"></i> -->
         </button>
-      </div> -->
+      </div>
 
       <!-- Slider Container -->
       <div id="slider" class="slider-container flex overflow-x-auto hide-scrollbar py-4 snap-x snap-mandatory">
@@ -592,8 +577,3 @@
   });
 </script>
 {% endblock body %}
-
-<!-- {% include "snippets/scripts.html"%} -->
-<!-- </body>
-
-</html> -->
