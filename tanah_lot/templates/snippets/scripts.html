@@ -255,3 +255,114 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 </script>
+
+
+
+
+<!-- Script Kalender -->
+ <script>
+    function calendarApp() {
+        return {
+            currentDate: new Date(),
+            currentMonth: null,
+            currentYear: null,
+            daysInMonth: [],
+            monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            view: 'month', // 'month', 'week', 'day'
+            isPickerOpen: false,
+            pickerYear: null,
+            // Hardcode event untuk demo
+            events: [
+                { date: '2025-06-03', title: 'Odalan' },
+                { date: '2025-06-07', title: 'Saraswati' },
+                { date: '2025-07-15', title: 'Galungan' },
+            ],
+
+            initCalendar() {
+                this.currentMonth = this.currentDate.getMonth();
+                this.currentYear = this.currentDate.getFullYear();
+                this.pickerYear = this.currentYear;
+                this.generateCalendarDays();
+            },
+
+            generateCalendarDays() {
+                this.daysInMonth = [];
+                const date = new Date(this.currentYear, this.currentMonth, 1);
+                const firstDayOfMonth = date.getDay(); // 0 (Sun) - 6 (Sat)
+                const daysInThisMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+
+                // Hari dari bulan sebelumnya
+                const daysInLastMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
+                for (let i = firstDayOfMonth; i > 0; i--) {
+                    this.daysInMonth.push({
+                        date: new Date(this.currentYear, this.currentMonth - 1, daysInLastMonth - i + 1),
+                        dayNumber: daysInLastMonth - i + 1,
+                        isCurrentMonth: false,
+                        isToday: false,
+                        events: []
+                    });
+                }
+
+                // Hari di bulan ini
+                for (let i = 1; i <= daysInThisMonth; i++) {
+                    let fullDate = new Date(this.currentYear, this.currentMonth, i);
+                    let today = new Date();
+                    let isToday = today.getDate() == i && today.getMonth() == this.currentMonth && today.getFullYear() == this.currentYear;
+
+                    let dateString = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                    let eventsForDay = this.events.filter(e => e.date === dateString);
+
+                    this.daysInMonth.push({
+                        date: fullDate,
+                        dayNumber: i,
+                        isCurrentMonth: true,
+                        isToday: isToday,
+                        events: eventsForDay
+                    });
+                }
+
+                // Hari dari bulan selanjutnya, untuk melengkapi grid
+                const remainingCells = 42 - this.daysInMonth.length; // 6 baris * 7 kolom
+                for (let i = 1; i <= remainingCells; i++) {
+                    this.daysInMonth.push({
+                        date: new Date(this.currentYear, this.currentMonth + 1, i),
+                        dayNumber: i,
+                        isCurrentMonth: false,
+                        isToday: false,
+                        events: []
+                    });
+                }
+            },
+
+            changeMonth(direction) {
+                this.currentMonth += direction;
+                if (this.currentMonth < 0) {
+                    this.currentMonth = 11;
+                    this.currentYear--;
+                } else if (this.currentMonth > 11) {
+                    this.currentMonth = 0;
+                    this.currentYear++;
+                }
+                this.pickerYear = this.currentYear;
+                this.generateCalendarDays();
+            },
+
+            goToToday() {
+                this.currentDate = new Date();
+                this.initCalendar();
+            },
+
+            changePickerYear(direction) {
+                this.pickerYear += direction;
+            },
+
+            selectMonth(monthIndex) {
+                this.currentMonth = monthIndex;
+                this.currentYear = this.pickerYear;
+                this.generateCalendarDays();
+                this.isPickerOpen = false;
+            }
+        }
+    }
+</script>

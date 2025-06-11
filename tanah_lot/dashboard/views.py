@@ -1,8 +1,18 @@
 from django.shortcuts import render
 
 
-# khusus article
+# khusus dashboard
 def index(request):
+    context={
+        'judul':'Dashboard | Tanah Lot',
+    }
+    return render(request,"index-dashboard.html", context)
+
+
+# ---------------------------------------------------------------------------------
+
+# khusus article
+def article(request):
     context={
         'judul':'Data Content',
     }
@@ -13,6 +23,29 @@ def addArticle(request):
         'judul':'Add Content',
     }
     return render(request,"article/add.html", context)
+
+
+# ---------------------------------------------------------------------------------
+
+# khusus calender
+def calender(request):
+    context={
+        'judul':'Data Event Calender',
+    }
+    return render(request,"calender/data.html", context)
+
+def addCalender(request):
+    context={
+        'judul':'Add Calender',
+    }
+    return render(request,"calender/add.html", context)
+
+
+def editCalender(request):
+    context={
+        'judul':'Edit Calender',
+    }
+    return render(request,"calender/edit.html", context)
 
 
 # ---------------------------------------------------------------------------------
