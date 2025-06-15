@@ -9,9 +9,8 @@ from django.contrib.auth.models import User
 
 def register(request):
     if request.user.is_authenticated:
-        # --- PERUBAHAN DI SINI ---
-        # Semua user yang sudah login langsung dialihkan ke dashboard
-        return redirect('dashboard:dashboard') # Pastikan nama URL ini benar
+       
+        return redirect('dashboard:dashboard') 
 
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -37,11 +36,10 @@ def register(request):
 
 
 
-def index(request): # Ini adalah view login Anda
-    # --- PERBAIKAN UTAMA ADA DI SINI ---
+def index(request): 
+    
     if request.user.is_authenticated:
-        # Jika user sudah login dan mencoba akses halaman login,
-        # langsung arahkan ke halaman dashboard.
+      
         return redirect('dashboard:dashboard')
 
     if request.method == 'POST':
@@ -58,7 +56,7 @@ def index(request): # Ini adalah view login Anda
 
             if user is not None:
                 login(request, user)
-                # Arahkan ke halaman dashboard setelah login BERHASIL
+               
                 return redirect('dashboard:dashboard') 
             else:
                 messages.error(request, 'Email atau password salah.')

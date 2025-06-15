@@ -15,30 +15,26 @@ from django.contrib.auth import update_session_auth_hash
 # CRUD UNTUK ARTICLE / CONTENT
 # ===================================================================
 
-from django.db.models import Q # Pastikan ini diimpor
+from django.db.models import Q 
 
 @login_required(login_url='/login/')
-def article(request): # Nama fungsi tetap 'index' sesuai kode Anda
+def article(request): 
     """Menampilkan semua data konten di tabel, dan menangani pencarian."""
  
-
-    # --- LOGIKA PENCARIAN DIMASUKKAN DI SINI ---
+    
     query = request.GET.get('q')
     
-    # Mulai dengan mengambil semua konten
+   
     content_queryset = Content.objects.all()
 
     if query:
-        # Jika ada kata kunci pencarian, filter queryset-nya
-        # Cari di title, description, DAN content_type
+        
         content_queryset = content_queryset.filter(
             Q(title__icontains=query) |
             Q(description__icontains=query) |
             Q(content_type__icontains=query)
         ).distinct()
-    # --- AKHIR LOGIKA PENCARIAN ---
-
-    # Urutkan hasilnya
+ 
     all_content_items = content_queryset.order_by('-created_at')
 
     context = {
@@ -73,12 +69,11 @@ def update_content(request, pk):
     """Menangani form untuk mengedit konten yang sudah ada."""
     
 
-    # Ambil objek konten yang mau diedit berdasarkan pk (ID) dari URL
+   
     content_instance = get_object_or_404(Content, pk=pk)
 
     if request.method == 'POST':
-        # Saat form disubmit, isi form dengan data baru DAN instance lama
-        # Ini memberitahu Django untuk meng-update objek yang ada, bukan membuat baru
+      
         form = ContentForm(request.POST, request.FILES, instance=content_instance)
         if form.is_valid():
             form.save()
@@ -87,15 +82,15 @@ def update_content(request, pk):
         else:
             messages.error(request, 'Gagal memperbarui konten. Periksa kembali isian Anda.')
     else:
-        # Saat halaman pertama kali dibuka, isi form dengan data dari instance yang ada
+      
         form = ContentForm(instance=content_instance)
 
     context = {
         'judul': 'Update Content',
         'form': form,
-        'is_update_page': True, # Penanda bahwa ini adalah halaman update
+        'is_update_page': True, 
     }
-    # Kita akan buat template baru bernama update.html
+   
     return render(request, 'article/edit.html', context)
 
 
@@ -107,18 +102,17 @@ def delete_content(request, pk):
     Menampilkan halaman konfirmasi dan menghapus objek konten.
     """
   
-    # --- AKHIR BLOK PENJAGA ---
 
     content_to_delete = get_object_or_404(Content, pk=pk)
 
-    # Ini berjalan jika user menekan tombol "Ya, Hapus" di halaman konfirmasi
+  
     if request.method == 'POST':
         title = content_to_delete.title
         content_to_delete.delete()
         messages.success(request, f'Konten "{title}" telah berhasil dihapus.')
-        return redirect('dashboard:article_data') # Kembali ke daftar konten
+        return redirect('dashboard:article_data') 
 
-    # Jika user baru mengklik tombol delete di tabel, tampilkan halaman konfirmasi
+    
     context = {
         'judul': 'Konfirmasi Hapus Konten',
         'item': content_to_delete
@@ -129,22 +123,18 @@ def delete_content(request, pk):
 # ===================================================================
 
 @login_required(login_url='/login/')
-def user(request): # Nama fungsi tetap 'user' sesuai keinginan Anda
+def user(request): 
     """
     Menampilkan semua data user di tabel, DAN menangani logika pencarian.
     """
     
-
-    # --- LOGIKA PENCARIAN DIMASUKKAN DI SINI ---
-    # Ambil kata kunci dari URL, contoh: /users/data/?q=admin
     query = request.GET.get('q')
     
-    # Mulai dengan mengambil semua user
+  
     user_queryset = User.objects.select_related('profile').all()
 
     if query:
-        # Jika ada kata kunci pencarian, filter queryset-nya
-        # Cari di username, nama depan, nama belakang, email, dan role dari profil
+       
         user_queryset = user_queryset.filter(
             Q(username__icontains=query) |
             Q(first_name__icontains=query) |
@@ -152,7 +142,7 @@ def user(request): # Nama fungsi tetap 'user' sesuai keinginan Anda
             Q(email__icontains=query) |
             Q(profile_role_icontains=query)
         ).distinct()
-    # --- AKHIR LOGIKA PENCARIAN ---
+   
 
     # Urutkan hasilnya
     all_users = user_queryset.order_by('username')
@@ -160,7 +150,7 @@ def user(request): # Nama fungsi tetap 'user' sesuai keinginan Anda
     context = {
         'judul': 'Data User',
         'all_users': all_users,
-        'search_query': query, # Kirim kembali kata kunci ke template
+        'search_query': query, 
     }
     return render(request, "users/data.html", context)
 
@@ -241,22 +231,22 @@ def delete_user(request, pk):
     """Menghapus user setelah ada konfirmasi."""
   
 
-    # Ambil objek user yang akan dihapus
+ 
     user_to_delete = get_object_or_404(User, pk=pk)
 
-    # Keamanan tambahan: jangan biarkan admin menghapus akunnya sendiri
+   
     if request.user.pk == user_to_delete.pk:
         messages.error(request, "Anda tidak bisa menghapus akun Anda sendiri.")
         return redirect('dashboard:users_data')
 
     if request.method == 'POST':
-        # Blok ini hanya berjalan jika user menekan tombol "Ya, Hapus" di halaman konfirmasi
+       
         username = user_to_delete.username
         user_to_delete.delete() # Perintah untuk menghapus user dari database
         messages.success(request, f"User '{username}' berhasil dihapus.")
         return redirect('dashboard:users_data')
     
-    # Jika methodnya GET, tampilkan halaman konfirmasi
+   
     context = {
         'judul': 'Konfirmasi Hapus User',
         'item': user_to_delete
@@ -273,16 +263,15 @@ def resetPassword(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
-            # Simpan user dengan password baru
+           
             user = form.save()
             
-            # --- INI BARIS KUNCINYA ---
-            # Memperbarui sesi login agar Anda tidak ter-logout
+          
             update_session_auth_hash(request, user)
-            # ---------------------------
+          
 
             messages.success(request, 'Password Anda berhasil diperbarui!')
-            # Arahkan kembali ke halaman daftar user
+            
             return redirect('dashboard:users_data') 
         else:
             messages.error(request, 'Gagal mengubah password. Silakan periksa kembali isian Anda.')
@@ -299,28 +288,21 @@ def resetPassword(request):
 
 
 # khusus dashboard
-# def index(request):
-#     context={
-#         'judul':'Dashboard | Tanah Lot',
-#     }
-#     return render(request,"index-dashboard.html", context)
 
-
-
-@login_required(login_url='/login/') # Tambahkan decorator untuk keamanan
+@login_required(login_url='/login/') 
 def index(request):
-    # 1. Hitung jumlah total objek di model Content
+   
     content_count = Content.objects.count()
 
-    # 2. Hitung jumlah total objek di model User
+    
     user_count = User.objects.count()
 
-    # 3. Masukkan hasil hitungan ke dalam context
+
     context = {
         'judul': 'Dashboard | Tanah Lot',
         'content_count': content_count,
         'user_count': user_count,
-        # Untuk kalender, kita beri nilai 0 karena datanya belum ada
+     
         'calendar_count': 0, 
     }
     return render(request, "index-dashboard.html", context)
