@@ -206,8 +206,8 @@
                         :aria-current="window.location.pathname === '{% url 'news:news_index' %}' ? 'page' : false">News</a>
                 </li>
                 <li>
-                    <a href="{% url 'attractions_index' %}" :class="getNavLinkClasses('{% url 'attractions_index' %}')"
-                        :aria-current="window.location.pathname === '{% url 'attractions_index' %}' ? 'page' : false">Attractions
+                    <a href="{% url 'attractions:attractions_index' %}" :class="getNavLinkClasses('{% url 'attractions:attractions_index' %}')"
+                        :aria-current="window.location.pathname === '{% url 'attractions:attractions_index' %}' ? 'page' : false">Attractions
                         & Accommodation</a>
                 </li>
                 <li>
