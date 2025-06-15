@@ -299,11 +299,32 @@ def resetPassword(request):
 
 
 # khusus dashboard
+# def index(request):
+#     context={
+#         'judul':'Dashboard | Tanah Lot',
+#     }
+#     return render(request,"index-dashboard.html", context)
+
+
+
+@login_required(login_url='/login/') # Tambahkan decorator untuk keamanan
 def index(request):
-    context={
-        'judul':'Dashboard | Tanah Lot',
+    # 1. Hitung jumlah total objek di model Content
+    content_count = Content.objects.count()
+
+    # 2. Hitung jumlah total objek di model User
+    user_count = User.objects.count()
+
+    # 3. Masukkan hasil hitungan ke dalam context
+    context = {
+        'judul': 'Dashboard | Tanah Lot',
+        'content_count': content_count,
+        'user_count': user_count,
+        # Untuk kalender, kita beri nilai 0 karena datanya belum ada
+        'calendar_count': 0, 
     }
-    return render(request,"index-dashboard.html", context)
+    return render(request, "index-dashboard.html", context)
+
 
 
 # ---------------------------------------------------------------------------------
