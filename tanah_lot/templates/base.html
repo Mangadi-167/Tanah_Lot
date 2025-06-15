@@ -10,23 +10,59 @@
     <link rel="icon" href="{% static 'image/iconhead1.png' %}">
     {% include "snippets/styles.html" %}
 
+    {# =================================================== #}
+    {# == BAGIAN 1: TAMBAHKAN CSS SWEETALERT DI SINI == #}
+    {# =================================================== #}
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    
+
 </head>
 
 <body class="overflow-x-hidden">
     {% include "snippets/navbar.html"%}
     {% include "snippets/chat-bubble.html" %}
+    
     {% block body %}
 
-
-
-
+    {# Konten dari halaman lain (seperti login.html, data.html, dll) akan muncul di sini #}
 
     {% endblock body %}
+
+    {% include "snippets/footer.html"%}
+
+    {# ======================================================================= #}
+    {# == BAGIAN 2: TAMBAHKAN SCRIPT SWEETALERT & LOGIKANYA DI SINI == #}
+    {# ======================================================================= #}
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3500, // Notifikasi akan hilang setelah 3.5 detik
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+
+            {% for message in messages %}
+                Toast.fire({
+                    icon: '{{ message.tags }}',
+                    title: '{{ message }}'
+                });
+            {% endfor %}
+        });
+    </script>
+    {% endif %}
+    
+    {# Ini script Anda yang sudah ada #}
+    {% include "snippets/scripts.html"%}
+
 </body>
-{% include "snippets/footer.html"%}
-
-
-
-{% include "snippets/scripts.html"%}
-
 </html>

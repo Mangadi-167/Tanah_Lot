@@ -6,14 +6,11 @@
         <ul class="space-y-2 font-medium">
             <h1 class="font-se text-neu-800 text-sm">Menu</h1>
             <li>
-                <a href="{% url 'dashboard' %}" class="flex items-center p-2 rounded-lg group
+                <a href="{% url 'dashboard:dashboard' %}" class="flex items-center p-2 rounded-lg group
                           {% if request.resolver_match.url_name == 'dashboard' %}
                               bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white {% else %}
                               text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {% endif %}">
-                    <svg class="w-6 h-6 transition duration-75
-                              {% if request.resolver_match.url_name == 'dashboard' %}
-                                  text-gray-900 dark:text-white {% else %}
-                                  text-gray-800 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white {% endif %}"
+                    <svg class="w-6 h-6 transition duration-75"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -25,7 +22,7 @@
 
 
             <li>
-                <a href="{% url 'article_data' %}" class="flex items-center p-2 rounded-lg group
+                <a href="{% url 'dashboard:article_data' %}" class="flex items-center p-2 rounded-lg group
                           {% if request.resolver_match.url_name == 'article_data' %}
                               bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white {% else %}
                               text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {% endif %}">
@@ -41,7 +38,7 @@
 
 
             <li>
-                <a href="{% url 'calender_data' %}" class="flex items-center p-2 rounded-lg group
+                <a href="{% url 'dashboard:calender_data' %}" class="flex items-center p-2 rounded-lg group
                           {% if request.resolver_match.url_name == 'calender_data' %}
                               bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white {% else %}
                               text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {% endif %}">
@@ -56,7 +53,7 @@
 
 
             <li>
-                <a href="{% url 'users_data' %}" class="flex items-center p-2 rounded-lg group
+                <a href="{% url 'dashboard:users_data' %}" class="flex items-center p-2 rounded-lg group
                           {% if request.resolver_match.url_name == 'users_data' %}
                               bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white {% else %}
                               text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {% endif %}">

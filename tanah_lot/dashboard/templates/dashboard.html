@@ -10,6 +10,7 @@
     {% include "snippets/styles.html" %}
     <link rel="icon" href="{% static 'image/iconhead1.png' %}">
     <title>{{ judul}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -31,10 +32,36 @@
     </div>
     
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3500, // Notifikasi akan hilang setelah 3.5 detik
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+            });
+
+            {% for message in messages %}
+                Toast.fire({
+                    icon: '{{ message.tags }}',
+                    title: '{{ message }}'
+                });
+            {% endfor %}
+        });
+    </script>
+    {% endif %}
     
-    <!-- {% include "snippets-dashboard/footer.html"%} -->
+    {# Ini script Anda yang sudah ada #}
     {% include "snippets/scripts.html"%}
-    
+
     
 </body>
 

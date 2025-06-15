@@ -2,7 +2,84 @@
 {% load static %}
 
 {% block body %}
+<div class="px-4 sm:px-6 lg:px-8 py-6 w-full max-w-9xl mx-auto">
+    <div class="sm:flex sm:justify-between sm:items-center mb-6 ">
+        <div class="mb-4 sm:mb-0">
+            {# Judul diubah menjadi Update User #}
+            <h1 class="text-2xl md:text-3xl text-dark-primary dark:text-gray-100 font-bold font-se">{{ judul }}</h1>
+        </div>
+        <div class="mb-4 sm:mb-0">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <a href="{% url 'dashboard:users_data' %}" class="inline-flex items-center text-neu-600 font-se text-sm font-medium">
+                            Data User
+                        </a>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <span class="ms-1 text-sm font-medium text-dark-secondary md:ms-2 dark:text-neu-900">Update User</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
 
 
+
+{# Action form dikosongkan agar submit ke URL saat ini, yaitu URL update #}
+<form class="w-full space-y-8" method="POST">
+    {% csrf_token %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+        <div class="md:col-span-1 space-y-6">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                <div>
+                    <label for="{{ form.username.id_for_label }}" class="block text-sm ...">Name<span class="text-red-500">*</span></label>
+                    {{ form.username }}
+                    {% for error in form.username.errors %}<p class="text-red-500 text-xs mt-1">{{ error }}</p>{% endfor %}
+                </div>
+                <div class="mt-4">
+                    <label for="{{ form.email.id_for_label }}" class="py-1 block text-sm ...">Email<span class="text-red-500">*</span></label>
+                    {{ form.email }}
+                    {% for error in form.email.errors %}<p class="text-red-500 text-xs mt-1">{{ error }}</p>{% endfor %}
+                </div>
+                <div class="mt-4">
+                    <label for="{{ form.phone_number.id_for_label }}" class="py-1 block text-sm ...">Phone Number</label>
+                    {{ form.phone_number }}
+                    {% for error in form.phone_number.errors %}<p class="text-red-500 text-xs mt-1">{{ error }}</p>{% endfor %}
+                </div>
+                <div class="mt-4">
+                    <label for="{{ form.password.id_for_label }}" class="py-1 block text-sm ...">{{ form.password.label }}</label>
+                    {{ form.password }}
+                    <p class="text-xs text-gray-500 mt-1">Kosongkan jika tidak ingin mengubah password.</p>
+                    {% for error in form.password.errors %}<p class="text-red-500 text-xs mt-1">{{ error }}</p>{% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="md:col-span-1">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                <label for="{{ form.role.id_for_label }}" class="block text-sm ...">User Position<span class="text-red-500">*</span></label>
+                {{ form.role }}
+                {% for error in form.role.errors %}<p class="text-red-500 text-xs mt-1">{{ error }}</p>{% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="flex items-center justify-start space-x-3 pt-2">
+        <button type="submit"
+            class="px-5 py-2.5 text-sm font-se font-medium text-white bg-pr-900 hover:bg-pr-900 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-xl text-center">
+            Update User
+        </button>
+        <a href="{% url 'dashboard:users_data' %}" class="font-medium rounded-xl  font-se text-sm px-5 py-2.5 text-center bg-red-700 text-white ...">
+            Cancel
+        </a>
+    </div>
+</form>
 
 {% endblock body %}

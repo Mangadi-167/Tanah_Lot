@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+app_name = 'dashboard'
+
 urlpatterns = [
 
     # khusus dashboard
@@ -11,8 +13,9 @@ urlpatterns = [
 
     # khusus article
     path("article/data/", views.article, name="article_data"),
-    
-    path("article/add", views.addArticle, name="add_article"),
+    path("article/add/", views.addArticle, name="add_article"),
+    path("article/update/<int:pk>/", views.update_content, name="update_content"),
+    path("content/delete/<int:pk>/", views.delete_content, name="delete_content"),
 
 
 
@@ -23,11 +26,15 @@ urlpatterns = [
   
     
 
-    # khusus user
+   # khusus user
     path("users/data/", views.user, name="users_data"),
-    path("users/add", views.addUser, name="add_user"),
+    path("users/data/add", views.addUser, name="add_user"),
+    path("users/data/edit/<int:pk>/", views.update_user, name="update_user"),
+     path("users/data/delete/<int:pk>/", views.delete_user, name="delete_user"),
+    
 
 
     # khusus reset password
-    path("users/reset-password", views.resetPassword, name="reset_password")
+    path("reset-password/", views.resetPassword, name="reset_password"),
+
 ]

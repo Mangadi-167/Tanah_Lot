@@ -14,7 +14,7 @@
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
-                        <a href="{% url 'article_data' %}"
+                        <a href="{% url 'dashboard:article_data' %}"
                             class="inline-flex items-center font-se text-sm font-medium text-dark-primary hover:text-primary-hover dark:text-gray-400 dark:hover:text-white">
                             Data Content
                         </a>
@@ -43,6 +43,7 @@
     <div class="mb-4 flex flex-col sm:flex-row justify-between items-center gap-3">
 
         <div class="relative w-full sm:w-auto ">
+            <form method="GET" action="{% url 'dashboard:article_data' %}" class="relative w-full sm:w-auto">
             <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
                 <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd"
@@ -52,10 +53,11 @@
             </span>
             <input
                 class=" block w-full sm:w-64 md:w-80 pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-pr-900 focus:border-pr-900 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                type="search" placeholder="Search Content..." />
+                type="search"name="q" placeholder="Search Content..."  value="{{ search_query|default:'' }}" />
+            </form>
         </div>
 
-        <a href="{% url 'add_article' %}"
+        <a href="{% url 'dashboard:add_article' %}"
             class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-pr-900 hover:bg-pr-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pr-900 dark:bg-indigo-500 dark:hover:bg-indigo-600">
             <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                 aria-hidden="true">
@@ -100,25 +102,32 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                {% for item in all_content_items %}
+                
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                        1</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <img class="h-10 w-16 object-cover rounded" src="{% static 'image/news2.jpg' %}"
-                            alt="Content Image">
+                        {{ forloop.counter }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            {% if item.image %}
+                                {# TAMBAHKAN TAG IMG DI SINI #}
+                                <img src="{{ item.image.url }}" alt="{{ item.title }}" class="h-16 w-16 object-cover rounded">
+                            {% else %}
+                                <span class="text-xs text-gray-500">No Image</span>
+                            {% endif %}
+                        </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                        {{ item.title|truncatechars:25 }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                        Festival Tanah Lot ...
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                        News
+                        {{ item.get_content_type_display }}
                     </td>
                     <td
                         class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                        Manajer Daerah...
+                        {{ item.description|truncatewords:5 }}
                     </td>
 
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                        <a href="{% url 'dashboard:update_content' item.id %}">
                         <button class="text-center text-neu-900 bg-amber-300 rounded h-8 w-8 ">
                             <svg class="w-6 h-6 mx-auto text-gray-800 dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -129,24 +138,56 @@
                             </svg>
 
                         </button>
-                        <button
-                            class="text-red-500 hover:text-red-700 dark:hover:text-red-400 bg-red-700 h-8 w-8 rounded ">
-                            <svg class="w-6 h-6 text-center mx-auto text-white dark:text-white bg-red-700 "
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                            </svg>
+                    </a>    
+                    {# Tombol Delete yang sekarang memanggil JavaScript #}
+<button type="button" 
+class="text-red-500 hover:text-red-700 bg-red-700 h-8 w-8 rounded"
+onclick="confirmContentDelete('{{ item.title|escapejs }}', 'delete-content-form-{{ item.id }}')">
 
-                        </button>
+{# Ikon SVG Anda tetap di sini, tidak ada yang berubah #}
+<svg class="w-6 h-6 text-center mx-auto text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+    stroke-width="2"
+    d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+</svg>
+</button>
+
+{# Form Hapus Tersembunyi (satu untuk setiap baris konten) #}
+<form id="delete-content-form-{{ item.id }}" method="POST" action="{% url 'dashboard:delete_content' item.id %}" class="hidden">
+{% csrf_token %}
+</form>
                     </td>
                 </tr>
-
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                        Tidak ada data konten yang ditemukan.
+                    </td>
+                </tr>
+                {% endfor %}
 
             </tbody>
         </table>
     </div>
 </div>
-
+<script>
+    function confirmContentDelete(title, formId) {
+        Swal.fire({
+            title: 'Anda Yakin?',
+            text: 'Anda akan menghapus konten "${title}". Tindakan ini tidak dapat dibatalkan!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            // Jika user menekan tombol "Ya, Hapus!"
+            if (result.isConfirmed) {
+                // Cari form tersembunyi yang sesuai dan submit form tersebut
+                document.getElementById(formId).submit();
+            }
+        });
+    }
+</script>
 {% endblock body %}

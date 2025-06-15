@@ -3,18 +3,19 @@
 
 {% block body %}
 <div class="px-4 sm:px-6 lg:px-8 py-6 w-full max-w-9xl mx-auto">
-
     <div class="sm:flex sm:justify-between sm:items-center mb-6 ">
         <div class="mb-4 sm:mb-0">
-            <h1 class="text-2xl md:text-3xl text-dark-primary dark:text-gray-100 font-bold font-se">Add User
+            <h1 class="text-2xl md:text-3xl text-dark-primary dark:text-gray-100 font-bold font-se">
+                {{ judul|default:"Add User" }}
             </h1>
         </div>
         <div class="mb-4 sm:mb-0">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
-                        <a href="{% url 'users_data' %}"
-                            class="inline-flex items-center text-neu-600 font-se text-sm font-medium  ">
+
+                        <a href="{% url 'dashboard:users_data' %}"
+                            class="inline-flex items-center text-neu-600 font-se text-sm font-medium">
                             Data User
                         </a>
                     </li>
@@ -35,85 +36,116 @@
         </div>
     </div>
 </div>
+{% if messages %}
+<div class="px-4 sm:px-6 lg:px-8">
+    {% for message in messages %}
+    <div
+        class="p-4 mb-4 text-sm {% if message.tags == 'error' %}text-red-800 bg-red-100{% else %}text-green-800 bg-green-100{% endif %} rounded-lg">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 
 
-<!-- form -->
 
-
-
-<form class="w-full space-y-8" method="POST" action="#" enctype="multipart/form-data ">
+<form class="w-full space-y-8" method="POST" action="{% url 'dashboard:add_user' %} " autocomplete="off" novalidate>
     {% csrf_token %}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
         <div class="md:col-span-1 space-y-6">
             <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
                 <div>
-                    <label for="name"
+                    <label for="id_username"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 font-se">Name<span
                             class="text-red-500">*</span></label>
-                    <input type="text" id="first_name"
+                    <input type="text" id="id_username" name="username"
+                        value="{{ form.username.value|default_if_none:'' }}"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900"
-                        placeholder="Enter a content title" required />
+                        placeholder="Enter a username" required />
+                    {% for error in form.username.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                    {% endfor%}
                 </div>
 
                 <div class="mt-4">
-                    <label for="description"
-                        class=" py-1 block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-se">Email<span
+                    <label for="id_email"
+                        class="py-1 block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-se">Email<span
                             class="text-red-500">*</span></label>
-                    <input type="text" id="email"
+                    <input type="email" id="id_email" name="email" value="{{ form.email.value|default_if_none:'' }}"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900"
                         placeholder="Enter email" required />
+                    {% for error in form.email.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                    {% endfor %}
                 </div>
 
                 <div class="mt-4">
-                    <label for="description"
-                        class=" py-1 block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-se">Phone Number<span
-                            class="text-red-500">*</span></label>
-                    <input type="text" id="phone-input"
+                    <label for="id_phone_number"
+                        class="py-1 block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-se">Phone
+                        Number</label>
+                    <input type="text" id="id_phone_number" name="phone_number"
+                        value="{{ form.phone_number.value|default_if_none:'' }}"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900"
-                        placeholder="Enter a phone number" required />
+                        placeholder="Enter a phone number" />
+                    {% for error in form.phone_number.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                    {% endfor %}
                 </div>
 
                 <div class="mt-4">
-                    <label for="description"
-                        class=" py-1 block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-se">Password<span
+                    <label for="id_password"
+                        class="py-1 block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 font-se">Password<span
                             class="text-red-500">*</span></label>
-                    <input type="password" id="password"
+               
+                    <input type="password" id="id_password" name="password" autocomplete="new-password"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900"
                         placeholder="Enter password" required />
+                    {% for error in form.password.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                    {% endfor %}
                 </div>
             </div>
-
         </div>
 
-
-        <!-- Jenis Konten -->
         <div class="md:col-span-1">
             <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                <label for="content_type" class="block text-sm font-se font-medium text-gray-700 dark:text-gray-300 mb-2">
+
+                <label for="{{ form.role.id_for_label }}"
+                    class="block text-sm font-se font-medium text-gray-700 dark:text-gray-300 mb-2">
                     User Position<span class="text-red-500">*</span>
                 </label>
-                <select id="position"
+
+                <select id="{{ form.role.id_for_label }}" name="{{ form.role.html_name }}"
                     class="bg-gray-50 border font-se border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900">
 
-                    <option selected>Admin</option>
-                    <option value="">User</option>
+                    <option value="" {% if not form.role.value %}selected{% endif %} disabled>Pilih Posisi...</option>
+
+                    {% for value, text in form.role.field.choices %}
+                        <option value="{{ value }}" {% if form.role.value|stringformat:"s" == value|stringformat:"s" %}selected{% endif %}>
+                            {{ text }}
+                        </option>
+                    {% endfor %}
+
                 </select>
+
+                {% for error in form.role.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ error }}</p>
+                {% endfor %}
+
             </div>
         </div>
     </div>
 
     <div class="flex items-center justify-start space-x-3 pt-2">
-        <a href="{% url 'users_data' %}"
-            class="px-5 py-2.5 text-sm font-se font-medium text-white bg-pr-900 hover:bg-pr-900 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-xl text-center dark:bg-pr-900 dark:hover:bg-pr-900 dark:focus:ring-pr-900">
+        <button type="submit"
+            class="px-5 py-2.5 text-sm font-se font-medium text-white bg-pr-900 hover:bg-pr-900 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-xl text-center">
             Add User
-        </a>
-        <a href="{% url 'users_data' %}"
-            class="font-medium rounded-xl font-se text-sm px-5 py-2.5 text-center  text-pr-900 hover:text-white border border-pr-900 hover:bg-pr-900 focus:ring-4 focus:outline-none focus:ring-pr-900  dark:border-pr-900 dark:text-pr-900 dark:hover:text-white dark:hover:bg-pr-900 dark:focus:ring-pr-900">
-            Cencel
+        </button>
+        <a href="{% url 'dashboard:users_data' %}"
+            class="font-medium rounded-xl  font-se text-sm px-5 py-2.5 text-center bg-red-700 text-white ...">
+            Cancel
         </a>
     </div>
 </form>
-
-
 
 {% endblock body %}
