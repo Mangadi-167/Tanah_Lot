@@ -45,16 +45,16 @@
 
         <div class="relative w-full sm:w-auto ">
             <form method="GET" action="{% url 'dashboard:users_data' %}" class="relative w-full sm:w-auto">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        clip-rule="evenodd" />
-                </svg>
-            </span>
-            <input
-                class=" block w-full sm:w-64 md:w-80 pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-pr-900 focus:border-pr-900 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
-                type="search"  name="q"value="{{ search_query|default:'' }}"placeholder="Search Content..." />
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                    <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <input
+                    class=" block w-full sm:w-64 md:w-80 pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-pr-900 focus:border-pr-900 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                    type="search" name="q" value="{{ search_query|default:'' }}" placeholder="Search Content..." />
         </div>
 
         <a href="{% url 'dashboard:add_user' %}"
@@ -102,46 +102,41 @@
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-            
+
                 {# Backend: Mulai perulangan untuk setiap data 'user_item' dari database #}
                 {% for user_item in all_users %}
-            
+
                 {# Frontend: Ini adalah struktur baris <tr> Anda yang asli #}
                 <tr>
                     {# Backend: Masukkan nomor urut #}
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
                         {{ forloop.counter }}
                     </td>
-            
+
                     {# Backend: Masukkan nama lengkap (atau username jika kosong) #}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                         {{ user_item.get_full_name|default:user_item.username }}
                     </td>
-            
+
                     {# Backend: Masukkan role/posisi #}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                         {{ user_item.profile.get_role_display }}
                     </td>
-            
+
                     {# Backend: Masukkan email #}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                         {{ user_item.email }}
                     </td>
-            
-                    {# Backend: Masukkan nomor telepon (jika kosong, tampilkan '-') #}
+
+                  
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                         {{ user_item.profile.phone_number|default:"-" }}
                     </td>
-            
-                    {# Frontend: Tombol Aksi Anda (statis sesuai permintaan) #}
-                        
-                    {# Frontend: Tombol Aksi Anda (statis sesuai permintaan) #}
+
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                         <a href="{% url 'dashboard:update_user' user_item.id %}">
 
                             <button type="button" class="text-center text-neu-900 bg-amber-300 rounded h-8 w-8 ">
-                                {# ^-- Perhatikan type="button" sudah ditambahkan di sini #}
-                            
                                 <svg class="w-6 h-6 mx-auto text-gray-800 dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -150,32 +145,56 @@
                                         d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                 </svg>
                             </button>
-                    </a>
-                    <a href="{% url 'dashboard:delete_user' user_item.id %}">
-    
-                        {# Tombol ini hanya untuk tampilan, tidak punya fungsi selain diklik sebagai bagian dari link #}
-                        <button type="button" class="text-red-500 hover:text-red-700 dark:hover:text-red-400 bg-red-700 h-8 w-8 rounded">
-                            
-                            {# Ikon SVG Anda tetap di sini, tidak ada yang berubah #}
-                            <svg class="w-6 h-6 text-center mx-auto text-white dark:text-white bg-red-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        </a>
+
+
+                        <button type="button" class="text-red-500 hover:text-red-700 bg-red-700 h-8 w-8 rounded"
+                            onclick="confirmUserDelete('{{ user_item.username|escapejs }}', 'delete-user-form-{{ user_item.id }}')">
+
+                           
+                            <svg class="w-6 h-6 text-center mx-auto text-white dark:text-white bg-red-700"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2"
                                     d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                             </svg>
-                            
                         </button>
-                    </a>
+
+                        <form id="delete-user-form-{{ user_item.id }}" method="POST"
+                            action="{% url 'dashboard:delete_user' user_item.id %}" class="hidden">
+                            {% csrf_token %}
+                        </form>
                     </td>
                 </tr>
-                {% endfor %} {# Backend: Akhir dari perulangan #}
-            
+                {% endfor %} 
+
             </tbody>
-                    </td>
-                </tr>
+            </td>
+            </tr>
             </tbody>
         </table>
     </div>
 </div>
 
+<script>
+    function confirmUserDelete(username, formId) {
+        Swal.fire({
+            title: 'Anda Yakin?',
+            text: 'Anda akan menghapus user ini?. Tindakan ini tidak dapat dibatalkan!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Jika user klik "Ya, Hapus!", submit form tersembunyi yang benar
+                document.getElementById(formId).submit();
+            }
+        });
+    }
+</script>
 
 {% endblock body%}

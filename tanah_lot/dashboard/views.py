@@ -117,7 +117,7 @@ def delete_content(request, pk):
         'judul': 'Konfirmasi Hapus Konten',
         'item': content_to_delete
     }
-    return render(request, 'article/delete.html', context)
+    return render(request, 'article/data.html', context)
 # ===================================================================
 # CRUD UNTUK USER
 # ===================================================================
@@ -282,7 +282,7 @@ def resetPassword(request):
         'judul': 'Change Password',
         'form': form
     }
-    return render(request, "users/reset_password.html", context)
+    return render(request, "users/reset-password.html", context)
 
 #----------------------------------------------------------------------------------
 
