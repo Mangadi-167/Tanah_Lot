@@ -140,7 +140,7 @@ def user(request):
             Q(first_name__icontains=query) |
             Q(last_name__icontains=query) |
             Q(email__icontains=query) |
-            Q(profile_role_icontains=query)
+            Q(profile__role__icontains=query)
         ).distinct()
    
 
