@@ -2,10 +2,11 @@
 
 <div class="py-4 px-2 bg-gray-50 dark:bg-gray-800">
     <div class="relative max-w-4xl mx-auto">
-        <form id="chat-form">
-            <input type="text"
+        <form id="chat-form" method="POST" action="{% url 'chatbot:chatbot' %}" class="relative">
+            {% csrf_token %}
+            <input type="text" name="message" id="message-input"
                 class="w-full border border-pr-900 dark:border-pr-800 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 rounded-full py-3 pl-5 pr-14 focus:outline-none focus:ring-2 focus:ring-pr-900 dark:focus:ring-pr-900 shadow-sm"
-                placeholder="Ask more about Tanah Lot...">
+                placeholder="Tanya TL-BOT tentang Tanah Lot..." autocomplete="off">
 
             <button type="submit"
                 class="absolute inset-y-0 right-0 flex items-center justify-center w-12 h-full text-neu-900 hover:text-pr-900 dark:hover:text-pr-900">
@@ -15,5 +16,152 @@
                 </svg>
             </button>
         </form>
+        <div class="mt-2 text-center ">
+            <button id="clear-history-btn"
+                class="text-xs text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">Hapus Riwayat Percakapan
+            </button>
+        </div>
     </div>
 </div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('message-input');
+        const chatMessagesDiv = document.getElementById('chat-messages'); // PENTING: Definisi ini
+        const clearHistoryBtn = document.getElementById('clear-history-btn');
+
+        // Fungsi bantu untuk mendapatkan CSRF token
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Fungsi untuk menambahkan pesan ke UI
+        function appendMessageToUI(role, text) {
+            const messageContainerClass = role === 'user' ? 'flex justify-end' : 'flex justify-start items-start gap-3';
+            const messageBubbleClass = role === 'user'
+                ? 'bg-pr-900 dark:bg-pr-900 text-white dark:text-gray-200 p-4 rounded-2xl rounded-br-lg shadow-sm'
+                : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-4 rounded-2xl rounded-bl-lg shadow-sm';
+            const textClass = role === 'user'
+                ? 'text-sm font-se text-justify'
+                : 'text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-se text-justify';
+
+            let messageHtml = '';
+
+            if (role === 'user') {
+                messageHtml = `
+                    <div class="${messageContainerClass}">
+                        <div class="max-w-md lg:max-w-lg">
+                            <div class="${messageBubbleClass}">
+                                <p class="${textClass}">${text}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else { // model (bot)
+                messageHtml = `
+                    <div class="${messageContainerClass}">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center">
+                                <img class="w-12 h-12 rounded-full" src="{% static 'image/iconai4.png' %}" alt="TALBOT avatar">
+                            </div>
+                        </div>
+                        <div class="max-w-xl">
+                            <div class="${messageBubbleClass}">
+                                <p class="${textClass}">${text.replace(/\n/g, '<br>')}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            chatMessagesDiv.insertAdjacentHTML('beforeend', messageHtml);
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight; // Auto-scroll
+        }
+
+        // Event listener untuk pengiriman form (pesan chat)
+        chatForm.addEventListener('submit', async function (event) {
+            event.preventDefault(); // Mencegah refresh halaman
+            const userMessage = messageInput.value.trim();
+
+            if (userMessage === '') {
+                return; // Jangan kirim pesan kosong
+            }
+
+            appendMessageToUI('user', userMessage); // Tampilkan pesan pengguna di UI
+            messageInput.value = ''; // Kosongkan input setelah dikirim
+
+            try {
+                const response = await fetch(chatForm.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `message=${encodeURIComponent(userMessage)}`
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    appendMessageToUI('model', data.bot_message); // Tampilkan balasan bot
+                } else {
+                    appendMessageToUI('model', `Error: ${data.bot_message || 'Terjadi kesalahan pada server.'}`);
+                    console.error('Server error:', data.bot_message);
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                appendMessageToUI('model', 'Maaf, tidak dapat terhubung ke bot. Periksa koneksi internet Anda.');
+            }
+        });
+
+        // Event listener untuk tombol "Hapus Riwayat Percakapan"
+        clearHistoryBtn.addEventListener('click', async function () {
+            if (!confirm("Apakah Anda yakin ingin menghapus riwayat percakapan?")) {
+                return;
+            }
+
+            try {
+                const response = await fetch("{% url 'chatbot:clear_chat' %}", {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    // Kosongkan kontainer pesan di UI
+                    chatMessagesDiv.innerHTML = `
+                        <div class="flex justify-center items-center h-full">
+                            <p class="text-gray-500 dark:text-gray-400">Mulai percakapan dengan TALBOT!</p>
+                        </div>`;
+                    // Opsional: alert(data.message);
+                } else {
+                    alert('Gagal menghapus riwayat: ' + (data.message || 'Terjadi kesalahan.'));
+                }
+            } catch (error) {
+                console.error('Error clearing chat:', error);
+                alert('Terjadi kesalahan saat mencoba menghapus riwayat. Lihat konsol untuk detail.');
+            }
+        });
+
+        // Auto-scroll ke bawah saat halaman pertama kali dimuat jika ada histori
+        // Pastikan chatMessagesDiv sudah terisi saat ini
+        if (chatMessagesDiv.scrollHeight > chatMessagesDiv.clientHeight) {
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+        }
+    }); // Akhir DOMContentLoaded
+</script>

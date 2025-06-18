@@ -1,10 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404 
+
+from dashboard.models import Content 
 
 def index(request):
-    context={
-        'judul':'Tanah Lot',
+  
+    latest_attractions = Content.objects.filter(content_type='attraction').order_by('-created_at')[:20]
+
+    context = {
+        'judul': 'Tanah Lot',
+        'attraction_list': latest_attractions,
     }
-    return render(request,"index.html", context)
+    return render(request, "index.html", context)
+
 
 
 def calender(request):
@@ -12,6 +19,8 @@ def calender(request):
         'judul' : 'Event Calender',
     }
     return render(request, "calender.html", context)
+
+
 
 
 def pakendungan(request):

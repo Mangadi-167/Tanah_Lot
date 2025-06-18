@@ -12,19 +12,19 @@
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown">
                     <span class="sr-only">Open user menu</span>
                     <img class="w-8 h-8 rounded-full" src="{% static 'image/profile.png' %}" alt="user photo">
-                    <span class="ml-2 text-neu-900 font-se font-medium dark:text-gray-300">Mangadi</span>
+                    <span class="ml-2 text-neu-900 font-se font-medium dark:text-gray-300">{{ user.get_full_name|default:user.username}}</span>
                 </button>
                 <!-- Dropdown menu -->
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600"
                     id="user-dropdown">
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 dark:text-white font-se">Mangadi</span>
+                        <span class="block text-sm text-gray-900 dark:text-white font-se">{{ user.get_full_name|default:user.username}}</span>
                         <span
-                            class="block text-sm  text-gray-500 truncate dark:text-gray-400 font-se">mangadi@gmail.com</span>
+                            class="block text-sm  text-gray-500 truncate dark:text-gray-400 font-se">{{ user.email}}</span>
 
                             <ul class="py-1 text-gray-700 dark:text-gray-400" aria-labelledby="dropdown">
                         <li>
-                            <a href="#"
+                            <a href="{% url 'login:logout'%}"
                                 class="flex items-center py-2 px-4 text-sm gap-2 font-se hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                     class="bi bi-box-arrow-left text-gray-700" viewBox="0 0 16 16">
