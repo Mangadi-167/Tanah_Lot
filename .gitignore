@@ -8,6 +8,7 @@ Env/
 # Virtual Environment
 env/
 node_modules/
+venv/
 
 # Django
 db.sqlite3

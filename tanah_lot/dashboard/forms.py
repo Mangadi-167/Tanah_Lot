@@ -1,5 +1,5 @@
 # dashboard/forms.py
-
+from django.contrib.auth.forms import PasswordChangeForm
 from django import forms
 from django.contrib.auth.models import User
 from .models import Content, CONTENT_TYPE_CHOICES, ROLE_CHOICES
@@ -12,7 +12,7 @@ SELECT_INPUT_CLASS = 'bg-gray-50 border font-se border-gray-300 text-gray-900 te
 TEXTAREA_CLASS = 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-pr-900 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900'
 IMAGE_INPUT_CLASS = 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
 TEXT_INPUT_CLASS = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900'
-
+FORM_RESET_PASSWORD = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900'
 # ==================================
 # FORM 1: UNTUK CONTENT
 # ==================================
@@ -88,17 +88,20 @@ class UpdateUserForm(forms.Form):
         if self.instance and User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
             raise forms.ValidationError("Email ini sudah digunakan oleh user lain.")
         return email
+    
+
+
 class PasswordResetFormByAdmin(forms.Form):
     # Field untuk password baru
     new_password1 = forms.CharField(
         label="Password Baru", 
-        widget=forms.PasswordInput(attrs={'class': FORM_INPUT_CLASS, 'placeholder': 'Masukkan password baru'}),
+        widget=forms.PasswordInput(attrs={'class': FORM_RESET_PASSWORD, 'placeholder': 'Masukkan password baru'}),
         help_text="Password harus memiliki setidaknya 8 karakter."
     )
     # Field untuk konfirmasi password baru
     new_password2 = forms.CharField(
         label="Konfirmasi Password Baru", 
-        widget=forms.PasswordInput(attrs={'class': FORM_INPUT_CLASS, 'placeholder': 'Ketik ulang password baru'})
+        widget=forms.PasswordInput(attrs={'class': FORM_RESET_PASSWORD, 'placeholder': 'Ketik ulang password baru'})
     )
 
     # Fungsi validasi untuk memastikan kedua password cocok

@@ -30,7 +30,7 @@ urlpatterns = [
     path("users/data/", views.user, name="users_data"),
     path("users/data/add", views.addUser, name="add_user"),
     path("users/data/edit/<int:pk>/", views.update_user, name="update_user"),
-     path("users/data/delete/<int:pk>/", views.delete_user, name="delete_user"),
+    path("users/data/delete/<int:pk>/", views.delete_user, name="delete_user"),
     
 
 

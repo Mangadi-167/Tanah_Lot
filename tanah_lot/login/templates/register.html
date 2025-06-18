@@ -11,7 +11,7 @@
                 <h1 class="font-se text-neu-900 font-bold text-xl mt-6">Welcome To Tanah Lot</h1>
                 <h1 class="font-se text-neu-700 font-medium text-lg">Register to create your account</h1>
                 
-                <form class="space-y-4 md:space-y-6" method="POST">
+                <form class="space-y-4 md:space-y-6" method="POST" autocomplete="off" novalidate>
                     {% csrf_token %}
 
                     {% for error in form.non_field_errors %}<p class="p-3 my-2 text-sm text-red-800 bg-red-100 rounded-lg">{{ error }}</p>{% endfor %}
@@ -32,9 +32,9 @@
                         {% for error in form.phone_number.errors %}<p class="text-red-600 text-xs mt-1">{{ error }}</p>{% endfor %}
                     </div>
                     <div>
-                        <label for="{{ form.password.id_for_label }}" class="font-se block mb-2 text-base font-medium text-neu-800 dark:text-white">Password</label>
+                        <label for="{{ form.password.id_for_label }}" autocomplete="new-password" class="font-se block mb-2 text-base font-medium text-neu-800 dark:text-white" >Password</label>
                         {{ form.password }}
-                        {% for error in form.password.errors %}<p class="text-red-600 text-xs mt-1">{{ error }}</p>{% endfor %}
+                        {% for error in form.password.errors %}<p class="text-red-600 text-xs mt-1" >{{ error }}</p>{% endfor %}
                     </div>
                     <div>
                         <label for="{{ form.password2.id_for_label }}" class="font-se block mb-2 text-base font-medium text-neu-800 dark:text-white">Confirm Password</label>

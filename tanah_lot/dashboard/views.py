@@ -137,8 +137,8 @@ def user(request):
        
         user_queryset = user_queryset.filter(
             Q(username__icontains=query) |
-            Q(first_name__icontains=query) |
-            Q(last_name__icontains=query) |
+            Q(first__name__icontains=query) |
+            Q(last__name__icontains=query) |
             Q(email__icontains=query) |
             Q(profile__role__icontains=query)
         ).distinct()
