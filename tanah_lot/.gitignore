@@ -10,7 +10,8 @@ env/
 node_modules/
 venv/
 .env/
-
+venv
+.env
 # Django
 db.sqlite3
 
