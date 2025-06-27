@@ -1,0 +1,63 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block body %}
+<div class="px-4 sm:px-6 lg:px-8 py-6 w-full max-w-9xl mx-auto">
+
+    <div class="sm:flex sm:justify-between sm:items-center mb-8">
+        <div>
+            <h1 class="text-2xl md:text-3xl text-dark-primary dark:text-gray-100 font-bold font-se">Ticket Sales Report</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Monitor all incoming ticket transactions.</p>
+        </div>
+        </div>
+
+    {% include 'transaction-list/_summary_cards.html' %}
+
+
+    <div class="container mx-auto p-4 bg-white rounded-xl shadow-xl">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-4 gap-3">
+           
+            <div class="relative w-full md:w-1/3">
+                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                </div>
+                <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Search by Order ID or Name...">
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead class="bg-gray-100 dark:bg-gray-700">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-900 dark:text-gray-300 uppercase tracking-wider">Order ID</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-900 dark:text-gray-300 uppercase tracking-wider">Username</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-900 dark:text-gray-300 uppercase tracking-wider">Date</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-900 dark:text-gray-300 uppercase tracking-wider">Overall price</th>
+                        <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-900 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                        <th scope="col" class="px-6 py-3 text-center text-xs font-semibold text-gray-900 dark:text-gray-300 uppercase tracking-wider">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                    
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">ORD-123XYZ</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Budi Santoso</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">27 Juni 2025</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Rp 80.000</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                            <span class="text-xs font-medium me-2 px-2.5 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">Success</span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                            <a href="#" class="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:underline">Detail</a>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+        
+        <nav class="flex items-center flex-wrap md:flex-row justify-between pt-4" aria-label="Table navigation">
+             </nav>
+    </div>
+</div>
+{% endblock body %}
