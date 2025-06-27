@@ -201,6 +201,10 @@
                         </ul>
                     </div>
                 </li>
+                 <li>
+                    <a href="{% url 'ticket' %}" :class="getNavLinkClasses('{% url 'ticket' %}')"
+                        :aria-current="window.location.pathname === '{% url 'ticket' %}' ? 'page' : false">Tickets</a>
+                </li>
                 <li>
                     <a href="{% url 'news:news_index' %}" :class="getNavLinkClasses('{% url 'news:news_index' %}')"
                         :aria-current="window.location.pathname === '{% url 'news:news_index' %}' ? 'page' : false">News</a>

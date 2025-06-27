@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("ticket/", include("ticket.urls")),
     path("news/", include("news.urls")),
     path("attractions/", include("attractions.urls")),
     path("dashboard/", include("dashboard.urls")),

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "about",
     "login",
     "chatbot",
+    "ticket",
 ]
 
 MIDDLEWARE = [
