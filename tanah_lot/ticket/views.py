@@ -23,3 +23,12 @@ def data(request):
         'judul':'Data Transaction',
     }
     return render(request,"transaction-list/transaction_list.html", context)
+
+
+
+
+def detail(request):
+    context={
+        'judul':'Detail Transaction',
+    }
+    return render(request,"transaction-list/transaction_detail.html", context)
