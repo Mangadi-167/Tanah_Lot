@@ -66,3 +66,16 @@ class Content(models.Model):
     class Meta:
         verbose_name = "Konten"
         verbose_name_plural = "Semua Konten"
+
+
+
+# Calender
+class Event(models.Model):
+    event_date = models.DateField()
+    event_name = models.CharField(max_length=255) # Pastikan ini ada dan ejaannya benar
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def _str_(self):
+        return self.event_name

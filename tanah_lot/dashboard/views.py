@@ -9,6 +9,14 @@ from .forms import ContentForm, UserCreationFormByAdmin, UpdateUserForm
 from django.db.models import Q
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import EventForm
+import json 
+from .models import Event
+from django.contrib import messages
+from django.http import JsonResponse
+from django.urls import reverse
 
 
 # ===================================================================
@@ -312,21 +320,74 @@ def index(request):
 # ---------------------------------------------------------------------------------
 
 # khusus calender
-def calender(request):
-    context={
-        'judul':'Data Event Calender',
-    }
-    return render(request,"calender/data.html", context)
+@login_required(login_url='/login/')
+def calender_events_api(request):
+    all_events = Event.objects.all()
+    events_list = []
+    for event in all_events:
+        events_list.append({
+            'id': event.id,
+            'title': event.event_name,
+            'date': event.event_date.strftime('%Y-%m-%d'),
+            # Baris ini sekarang akan berfungsi karena 'reverse' sudah di-import
+            'edit_url': reverse('dashboard:edit_calender', args=[event.id]),
+            'delete_url': reverse('dashboard:delete_calender', args=[event.id]),
+        })
+    return JsonResponse(events_list, safe=False)
+# --- VIEW UNTUK MENAMPILKAN HALAMAN KALENDER (DISEDERHANAKAN) ---
+@login_required(login_url='/login/')
+def calender_data(request):
+    context = {'judul': "Event Calender"}
+    return render(request, 'calender/data.html', context)
 
-def addCalender(request):
-    context={
-        'judul':'Add Calender',
+# --- VIEW UNTUK MENAMBAH EVENT (TETAP SAMA) ---
+@login_required(login_url='/login/')
+def add_calender(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event baru berhasil ditambahkan ke kalender.')
+            return redirect('dashboard:calender_data')
+    else:
+        form = EventForm()
+    context = {'judul': 'Add Event Calender', 'form': form}
+    return render(request, 'calender/add.html', context)
+
+@login_required(login_url='/login/')
+def edit_calender(request, event_id):
+    # Ambil event yang sesuai dengan ID, atau tampilkan 404 jika tidak ada
+    event = get_object_or_404(Event, id=event_id)
+    
+    if request.method == 'POST':
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event berhasil diperbarui.')
+            return redirect('dashboard:calender_data')
+    else:
+        # Saat GET request, tampilkan form yang sudah terisi data event
+        form = EventForm(instance=event)
+    
+    context = {
+        'judul': 'Edit Event',
+        'form': form,
+        'event': event, # Kirim objek event untuk info tambahan jika perlu
     }
-    return render(request,"calender/add.html", context)
+    # Kita bisa gunakan template yang sama dengan 'add' jika form-nya sama
+    return render(request, 'calender/add.html', context)
 
 
-def editCalender(request):
-    context={
-        'judul':'Edit Calender',
-    }
-    return render(request,"calender/edit.html", context)
+@login_required(login_url='/login/')
+def delete_calender(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    
+    # Sebaiknya gunakan method POST untuk delete demi keamanan
+    if request.method == 'POST':
+        event.delete()
+        messages.success(request, f"Event '{event.event_name}' telah dihapus.")
+        return redirect('dashboard:calender_data')
+    else:
+        # Jika diakses via GET, redirect saja (atau tampilkan halaman konfirmasi)
+        # Untuk keamanan, kita hanya akan mengizinkan POST
+        return redirect('dashboard:calender_data')

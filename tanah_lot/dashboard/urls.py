@@ -19,10 +19,13 @@ urlpatterns = [
 
 
 
-     # khusus event calender
-    path("calender/data/", views.calender, name="calender_data"),
-    path("calender/add/", views.addCalender, name="add_calender"),
-    path("calender/edit/", views.editCalender, name="edit_calender"),
+    # khusus event calender
+    path("calender/", views.calender_data, name="calender_data"),
+    path("calender/add/", views.add_calender, name="add_calender"),
+    # URL BARU UNTUK API
+    path("api/calender/events/", views.calender_events_api, name="calender_events_api"), 
+    path("calender/edit/<int:event_id>/", views.edit_calender, name="edit_calender"),
+    path("calender/delete/<int:event_id>/", views.delete_calender, name="delete_calender"),
   
     
 

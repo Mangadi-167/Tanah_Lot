@@ -1,340 +1,405 @@
 {% load static %}
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+<!-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> -->
+ 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
 <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const sidebar = document.getElementById('default-sidebar');
-            const desktopToggleButton = document.getElementById('toggleSidebar');
-            const mainContent = document.getElementById('main-content');
-            
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebar = document.getElementById('default-sidebar');
+        const desktopToggleButton = document.getElementById('toggleSidebar');
+        const mainContent = document.getElementById('main-content');
 
-            // Pastikan semua elemen target ada sebelum melanjutkan
-            if (desktopToggleButton && sidebar && mainContent) {
 
-                function applySidebarState(isWide) {
-                    const menuTexts = sidebar.querySelectorAll('.sidebar-menu-text'); // Ambil di dalam fungsi agar dinamis
+        // Pastikan semua elemen target ada sebelum melanjutkan
+        if (desktopToggleButton && sidebar && mainContent) {
 
-                    if (isWide) {
-                        sidebar.classList.remove('w-20');
-                        sidebar.classList.add('w-64');
-                        mainContent.classList.remove('sm:ml-20');
-                        mainContent.classList.add('sm:ml-64');
-                        menuTexts.forEach(textElement => {
-                            textElement.classList.remove('hidden');
-                        });
+            function applySidebarState(isWide) {
+                const menuTexts = sidebar.querySelectorAll('.sidebar-menu-text'); // Ambil di dalam fungsi agar dinamis
+
+                if (isWide) {
+                    sidebar.classList.remove('w-20');
+                    sidebar.classList.add('w-64');
+                    mainContent.classList.remove('sm:ml-20');
+                    mainContent.classList.add('sm:ml-64');
+                    menuTexts.forEach(textElement => {
+                        textElement.classList.remove('hidden');
+                    });
+                    desktopToggleButton.setAttribute('aria-expanded', 'true');
+                } else { // Jika ingin diperkecil
+                    sidebar.classList.remove('w-64');
+                    sidebar.classList.add('w-20');
+                    mainContent.classList.remove('sm:ml-64');
+                    mainContent.classList.add('sm:ml-20');
+                    menuTexts.forEach(textElement => {
+                        textElement.classList.add('hidden');
+                    });
+                    desktopToggleButton.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            desktopToggleButton.addEventListener('click', function () {
+                const isCurrentlyWide = sidebar.classList.contains('w-64');
+                applySidebarState(!isCurrentlyWide); // Toggle state
+            });
+
+            function adjustLayoutOnResize() {
+                if (!sidebar || !mainContent) return;
+
+                if (window.innerWidth < 1024) { // Breakpoint lg Tailwind
+                    // Jika di mobile dan sidebar sebelumnya diperkecil (w-20), kembalikan ke lebar
+                    if (sidebar.classList.contains('w-20')) {
+                        applySidebarState(true);
+                    }
+                    mainContent.classList.remove('sm:ml-64', 'sm:ml-20'); // Hapus margin desktop
+                    if (desktopToggleButton) { // Set aria-expanded default untuk tombol desktop (meskipun hidden)
                         desktopToggleButton.setAttribute('aria-expanded', 'true');
-                    } else { // Jika ingin diperkecil
-                        sidebar.classList.remove('w-64');
-                        sidebar.classList.add('w-20');
-                        mainContent.classList.remove('sm:ml-64');
-                        mainContent.classList.add('sm:ml-20');
-                        menuTexts.forEach(textElement => {
-                            textElement.classList.add('hidden');
-                        });
-                        desktopToggleButton.setAttribute('aria-expanded', 'false');
                     }
-                }
-
-                desktopToggleButton.addEventListener('click', function () {
-                    const isCurrentlyWide = sidebar.classList.contains('w-64');
-                    applySidebarState(!isCurrentlyWide); // Toggle state
-                });
-
-                function adjustLayoutOnResize() {
-                    if (!sidebar || !mainContent) return;
-
-                    if (window.innerWidth < 1024) { // Breakpoint lg Tailwind
-                        // Jika di mobile dan sidebar sebelumnya diperkecil (w-20), kembalikan ke lebar
-                        if (sidebar.classList.contains('w-20')) {
-                            applySidebarState(true);
-                        }
-                        mainContent.classList.remove('sm:ml-64', 'sm:ml-20'); // Hapus margin desktop
-                        if (desktopToggleButton) { // Set aria-expanded default untuk tombol desktop (meskipun hidden)
-                            desktopToggleButton.setAttribute('aria-expanded', 'true');
-                        }
-                    } else { // Desktop
-                        // Jika dari mobile ke desktop, atau state awal tidak jelas, set default lebar
-                        if (!sidebar.classList.contains('w-64') && !sidebar.classList.contains('w-20')) {
-                            applySidebarState(true);
-                        } else {
-                            // Terapkan margin konten yang sesuai dengan lebar sidebar saat ini
-                            if (sidebar.classList.contains('w-64')) {
-                                mainContent.classList.remove('sm:ml-20');
-                                mainContent.classList.add('sm:ml-64');
-                                if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'true');
-                            } else if (sidebar.classList.contains('w-20')) {
-                                mainContent.classList.remove('sm:ml-64');
-                                mainContent.classList.add('sm:ml-20');
-                                if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'false');
-                            }
-                        }
-                    }
-                }
-
-                window.addEventListener('resize', adjustLayoutOnResize);
-
-                // Panggil saat load untuk set state awal yang benar
-                // Ini penting agar saat halaman dimuat di desktop, state awalnya benar
-                if (window.innerWidth >= 1024) {
-                    // Jika sidebar tidak w-20 (berarti harusnya w-64 atau state default), set ke lebar
-                    if (!sidebar.classList.contains('w-20')) {
+                } else { // Desktop
+                    // Jika dari mobile ke desktop, atau state awal tidak jelas, set default lebar
+                    if (!sidebar.classList.contains('w-64') && !sidebar.classList.contains('w-20')) {
                         applySidebarState(true);
                     } else {
-                        // Jika memang awalnya w-20 (mungkin dari refresh halaman saat state kecil)
-                        applySidebarState(false);
+                        // Terapkan margin konten yang sesuai dengan lebar sidebar saat ini
+                        if (sidebar.classList.contains('w-64')) {
+                            mainContent.classList.remove('sm:ml-20');
+                            mainContent.classList.add('sm:ml-64');
+                            if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'true');
+                        } else if (sidebar.classList.contains('w-20')) {
+                            mainContent.classList.remove('sm:ml-64');
+                            mainContent.classList.add('sm:ml-20');
+                            if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'false');
+                        }
                     }
+                }
+            }
+
+            window.addEventListener('resize', adjustLayoutOnResize);
+
+            // Panggil saat load untuk set state awal yang benar
+            // Ini penting agar saat halaman dimuat di desktop, state awalnya benar
+            if (window.innerWidth >= 1024) {
+                // Jika sidebar tidak w-20 (berarti harusnya w-64 atau state default), set ke lebar
+                if (!sidebar.classList.contains('w-20')) {
+                    applySidebarState(true);
                 } else {
-                    // Untuk mobile, pastikan tombol desktop (meskipun tersembunyi) memiliki aria-expanded yang sesuai
-                    if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'true');
+                    // Jika memang awalnya w-20 (mungkin dari refresh halaman saat state kecil)
+                    applySidebarState(false);
                 }
             } else {
-                // Tambahkan console log jika salah satu elemen penting tidak ditemukan
-                if (!desktopToggleButton) console.error('Tombol Desktop (id="toggleSidebar") tidak ditemukan.');
-                if (!sidebar) console.error('Sidebar (id="default-sidebar") tidak ditemukan.');
-                if (!mainContent) console.error('Konten Utama (id="main-content") tidak ditemukan.');
+                // Untuk mobile, pastikan tombol desktop (meskipun tersembunyi) memiliki aria-expanded yang sesuai
+                if (desktopToggleButton) desktopToggleButton.setAttribute('aria-expanded', 'true');
             }
-        });
-    </script>
-
-    <!-- footer dashboard -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('Sidebar, Main Content & Footer adjustment script loaded.');
-
-    const sidebar = document.getElementById('default-sidebar');
-    const desktopToggleButton = document.getElementById('toggleSidebar');
-    const mainContent = document.getElementById('main-content');
-    const footer = document.getElementById('app-footer'); // ✅ AMBIL ELEMEN FOOTER
-    const menuTexts = sidebar ? sidebar.querySelectorAll('.sidebar-menu-text') : [];
-
-    // Pengecekan elemen
-    if (!sidebar) console.error('Sidebar (id="default-sidebar") not found.');
-    if (!desktopToggleButton) console.error('Desktop toggle button (id="toggleSidebar") not found.');
-    if (!mainContent) console.error('Main content (id="main-content") not found.');
-    if (!footer) console.error('Footer (id="app-footer") not found.'); // ✅ Cek footer
-
-    // Hanya lanjutkan jika semua elemen penting ada
-    if (desktopToggleButton && sidebar && mainContent && footer) { // ✅ Pastikan footer ada di sini
-        console.log('All target elements for desktop sidebar toggle found.');
-        let isDesktopSidebarMinimized = false; // Default sidebar tidak diperkecil
-
-        function applyDesktopSidebarState(minimize) {
-            console.log('applyDesktopSidebarState called. Minimize:', minimize);
-            
-            if (minimize) { // Perkecil sidebar
-                sidebar.classList.remove('w-64');
-                sidebar.classList.add('w-20');
-
-                mainContent.classList.remove('sm:ml-64');
-                mainContent.classList.add('sm:ml-20');
-                footer.classList.remove('sm:ml-64'); // ✅ SESUAIKAN FOOTER
-                footer.classList.add('sm:ml-20');    // ✅ SESUAIKAN FOOTER
-
-                menuTexts.forEach(textElement => {
-                    textElement.classList.add('hidden');
-                });
-                desktopToggleButton.setAttribute('aria-expanded', 'false');
-            } else { // Perbesar sidebar (kembali ke normal)
-                sidebar.classList.remove('w-20');
-                sidebar.classList.add('w-64');
-
-                mainContent.classList.remove('sm:ml-20');
-                mainContent.classList.add('sm:ml-64');
-                footer.classList.remove('sm:ml-20'); // ✅ SESUAIKAN FOOTER
-                footer.classList.add('sm:ml-64');    // ✅ SESUAIKAN FOOTER
-
-                menuTexts.forEach(textElement => {
-                    textElement.classList.remove('hidden');
-                });
-                desktopToggleButton.setAttribute('aria-expanded', 'true');
-            }
+        } else {
+            // Tambahkan console log jika salah satu elemen penting tidak ditemukan
+            if (!desktopToggleButton) console.error('Tombol Desktop (id="toggleSidebar") tidak ditemukan.');
+            if (!sidebar) console.error('Sidebar (id="default-sidebar") tidak ditemukan.');
+            if (!mainContent) console.error('Konten Utama (id="main-content") tidak ditemukan.');
         }
+    });
+</script>
 
-        desktopToggleButton.addEventListener('click', function () {
-            console.log('Desktop toggleButton clicked.');
-            if (window.innerWidth >= 1024) { // Hanya bekerja di layar lg ke atas
-                isDesktopSidebarMinimized = !isDesktopSidebarMinimized;
-                applyDesktopSidebarState(isDesktopSidebarMinimized);
-            }
-        });
+<!-- footer dashboard -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('Sidebar, Main Content & Footer adjustment script loaded.');
 
-        function handleWindowResize() {
-            console.log('Window resized. Current width:', window.innerWidth);
-            if (!sidebar || !mainContent || !footer) return;
+        const sidebar = document.getElementById('default-sidebar');
+        const desktopToggleButton = document.getElementById('toggleSidebar');
+        const mainContent = document.getElementById('main-content');
+        const footer = document.getElementById('app-footer'); // ✅ AMBIL ELEMEN FOOTER
+        const menuTexts = sidebar ? sidebar.querySelectorAll('.sidebar-menu-text') : [];
 
-            if (window.innerWidth < 1024) { // Di bawah lg (tablet/mobile)
-                if (sidebar.classList.contains('w-20')) { 
-                    applyDesktopSidebarState(false); 
-                }
-                // Untuk mobile/tablet, margin diatur oleh CSS atau state drawer Flowbite.
-                // Hapus kelas margin JS agar tidak konflik.
-                mainContent.classList.remove('sm:ml-20');
-                footer.classList.remove('sm:ml-20');
+        // Pengecekan elemen
+        if (!sidebar) console.error('Sidebar (id="default-sidebar") not found.');
+        if (!desktopToggleButton) console.error('Desktop toggle button (id="toggleSidebar") not found.');
+        if (!mainContent) console.error('Main content (id="main-content") not found.');
+        if (!footer) console.error('Footer (id="app-footer") not found.'); // ✅ Cek footer
 
-                if (window.innerWidth < 640) { // Di bawah sm (mobile, drawer overlay)
+        // Hanya lanjutkan jika semua elemen penting ada
+        if (desktopToggleButton && sidebar && mainContent && footer) { // ✅ Pastikan footer ada di sini
+            console.log('All target elements for desktop sidebar toggle found.');
+            let isDesktopSidebarMinimized = false; // Default sidebar tidak diperkecil
+
+            function applyDesktopSidebarState(minimize) {
+                console.log('applyDesktopSidebarState called. Minimize:', minimize);
+
+                if (minimize) { // Perkecil sidebar
+                    sidebar.classList.remove('w-64');
+                    sidebar.classList.add('w-20');
+
                     mainContent.classList.remove('sm:ml-64');
-                    footer.classList.remove('sm:ml-64');
-                } else { // Antara sm dan lg (tablet)
-                    // Jika sidebar terlihat karena sm:translate-x-0, pastikan margin diterapkan
-                    if (sidebar.classList.contains('sm:translate-x-0')) {
-                        mainContent.classList.add('sm:ml-64');
-                        footer.classList.add('sm:ml-64');
-                    } else { // Jika sidebar tersembunyi (misal oleh drawer)
+                    mainContent.classList.add('sm:ml-20');
+                    footer.classList.remove('sm:ml-64'); // ✅ SESUAIKAN FOOTER
+                    footer.classList.add('sm:ml-20');    // ✅ SESUAIKAN FOOTER
+
+                    menuTexts.forEach(textElement => {
+                        textElement.classList.add('hidden');
+                    });
+                    desktopToggleButton.setAttribute('aria-expanded', 'false');
+                } else { // Perbesar sidebar (kembali ke normal)
+                    sidebar.classList.remove('w-20');
+                    sidebar.classList.add('w-64');
+
+                    mainContent.classList.remove('sm:ml-20');
+                    mainContent.classList.add('sm:ml-64');
+                    footer.classList.remove('sm:ml-20'); // ✅ SESUAIKAN FOOTER
+                    footer.classList.add('sm:ml-64');    // ✅ SESUAIKAN FOOTER
+
+                    menuTexts.forEach(textElement => {
+                        textElement.classList.remove('hidden');
+                    });
+                    desktopToggleButton.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            desktopToggleButton.addEventListener('click', function () {
+                console.log('Desktop toggleButton clicked.');
+                if (window.innerWidth >= 1024) { // Hanya bekerja di layar lg ke atas
+                    isDesktopSidebarMinimized = !isDesktopSidebarMinimized;
+                    applyDesktopSidebarState(isDesktopSidebarMinimized);
+                }
+            });
+
+            function handleWindowResize() {
+                console.log('Window resized. Current width:', window.innerWidth);
+                if (!sidebar || !mainContent || !footer) return;
+
+                if (window.innerWidth < 1024) { // Di bawah lg (tablet/mobile)
+                    if (sidebar.classList.contains('w-20')) {
+                        applyDesktopSidebarState(false);
+                    }
+                    // Untuk mobile/tablet, margin diatur oleh CSS atau state drawer Flowbite.
+                    // Hapus kelas margin JS agar tidak konflik.
+                    mainContent.classList.remove('sm:ml-20');
+                    footer.classList.remove('sm:ml-20');
+
+                    if (window.innerWidth < 640) { // Di bawah sm (mobile, drawer overlay)
                         mainContent.classList.remove('sm:ml-64');
                         footer.classList.remove('sm:ml-64');
+                    } else { // Antara sm dan lg (tablet)
+                        // Jika sidebar terlihat karena sm:translate-x-0, pastikan margin diterapkan
+                        if (sidebar.classList.contains('sm:translate-x-0')) {
+                            mainContent.classList.add('sm:ml-64');
+                            footer.classList.add('sm:ml-64');
+                        } else { // Jika sidebar tersembunyi (misal oleh drawer)
+                            mainContent.classList.remove('sm:ml-64');
+                            footer.classList.remove('sm:ml-64');
+                        }
                     }
+                    desktopToggleButton.setAttribute('aria-expanded', 'true');
+                } else { // Desktop (lg ke atas)
+                    applyDesktopSidebarState(isDesktopSidebarMinimized);
                 }
-                desktopToggleButton.setAttribute('aria-expanded', 'true');
-            } else { // Desktop (lg ke atas)
-                applyDesktopSidebarState(isDesktopSidebarMinimized);
             }
-        }
-        window.addEventListener('resize', handleWindowResize);
-        
-        // Set state awal saat halaman dimuat
-        if (window.innerWidth >= 1024) {
-            applyDesktopSidebarState(isDesktopSidebarMinimized); // Default: sidebar lebar
+            window.addEventListener('resize', handleWindowResize);
+
+            // Set state awal saat halaman dimuat
+            if (window.innerWidth >= 1024) {
+                applyDesktopSidebarState(isDesktopSidebarMinimized); // Default: sidebar lebar
+            } else {
+                handleWindowResize(); // Atur untuk mobile/tablet dengan benar
+            }
         } else {
-            handleWindowResize(); // Atur untuk mobile/tablet dengan benar
+            console.warn('One or more critical elements for sidebar/footer interaction are missing.');
         }
-    } else {
-        console.warn('One or more critical elements for sidebar/footer interaction are missing.');
-    }
-});
+    });
 </script>
 
 
 <!-- gambar pada form add conten article -->
- <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const imageInput = document.getElementById('id_image');
-    const imagePreview = document.getElementById('image-preview');
-    const imageFilenameDisplay = document.getElementById('image-filename-display'); // Dari HTML yang saya berikan sebelumnya
-    const removeImageButton = document.getElementById('remove-image-btn');
-    const imageUploadUIPlaceholder = document.getElementById('image-upload-ui-placeholder');
-    const imagePreviewContainer = document.getElementById('image-preview-container');
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageInput = document.getElementById('id_image');
+        const imagePreview = document.getElementById('image-preview');
+        const imageFilenameDisplay = document.getElementById('image-filename-display'); // Dari HTML yang saya berikan sebelumnya
+        const removeImageButton = document.getElementById('remove-image-btn');
+        const imageUploadUIPlaceholder = document.getElementById('image-upload-ui-placeholder');
+        const imagePreviewContainer = document.getElementById('image-preview-container');
 
-    // Pastikan semua elemen ada sebelum menambahkan event listener
-    if (imageInput && imagePreview && imageFilenameDisplay && removeImageButton && imageUploadUIPlaceholder && imagePreviewContainer) {
+        // Pastikan semua elemen ada sebelum menambahkan event listener
+        if (imageInput && imagePreview && imageFilenameDisplay && removeImageButton && imageUploadUIPlaceholder && imagePreviewContainer) {
 
-        imageInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
-                    imageFilenameDisplay.textContent = file.name; // Tampilkan nama file
-                    imagePreviewContainer.classList.remove('hidden'); // Tampilkan kontainer preview
-                    imageUploadUIPlaceholder.classList.add('hidden'); // Sembunyikan placeholder awal
+            imageInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imageFilenameDisplay.textContent = file.name; // Tampilkan nama file
+                        imagePreviewContainer.classList.remove('hidden'); // Tampilkan kontainer preview
+                        imageUploadUIPlaceholder.classList.add('hidden'); // Sembunyikan placeholder awal
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    // Jika tidak ada file dipilih (misalnya, pengguna membatalkan dialog)
+                    // Kembalikan ke state awal jika perlu
+                    imagePreview.src = '#';
+                    imageFilenameDisplay.textContent = 'PNG, JPG, JPEG (Ukuran Maks ...MB)'; // Atau teks placeholder awal Anda
+                    imagePreviewContainer.classList.add('hidden');
+                    imageUploadUIPlaceholder.classList.remove('hidden');
                 }
-                reader.readAsDataURL(file);
-            } else {
-                // Jika tidak ada file dipilih (misalnya, pengguna membatalkan dialog)
-                // Kembalikan ke state awal jika perlu
-                imagePreview.src = '#';
-                imageFilenameDisplay.textContent = 'PNG, JPG, JPEG (Ukuran Maks ...MB)'; // Atau teks placeholder awal Anda
-                imagePreviewContainer.classList.add('hidden');
-                imageUploadUIPlaceholder.classList.remove('hidden');
-            }
-        });
+            });
 
-        removeImageButton.addEventListener('click', function() {
-            imageInput.value = ''; // Hapus file dari input
-            imagePreview.src = '#'; // Reset src gambar preview
-            imageFilenameDisplay.textContent = 'PNG, JPG, JPEG (Ukuran Maks ...MB)'; // Reset nama file
-            imagePreviewContainer.classList.add('hidden'); // Sembunyikan kontainer preview
-            imageUploadUIPlaceholder.classList.remove('hidden'); // Tampilkan kembali placeholder awal
-        });
+            removeImageButton.addEventListener('click', function () {
+                imageInput.value = ''; // Hapus file dari input
+                imagePreview.src = '#'; // Reset src gambar preview
+                imageFilenameDisplay.textContent = 'PNG, JPG, JPEG (Ukuran Maks ...MB)'; // Reset nama file
+                imagePreviewContainer.classList.add('hidden'); // Sembunyikan kontainer preview
+                imageUploadUIPlaceholder.classList.remove('hidden'); // Tampilkan kembali placeholder awal
+            });
 
-    } else {
-        console.warn('Satu atau lebih elemen untuk preview gambar tidak ditemukan. Pastikan ID elemen HTML sudah benar.');
-    }
+        } else {
+            console.warn('Satu atau lebih elemen untuk preview gambar tidak ditemukan. Pastikan ID elemen HTML sudah benar.');
+        }
 
-});
+    });
 </script>
 
 
 
 
 <!-- Script Kalender -->
- <script>
+<!-- Script Kalender -->
+<script>
+    // File: snippets/scripts.html
+
+    // =========================================================================
+    // == INI KODE FINAL. GANTI FUNGSI calendarApp LAMA ANDA DENGAN INI SEMUA ==
+    // =========================================================================
     function calendarApp() {
         return {
+            // Properti data (tidak berubah)
             currentDate: new Date(),
             currentMonth: null,
             currentYear: null,
             daysInMonth: [],
             monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            view: 'month', // 'month', 'week', 'day'
+            view: 'month',
             isPickerOpen: false,
             pickerYear: null,
-            // Hardcode event untuk demo
-            events: [
-                { date: '2025-06-03', title: 'Odalan' },
-                { date: '2025-06-07', title: 'Saraswati' },
-                { date: '2025-07-15', title: 'Galungan' },
-            ],
+            events: [],
 
             initCalendar() {
                 this.currentMonth = this.currentDate.getMonth();
                 this.currentYear = this.currentDate.getFullYear();
                 this.pickerYear = this.currentYear;
-                this.generateCalendarDays();
+                fetch("{% url 'dashboard:calender_events_api' %}")
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.text().then(text => { throw new Error('API Error: ' + text) });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        this.events = data;
+                        this.generateCalendarDays();
+                    })
+                    .catch(error => {
+                        console.error('Gagal mengambil data kalender:', error);
+                        this.generateCalendarDays();
+                    });
             },
 
             generateCalendarDays() {
                 this.daysInMonth = [];
                 const date = new Date(this.currentYear, this.currentMonth, 1);
-                const firstDayOfMonth = date.getDay(); // 0 (Sun) - 6 (Sat)
+                const firstDayOfMonth = date.getDay();
                 const daysInThisMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-
-                // Hari dari bulan sebelumnya
                 const daysInLastMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
+                let daysArray = [];
                 for (let i = firstDayOfMonth; i > 0; i--) {
-                    this.daysInMonth.push({
-                        date: new Date(this.currentYear, this.currentMonth - 1, daysInLastMonth - i + 1),
-                        dayNumber: daysInLastMonth - i + 1,
-                        isCurrentMonth: false,
-                        isToday: false,
-                        events: []
-                    });
+                    const dayNumber = daysInLastMonth - i + 1;
+                    const fullDate = new Date(this.currentYear, this.currentMonth - 1, dayNumber);
+                    const dateString = `${fullDate.getFullYear()}-${String(fullDate.getMonth() + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
+                    daysArray.push({ dayNumber: dayNumber, isCurrentMonth: false, events: [], date: dateString });
                 }
-
-                // Hari di bulan ini
                 for (let i = 1; i <= daysInThisMonth; i++) {
-                    let fullDate = new Date(this.currentYear, this.currentMonth, i);
-                    let today = new Date();
-                    let isToday = today.getDate() == i && today.getMonth() == this.currentMonth && today.getFullYear() == this.currentYear;
-
-                    let dateString = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-                    let eventsForDay = this.events.filter(e => e.date === dateString);
-
-                    this.daysInMonth.push({
-                        date: fullDate,
-                        dayNumber: i,
-                        isCurrentMonth: true,
-                        isToday: isToday,
-                        events: eventsForDay
-                    });
+                    const today = new Date();
+                    const isToday = today.getDate() === i && today.getMonth() === this.currentMonth && today.getFullYear() === this.currentYear;
+                    const dateString = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                    const eventsForDay = this.events.filter(e => e.date === dateString);
+                    daysArray.push({ dayNumber: i, date: dateString, isCurrentMonth: true, isToday: isToday, events: eventsForDay });
                 }
-
-                // Hari dari bulan selanjutnya, untuk melengkapi grid
-                const remainingCells = 42 - this.daysInMonth.length; // 6 baris * 7 kolom
+                const gridCells = daysArray.length;
+                const remainingCells = gridCells > 35 ? 42 - gridCells : 35 - gridCells;
                 for (let i = 1; i <= remainingCells; i++) {
-                    this.daysInMonth.push({
-                        date: new Date(this.currentYear, this.currentMonth + 1, i),
-                        dayNumber: i,
-                        isCurrentMonth: false,
-                        isToday: false,
-                        events: []
-                    });
+                    const fullDate = new Date(this.currentYear, this.currentMonth + 1, i);
+                    const dateString = `${fullDate.getFullYear()}-${String(fullDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                    daysArray.push({ dayNumber: i, isCurrentMonth: false, events: [], date: dateString });
                 }
+                this.daysInMonth = daysArray;
             },
 
+            // --- FUNGSI BARU UNTUK MENGAMBIL CSRF TOKEN DARI COOKIE ---
+            getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            },
+
+            // --- FUNGSI showEventOptions YANG SUDAH DIPERBAIKI ---
+            showEventOptions(event) {
+                if (!event.edit_url || !event.delete_url) {
+                    Swal.fire({ title: event.title, text: `Event pada tanggal ${event.date}`, icon: 'info' });
+                    return;
+                }
+                Swal.fire({
+                    title: event.title,
+                    text: `Event pada tanggal ${event.date}`,
+                    showCancelButton: true,
+                    confirmButtonText: 'Edit',
+                    cancelButtonText: 'Tutup',
+                    showDenyButton: true,
+                    denyButtonText: `Hapus`,
+                    confirmButtonColor: '#3B82F6',
+                    denyButtonColor: '#EF4444',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = event.edit_url;
+                    } else if (result.isDenied) {
+                        Swal.fire({
+                            title: 'Anda yakin?',
+                            text: `Event "${event.title}" akan dihapus secara permanen!`,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonText: 'Batal',
+                            confirmButtonText: 'Ya, hapus!'
+                        }).then((deleteResult) => {
+                            if (deleteResult.isConfirmed) {
+                                let form = document.createElement('form');
+                                form.method = 'POST';
+                                form.action = event.delete_url;
+
+                                // --> INI BAGIAN PENTING YANG SUDAH DIPERBAIKI <--
+                                let csrfToken = this.getCookie('csrftoken');
+                                let csrfInput = document.createElement('input');
+                                csrfInput.type = 'hidden';
+                                csrfInput.name = 'csrfmiddlewaretoken';
+                                csrfInput.value = csrfToken;
+                                form.appendChild(csrfInput);
+
+                                document.body.appendChild(form);
+                                form.submit();
+                            }
+                        })
+                    }
+                })
+            },
+
+            // --- FUNGSI NAVIGASI (VERSI LENGKAP DAN BENAR) ---
             changeMonth(direction) {
                 this.currentMonth += direction;
                 if (this.currentMonth < 0) {
@@ -350,7 +415,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             goToToday() {
                 this.currentDate = new Date();
-                this.initCalendar();
+                this.currentMonth = this.currentDate.getMonth();
+                this.currentYear = this.currentDate.getFullYear();
+                this.pickerYear = this.currentYear;
+                this.generateCalendarDays();
             },
 
             changePickerYear(direction) {

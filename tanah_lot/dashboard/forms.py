@@ -3,6 +3,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django import forms
 from django.contrib.auth.models import User
 from .models import Content, CONTENT_TYPE_CHOICES, ROLE_CHOICES
+from .models import Event
 
 # ===================================================================
 # DEFINISI KELAS CSS (AGAR TAMPILAN TIDAK RUSAK)
@@ -110,3 +111,26 @@ class PasswordResetFormByAdmin(forms.Form):
         if cd['new_password1'] and cd['new_password2'] and cd['new_password1'] != cd['new_password2']:
             raise forms.ValidationError("Password tidak cocok.")
         return cd['new_password2']
+    
+
+# Calender
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ['event_date', 'event_name', 'description']
+        widgets = {
+            'event_date': forms.DateInput(attrs={
+                'class': 'font-se bg-gray-50 border ...', # Salin kelas CSS lengkap Anda
+                'placeholder': 'Select date',
+                'datepicker': True, # Atribut khusus untuk memicu datepicker JS
+            }),
+            'event_name': forms.TextInput(attrs={
+                'class': 'font-se bg-gray-50 border ...', # Salin kelas CSS lengkap Anda
+                'placeholder': 'Enter event name'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'font-se block p-2.5 w-full ...', # Salin kelas CSS lengkap Anda
+                'placeholder': 'Enter event description',
+                'rows': 4
+            })
+        }
