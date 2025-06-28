@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block body %}
+<div class="bg-frame-50 dark:bg-gray-900 min-h-screen flex items-center justify-center py-20">
+    <div class="max-w-md w-full mx-auto text-center bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg">
+        <svg class="w-16 h-16 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mt-4 font-se">Thank You For Your Order!</h1>
+        
+        <p class="text-gray-600 dark:text-gray-400 mt-2">
+            Your order has been successfully created. Please complete the payment.
+        </p>
+
+        <div class="mt-6 text-left bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg">
+            <p class="text-sm text-gray-500 dark:text-gray-400">Order ID:</p>
+            <p class="text-lg font-mono font-bold text-pr-900 dark:text-white">{{ transaction.order_id }}</p>
+            
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-3">Total Amount:</p>
+            <p class="text-lg font-bold text-pr-900 dark:text-white">Rp {{ transaction.total_price|floatformat:0|intcomma }}</p>
+        </div>
+
+        <div class="mt-8">
+            <!-- <a href="#" class="w-full block bg-pr-900 text-white font-medium py-3 px-4 rounded-lg text-lg hover:opacity-90 transition-all">
+                Pay Now (Coming Soon)
+            </a> -->
+            <a href="{% url '/' %}" class="w-full block mt-3 text-gray-600 dark:text-gray-300 font-medium py-2 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
+                Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock body%}

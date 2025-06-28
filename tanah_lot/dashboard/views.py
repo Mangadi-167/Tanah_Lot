@@ -1,6 +1,7 @@
-# dashboard/views.py
-
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
+from ticket.models import Transaction  
+from django.db.models import Sum, F      
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -294,24 +295,50 @@ def resetPassword(request):
 
 #----------------------------------------------------------------------------------
 
-
-# khusus dashboard
-
 @login_required(login_url='/login/') 
 def index(request):
-   
-    content_count = Content.objects.count()
-
     
+    content_count = Content.objects.count()
     user_count = User.objects.count()
 
+    successful_transactions = Transaction.objects.filter(status='success')
 
+    total_income_data = successful_transactions.aggregate(total=Sum('total_price'))
+    total_income = total_income_data['total'] or 0
+
+    total_tickets_data = successful_transactions.aggregate(total=Sum(F('adult_tickets') + F('child_tickets')))
+    total_tickets_sold = total_tickets_data['total'] or 0
+
+    search_query = request.GET.get('q', None)
+
+    # --- Logika untuk Tabel Transaksi dengan Paginasi ---
+    # Ambil semua transaksi untuk dipaginasi
+    all_transactions_list = Transaction.objects.all().order_by('-created_at')
+
+    if search_query:
+        all_transactions_list = all_transactions_list.filter(
+            Q(order_id__icontains=search_query) |
+            Q(full_name__icontains=search_query)
+        )
+
+   
+    paginator = Paginator(all_transactions_list, 5) 
+    page_number = request.GET.get('page')
+
+   
+    transactions_page_obj = paginator.get_page(page_number)
+
+   
     context = {
         'judul': 'Dashboard | Tanah Lot',
         'content_count': content_count,
         'user_count': user_count,
-     
-        'calendar_count': 0, 
+        'calendar_count': Event.objects.count(), 
+        'total_income': total_income,
+        'total_tickets_sold': total_tickets_sold,
+
+        
+        'transactions_on_dashboard': transactions_page_obj, 
     }
     return render(request, "index-dashboard.html", context)
 

@@ -11,10 +11,19 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
+from pathlib import Path 
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+env_path = BASE_DIR / '.env'
+
+
+load_dotenv(dotenv_path=env_path)
+
+# -------------------------------------------------------------
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -25,8 +34,8 @@ SECRET_KEY = "django-insecure-ii_sld@y98ltj#xqlru39jdiptg1$=0s91-#r8o-u*$ah$=^g5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://*.ngrok-free.app']
 
 # Application definition
 
@@ -122,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Makassar"
 
 USE_I18N = True
 
@@ -147,3 +156,18 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# MIDTRANS CONFIGURATION
+MIDTRANS_CLIENT_KEY = os.getenv('MIDTRANS_CLIENT_KEY')
+MIDTRANS_SERVER_KEY = os.getenv('MIDTRANS_SERVER_KEY')
+MIDTRANS_IS_PRODUCTION = os.getenv('MIDTRANS_IS_PRODUCTION', 'False').lower() in ['true', '1', 't']
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True # Transport Layer Security
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') # Mengambil email dari .env
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') # Mengambil Sandi Aplikasi dari .env
+DEFAULT_FROM_EMAIL = f"Tanah Lot Ticketing <{os.getenv('EMAIL_HOST_USER')}>"

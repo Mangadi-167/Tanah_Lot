@@ -68,7 +68,7 @@
             <h1 class="font-se text-neu-800 text-sm sidebar-menu-text">Transaction</h1>
 
             <li>
-                <a href="{% url 'transaction_data' %}" class="flex items-center p-2 rounded-lg group
+                <a href="{% url 'ticket:transaction_data' %}" class="flex items-center p-2 rounded-lg group
                          {% if request.resolver_match.url_name == 'transaction_data' %}
                               bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white {% else %}
                               text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {% endif %} ">
