@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ judul }}</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background-color: #f0f2f5; }
+        .verification-card { max-width: 400px; width: 90%; background-color: white; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); overflow: hidden; }
+        .status-banner { padding: 40px 20px; color: white; text-align: center; }
+        .status-banner.valid { background-color: #28a745; } /* Hijau */
+        .status-banner.invalid { background-color: #dc3545; } /* Merah */
+        .status-banner h1 { font-size: 28px; font-weight: 700; margin: 0 0 10px 0; }
+        .status-banner p { margin: 0; font-size: 16px; opacity: 0.9; }
+        .details { padding: 25px; }
+        .details table { width: 100%; border-collapse: collapse; }
+        .details td { padding: 10px 0; border-bottom: 1px solid #e9ecef; font-size: 15px; }
+        .details td:first-child { color: #6c757d; }
+        .details td:last-child { text-align: right; font-weight: 600; color: #343a40; }
+        .details tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body>
+
+    <div class="verification-card">
+        <div class="status-banner {% if is_valid %}valid{% else %}invalid{% endif %}">
+            <h1>{{ message }}</h1>
+            {% if transaction %}
+            <p>Order ID: {{ transaction.order_id }}</p>
+            {% endif %}
+        </div>
+
+        {% if transaction %}
+        <div class="details">
+            <table>
+                <tr>
+                    <td>Nama</td>
+                    <td>{{ transaction.full_name }}</td>
+                </tr>
+                {% if transaction.adult_tickets > 0 %}
+                <tr>
+                    <td>Tiket Dewasa ({{ transaction.nationality|capfirst }})</td>
+                    <td>{{ transaction.adult_tickets }} orang</td>
+                </tr>
+                {% endif %}
+                {% if transaction.child_tickets > 0 %}
+                <tr>
+                    <td>Tiket Anak ({{ transaction.nationality|capfirst }})</td>
+                    <td>{{ transaction.child_tickets }} orang</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td>Tanggal Beli</td>
+                    <td>{{ transaction.created_at|date:"d M Y" }}</td>
+                </tr>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

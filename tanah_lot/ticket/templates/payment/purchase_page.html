@@ -194,7 +194,7 @@
             <div id="order-details"
                 class="hidden max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 sm:p-8 lg:p-10 mt-8">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6 font-se">Complete your data</h2>
-                <form id="payment-form" method="POST" action="">
+                <form id="payment-form" method="POST" action="{% url 'ticket:ticket' %}">
                     {% csrf_token %}
                     <input type="hidden" name="nationality" id="input-nationality">
                     <input type="hidden" name="adult_tickets" id="input-adult-tickets">
@@ -251,145 +251,182 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Definisi semua elemen
-        const nationalitySelector = document.getElementById('nationality-selector');
-        const ticketSelector = document.getElementById('ticket-selector');
-        const orderDetails = document.getElementById('order-details');
-        const domestikTicketsDiv = document.getElementById('domestik-tickets');
-        const asingTicketsDiv = document.getElementById('asing-tickets');
-        const payButton = document.getElementById('pay-button');
-        const summaryDiv = document.getElementById('summary');
-        const totalPriceEl = document.getElementById('total-price');
-        const inputNationality = document.getElementById('input-nationality');
-        const inputAdultTickets = document.getElementById('input-adult-tickets');
-        const inputChildTickets = document.getElementById('input-child-tickets');
-        const inputTotalPrice = document.getElementById('input-total-price');
-
-        // Data harga
-        const ticketPrices = {
-            domestik: { adult: 30000, child: 20000 },
-            asing: { adult: 75000, child: 40000 }
-        };
-
-        // Variabel untuk menyimpan status
-        let currentNationality = null;
-        let ticketCounts = { adult: 0, child: 0 };
-
-        // Fungsi untuk memilih kewarganegaraan
-        window.selectNationality = (type, selectedCardElement) => {
-            currentNationality = type;
-
-            //  card yang aktif
-            document.querySelectorAll('.nationality-card').forEach(card => {
-                card.classList.remove('ring-2', 'ring-pr-900', 'ring-offset-2', 'dark:ring-offset-gray-900');
-            });
-            if (selectedCardElement) {
-                selectedCardElement.classList.add('ring-2', 'ring-pr-900', 'ring-offset-2', 'dark:ring-offset-gray-900');
-            }
-
-
-            setTimeout(() => {
-                nationalitySelector.style.display = 'none';
-                ticketSelector.style.display = 'block';
-                orderDetails.style.display = 'block';
-            }, 200);
-
-            //  untuk menampilkan harga 
-            if (type === 'domestik') {
-                domestikTicketsDiv.style.display = 'block';
-                asingTicketsDiv.style.display = 'none';
-            } else {
-                domestikTicketsDiv.style.display = 'none';
-                asingTicketsDiv.style.display = 'block';
-            }
-
-            ticketCounts = { adult: 0, child: 0 };
-            updateSummary();
-        };
-
-        // Fungsi untuk kembali ke pemilihan kategori
-        window.changeNationality = () => {
-            currentNationality = null;
-            ticketCounts = { adult: 0, child: 0 };
-
-            document.querySelectorAll('.nationality-card').forEach(card => {
-                card.classList.remove('ring-2', 'ring-pr-900', 'ring-offset-2', 'dark:ring-offset-gray-900');
-            });
-
-            nationalitySelector.style.display = 'block';
-            ticketSelector.style.display = 'none';
-            orderDetails.style.display = 'none';
-            updateSummary();
-        };
-
-        // Fungsi untuk mengubah jumlah tiket
-        const updateQuantity = (type, action) => {
-            if (!currentNationality) return;
-            if (action === 'increment') {
-                ticketCounts[type]++;
-            } else if (action === 'decrement' && ticketCounts[type] > 0) {
-                ticketCounts[type]--;
-            }
-            updateSummary();
-        };
-
-        // Fungsi untuk memperbarui tampilan ringkasan dan total
-        const updateSummary = () => {
-            if (!currentNationality) {
-                summaryDiv.innerHTML = '';
-                totalPriceEl.textContent = 'Rp 0';
-                payButton.disabled = true;
-                return;
-            }
-
-            const prices = ticketPrices[currentNationality];
-            let total = 0;
-            let summaryHtml = '';
-
-            document.getElementById(`adult-${currentNationality}-count`).textContent = ticketCounts.adult;
-            document.getElementById(`child-${currentNationality}-count`).textContent = ticketCounts.child;
-
-            if (ticketCounts.adult > 0) {
-                const subtotal = ticketCounts.adult * prices.adult;
-                total += subtotal;
-                summaryHtml += `<div class="flex justify-between text-sm text-gray-600 dark:text-gray-300"><p>${ticketCounts.adult} x Adult (${currentNationality})</p><p>Rp ${subtotal.toLocaleString('id-ID')}</p></div>`;
-            }
-            if (ticketCounts.child > 0) {
-                const subtotal = ticketCounts.child * prices.child;
-                total += subtotal;
-                summaryHtml += `<div class="flex justify-between text-sm text-gray-600 dark:text-gray-300"><p>${ticketCounts.child} x Child (${currentNationality})</p><p>Rp ${subtotal.toLocaleString('id-ID')}</p></div>`;
-            }
-
-            summaryDiv.innerHTML = summaryHtml;
-            totalPriceEl.textContent = `Rp ${total.toLocaleString('id-ID')}`;
-            payButton.disabled = total === 0;
-
-            inputNationality.value = currentNationality;
-            inputAdultTickets.value = ticketCounts.adult;
-            inputChildTickets.value = ticketCounts.child;
-            inputTotalPrice.value = total;
-        };
-
-        // Menambahkan event listener ke semua tombol kuantitas
-        document.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const type = button.dataset.type;
-                const action = button.dataset.action;
-                updateQuantity(type, action);
-            });
-        });
-
-        // Event listener untuk form submission
-        document.getElementById('payment-form').addEventListener('submit', function (event) {
-            if (ticketCounts.adult === 0 && ticketCounts.child === 0) {
-                alert('Please select the number of tickets first.');
-                event.preventDefault();
-            }
-        });
-
-    });
+<script type="text/javascript"
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="{{ midtrans_client_key }}">
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // -----------------------------------------------------------------
+    // BAGIAN 1: DEFINISI ELEMEN DAN DATA (Logika Asli Anda)
+    // -----------------------------------------------------------------
+    const nationalitySelector = document.getElementById('nationality-selector');
+    const ticketSelector = document.getElementById('ticket-selector');
+    const orderDetails = document.getElementById('order-details');
+    const domestikTicketsDiv = document.getElementById('domestik-tickets');
+    const asingTicketsDiv = document.getElementById('asing-tickets');
+    const payButton = document.getElementById('pay-button');
+    const summaryDiv = document.getElementById('summary');
+    const totalPriceEl = document.getElementById('total-price');
+    const paymentForm = document.getElementById('payment-form');
+    const inputNationality = document.getElementById('input-nationality');
+    const inputAdultTickets = document.getElementById('input-adult-tickets');
+    const inputChildTickets = document.getElementById('input-child-tickets');
+    const inputTotalPrice = document.getElementById('input-total-price');
+
+    const ticketPrices = {
+        domestik: { adult: 30000, child: 20000 },
+        asing: { adult: 75000, child: 40000 }
+    };
+
+    let currentNationality = null;
+    let ticketCounts = { adult: 0, child: 0 };
+
+    // -----------------------------------------------------------------
+    // BAGIAN 2: FUNGSI-FUNGSI INTERAKSI (Logika Asli Anda yang Hilang)
+    // -----------------------------------------------------------------
+
+    // Fungsi untuk memilih kewarganegaraan
+    window.selectNationality = (type) => {
+        currentNationality = type;
+        nationalitySelector.style.display = 'none';
+        ticketSelector.style.display = 'block';
+        orderDetails.style.display = 'block';
+
+        if (type === 'domestik') {
+            domestikTicketsDiv.style.display = 'block';
+            asingTicketsDiv.style.display = 'none';
+        } else {
+            domestikTicketsDiv.style.display = 'none';
+            asingTicketsDiv.style.display = 'block';
+        }
+        ticketCounts = { adult: 0, child: 0 };
+        updateSummary();
+    };
+
+    // Fungsi untuk kembali ke pemilihan kategori
+    window.changeNationality = () => {
+        currentNationality = null;
+        ticketCounts = { adult: 0, child: 0 };
+        nationalitySelector.style.display = 'block';
+        ticketSelector.style.display = 'none';
+        orderDetails.style.display = 'none';
+        updateSummary();
+    };
+
+    // Fungsi untuk mengubah jumlah tiket
+    const updateQuantity = (type, action) => {
+        if (!currentNationality) return;
+        if (action === 'increment') {
+            ticketCounts[type]++;
+        } else if (action === 'decrement' && ticketCounts[type] > 0) {
+            ticketCounts[type]--;
+        }
+        updateSummary();
+    };
+
+    // Fungsi untuk memperbarui tampilan ringkasan dan total
+    const updateSummary = () => {
+        if (!currentNationality) {
+            summaryDiv.innerHTML = '';
+            totalPriceEl.textContent = 'Rp 0';
+            payButton.disabled = true;
+            return;
+        }
+
+        const prices = ticketPrices[currentNationality];
+        let total = 0;
+        let summaryHtml = '';
+
+        document.getElementById(`adult-${currentNationality}-count`).textContent = ticketCounts.adult;
+        document.getElementById(`child-${currentNationality}-count`).textContent = ticketCounts.child;
+
+        if (ticketCounts.adult > 0) {
+            const subtotal = ticketCounts.adult * prices.adult;
+            total += subtotal;
+            summaryHtml += `<div class="flex justify-between text-sm text-gray-600 dark:text-gray-300"><p>${ticketCounts.adult} x Adult (${currentNationality})</p><p>Rp ${subtotal.toLocaleString('id-ID')}</p></div>`;
+        }
+        if (ticketCounts.child > 0) {
+            const subtotal = ticketCounts.child * prices.child;
+            total += subtotal;
+            summaryHtml += `<div class="flex justify-between text-sm text-gray-600 dark:text-gray-300"><p>${ticketCounts.child} x Child (${currentNationality})</p><p>Rp ${subtotal.toLocaleString('id-ID')}</p></div>`;
+        }
+
+        summaryDiv.innerHTML = summaryHtml;
+        totalPriceEl.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        payButton.disabled = total === 0;
+
+        inputNationality.value = currentNationality;
+        inputAdultTickets.value = ticketCounts.adult;
+        inputChildTickets.value = ticketCounts.child;
+        inputTotalPrice.value = total;
+    };
+
+    // Menambahkan event listener ke semua tombol kuantitas
+    document.querySelectorAll('.quantity-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const type = button.dataset.type;
+            const action = button.dataset.action;
+            updateQuantity(type, action);
+        });
+    });
+
+    // -----------------------------------------------------------------
+    // BAGIAN 3: LOGIKA PEMBAYARAN BARU
+    // -----------------------------------------------------------------
+    paymentForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        payButton.disabled = true;
+        payButton.textContent = 'Processing...';
+
+        const formData = new FormData(paymentForm);
+
+        fetch("{% url 'ticket:ticket' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert('Error: ' + data.error);
+                payButton.disabled = false;
+                payButton.textContent = 'Proceed to Payment';
+            } else {
+                window.snap.pay(data.token, {
+                    onSuccess: function(result){
+                        alert("Payment success!");
+                        window.location.href = "{% url 'ticket:order_confirmation' order_id='PLACEHOLDER' %}".replace('PLACEHOLDER', result.order_id);
+                    },
+                    onPending: function(result){
+                        alert("Waiting for your payment!");
+                        window.location.href = "{% url 'ticket:order_confirmation' order_id='PLACEHOLDER' %}".replace('PLACEHOLDER', result.order_id);
+                    },
+                    onError: function(result){
+                        alert("Payment failed!");
+                        payButton.disabled = false;
+                        payButton.textContent = 'Proceed to Payment';
+                    },
+                    onClose: function(){
+                        alert('You closed the popup without finishing the payment');
+                        payButton.disabled = false;
+                        payButton.textContent = 'Proceed to Payment';
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+            payButton.disabled = false;
+            payButton.textContent = 'Proceed to Payment';
+        });
+    });
+});
+</script>
+
 
 {% endblock body%}
