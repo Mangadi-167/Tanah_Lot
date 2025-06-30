@@ -261,178 +261,177 @@
 
 
 <!-- Script Kalender -->
-<!-- Script Kalender -->
 <script>
-    // File: snippets/scripts.html
+function calendarApp() {
+    return {
+        // Properti data (tidak berubah)
+        currentDate: new Date(),
+        currentMonth: null,
+        currentYear: null,
+        daysInMonth: [],
+        monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        view: 'month',
+        isPickerOpen: false,
+        pickerYear: null,
+        events: [], 
 
-    // =========================================================================
-    // == INI KODE FINAL. GANTI FUNGSI calendarApp LAMA ANDA DENGAN INI SEMUA ==
-    // =========================================================================
-    function calendarApp() {
-        return {
-            // Properti data (tidak berubah)
-            currentDate: new Date(),
-            currentMonth: null,
-            currentYear: null,
-            daysInMonth: [],
-            monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            view: 'month',
-            isPickerOpen: false,
-            pickerYear: null,
-            events: [],
-
-            initCalendar() {
-                this.currentMonth = this.currentDate.getMonth();
-                this.currentYear = this.currentDate.getFullYear();
-                this.pickerYear = this.currentYear;
-                fetch("{% url 'dashboard:calender_events_api' %}")
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.text().then(text => { throw new Error('API Error: ' + text) });
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        this.events = data;
-                        this.generateCalendarDays();
-                    })
-                    .catch(error => {
-                        console.error('Gagal mengambil data kalender:', error);
-                        this.generateCalendarDays();
-                    });
-            },
-
-            generateCalendarDays() {
-                this.daysInMonth = [];
-                const date = new Date(this.currentYear, this.currentMonth, 1);
-                const firstDayOfMonth = date.getDay();
-                const daysInThisMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-                const daysInLastMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
-                let daysArray = [];
-                for (let i = firstDayOfMonth; i > 0; i--) {
-                    const dayNumber = daysInLastMonth - i + 1;
-                    const fullDate = new Date(this.currentYear, this.currentMonth - 1, dayNumber);
-                    const dateString = `${fullDate.getFullYear()}-${String(fullDate.getMonth() + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
-                    daysArray.push({ dayNumber: dayNumber, isCurrentMonth: false, events: [], date: dateString });
+        initCalendar() {
+            this.currentMonth = this.currentDate.getMonth();
+            this.currentYear = this.currentDate.getFullYear();
+            this.pickerYear = this.currentYear;
+            fetch("{% url 'dashboard:calender_events_api' %}", {
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache'
                 }
-                for (let i = 1; i <= daysInThisMonth; i++) {
-                    const today = new Date();
-                    const isToday = today.getDate() === i && today.getMonth() === this.currentMonth && today.getFullYear() === this.currentYear;
-                    const dateString = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-                    const eventsForDay = this.events.filter(e => e.date === dateString);
-                    daysArray.push({ dayNumber: i, date: dateString, isCurrentMonth: true, isToday: isToday, events: eventsForDay });
-                }
-                const gridCells = daysArray.length;
-                const remainingCells = gridCells > 35 ? 42 - gridCells : 35 - gridCells;
-                for (let i = 1; i <= remainingCells; i++) {
-                    const fullDate = new Date(this.currentYear, this.currentMonth + 1, i);
-                    const dateString = `${fullDate.getFullYear()}-${String(fullDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-                    daysArray.push({ dayNumber: i, isCurrentMonth: false, events: [], date: dateString });
-                }
-                this.daysInMonth = daysArray;
-            },
-
-            // --- FUNGSI BARU UNTUK MENGAMBIL CSRF TOKEN DARI COOKIE ---
-            getCookie(name) {
-                let cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    const cookies = document.cookie.split(';');
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].trim();
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => { throw new Error('API Error: ' + text) });
                     }
-                }
-                return cookieValue;
-            },
-
-            // --- FUNGSI showEventOptions YANG SUDAH DIPERBAIKI ---
-            showEventOptions(event) {
-                if (!event.edit_url || !event.delete_url) {
-                    Swal.fire({ title: event.title, text: `Event pada tanggal ${event.date}`, icon: 'info' });
-                    return;
-                }
-                Swal.fire({
-                    title: event.title,
-                    text: `Event pada tanggal ${event.date}`,
-                    showCancelButton: true,
-                    confirmButtonText: 'Edit',
-                    cancelButtonText: 'Tutup',
-                    showDenyButton: true,
-                    denyButtonText: `Hapus`,
-                    confirmButtonColor: '#3B82F6',
-                    denyButtonColor: '#EF4444',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = event.edit_url;
-                    } else if (result.isDenied) {
-                        Swal.fire({
-                            title: 'Anda yakin?',
-                            text: `Event "${event.title}" akan dihapus secara permanen!`,
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#d33',
-                            cancelButtonText: 'Batal',
-                            confirmButtonText: 'Ya, hapus!'
-                        }).then((deleteResult) => {
-                            if (deleteResult.isConfirmed) {
-                                let form = document.createElement('form');
-                                form.method = 'POST';
-                                form.action = event.delete_url;
-
-                                // --> INI BAGIAN PENTING YANG SUDAH DIPERBAIKI <--
-                                let csrfToken = this.getCookie('csrftoken');
-                                let csrfInput = document.createElement('input');
-                                csrfInput.type = 'hidden';
-                                csrfInput.name = 'csrfmiddlewaretoken';
-                                csrfInput.value = csrfToken;
-                                form.appendChild(csrfInput);
-
-                                document.body.appendChild(form);
-                                form.submit();
-                            }
-                        })
-                    }
+                    return response.json();
                 })
-            },
+                .then(data => {
+                    this.events = data; 
+                    this.generateCalendarDays(); 
+                })
+                .catch(error => {
+                    console.error('Gagal mengambil data kalender:', error);
+                    this.generateCalendarDays();
+                });
+        },
 
-            // --- FUNGSI NAVIGASI (VERSI LENGKAP DAN BENAR) ---
-            changeMonth(direction) {
-                this.currentMonth += direction;
-                if (this.currentMonth < 0) {
-                    this.currentMonth = 11;
-                    this.currentYear--;
-                } else if (this.currentMonth > 11) {
-                    this.currentMonth = 0;
-                    this.currentYear++;
-                }
-                this.pickerYear = this.currentYear;
-                this.generateCalendarDays();
-            },
-
-            goToToday() {
-                this.currentDate = new Date();
-                this.currentMonth = this.currentDate.getMonth();
-                this.currentYear = this.currentDate.getFullYear();
-                this.pickerYear = this.currentYear;
-                this.generateCalendarDays();
-            },
-
-            changePickerYear(direction) {
-                this.pickerYear += direction;
-            },
-
-            selectMonth(monthIndex) {
-                this.currentMonth = monthIndex;
-                this.currentYear = this.pickerYear;
-                this.generateCalendarDays();
-                this.isPickerOpen = false;
+        generateCalendarDays() {
+            this.daysInMonth = [];
+            const date = new Date(this.currentYear, this.currentMonth, 1);
+            const firstDayOfMonth = date.getDay();
+            const daysInThisMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+            const daysInLastMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
+            let daysArray = [];
+            for (let i = firstDayOfMonth; i > 0; i--) {
+                const dayNumber = daysInLastMonth - i + 1;
+                const fullDate = new Date(this.currentYear, this.currentMonth - 1, dayNumber);
+                const dateString = `${fullDate.getFullYear()}-${String(fullDate.getMonth() + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
+                daysArray.push({ dayNumber: dayNumber, isCurrentMonth: false, events: [], date: dateString });
             }
-        }
+            for (let i = 1; i <= daysInThisMonth; i++) {
+                const today = new Date();
+                const isToday = today.getDate() === i && today.getMonth() === this.currentMonth && today.getFullYear() === this.currentYear;
+                const dateString = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                const eventsForDay = this.events.filter(e => e.date === dateString);
+                daysArray.push({ dayNumber: i, date: dateString, isCurrentMonth: true, isToday: isToday, events: eventsForDay });
+            }
+            const gridCells = daysArray.length;
+            const remainingCells = gridCells > 35 ? 42 - gridCells : 35 - gridCells;
+            for (let i = 1; i <= remainingCells; i++) {
+                const fullDate = new Date(this.currentYear, this.currentMonth + 1, i);
+                const dateString = `${fullDate.getFullYear()}-${String(fullDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                daysArray.push({ dayNumber: i, isCurrentMonth: false, events: [], date: dateString });
+            }
+            this.daysInMonth = daysArray;
+        },
+
+        // --- FUNGSI BARU UNTUK MENGAMBIL CSRF TOKEN DARI COOKIE ---
+        getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        },
+
+        // --- FUNGSI showEventOptions YANG SUDAH DIPERBAIKI ---
+        showEventOptions(event) {
+            if (!event.edit_url || !event.delete_url) {
+                Swal.fire({ title: event.title, text: `Event pada tanggal ${event.date}`, icon: 'info' });
+                return;
+            }
+            Swal.fire({
+                title: event.title,
+                text: `Event pada tanggal ${event.date}`,
+                showCancelButton: true,
+                confirmButtonText: 'Edit',
+                cancelButtonText: 'Tutup',
+                showDenyButton: true,
+                denyButtonText: `Hapus`,
+                confirmButtonColor: '#3B82F6',
+                denyButtonColor: '#EF4444',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = event.edit_url;
+                } else if (result.isDenied) {
+                    Swal.fire({
+                        title: 'Anda yakin?',
+                        text: `Event "${event.title}" akan dihapus secara permanen!`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonText: 'Batal',
+                        confirmButtonText: 'Ya, hapus!'
+                    }).then((deleteResult) => {
+                        if (deleteResult.isConfirmed) {
+                            let form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = event.delete_url;
+                            
+                            // --> INI BAGIAN PENTING YANG SUDAH DIPERBAIKI <--
+                            let csrfToken = this.getCookie('csrftoken');
+                            let csrfInput = document.createElement('input');
+                            csrfInput.type = 'hidden';
+                            csrfInput.name = 'csrfmiddlewaretoken';
+                            csrfInput.value = csrfToken;
+                            form.appendChild(csrfInput);
+                            
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    })
+                }
+            })
+        },
+
+// --- FUNGSI NAVIGASI (VERSI LENGKAP DAN BENAR) ---
+changeMonth(direction) {
+    this.currentMonth += direction;
+    if (this.currentMonth < 0) {
+        this.currentMonth = 11;
+        this.currentYear--;
+    } else if (this.currentMonth > 11) {
+        this.currentMonth = 0;
+        this.currentYear++;
     }
+    this.pickerYear = this.currentYear;
+    this.generateCalendarDays();
+},
+
+goToToday() {
+    this.currentDate = new Date();
+    this.currentMonth = this.currentDate.getMonth();
+    this.currentYear = this.currentDate.getFullYear();
+    this.pickerYear = this.currentYear;
+    this.generateCalendarDays();
+},
+
+changePickerYear(direction) {
+    this.pickerYear += direction;
+},
+
+selectMonth(monthIndex) {
+    this.currentMonth = monthIndex;
+    this.currentYear = this.pickerYear;
+    this.generateCalendarDays();
+    this.isPickerOpen = false;
+}
+    }
+}
 </script>
 
 

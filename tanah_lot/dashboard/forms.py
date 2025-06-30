@@ -119,18 +119,15 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ['event_date', 'event_name', 'description']
         widgets = {
-            'event_date': forms.DateInput(attrs={
-                'class': 'font-se bg-gray-50 border ...', # Salin kelas CSS lengkap Anda
-                'placeholder': 'Select date',
-                'datepicker': True, # Atribut khusus untuk memicu datepicker JS
-            }),
-            'event_name': forms.TextInput(attrs={
-                'class': 'font-se bg-gray-50 border ...', # Salin kelas CSS lengkap Anda
-                'placeholder': 'Enter event name'
-            }),
-            'description': forms.Textarea(attrs={
-                'class': 'font-se block p-2.5 w-full ...', # Salin kelas CSS lengkap Anda
-                'placeholder': 'Enter event description',
-                'rows': 4
-            })
+            'event_date': forms.DateInput(
+                # Memaksa format input dan output HTML menjadi YYYY-MM-DD
+                format='%Y-%m-%d',
+                attrs={
+                    # Gunakan input tanggal asli dari browser
+                    'type': 'date',
+                    'class': 'font-se bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pr-900 dark:focus:border-pr-900',
+                }
+            ),
+            'event_name': forms.TextInput(attrs={'class': '... class styling Anda ...'}),
+            'description': forms.Textarea(attrs={'class': '... class styling Anda ...', 'rows': 4}),
         }

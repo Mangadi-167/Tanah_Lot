@@ -9,8 +9,20 @@ from django.contrib.auth.models import User
 
 def register(request):
     if request.user.is_authenticated:
-       
-        return redirect('dashboard:dashboard') 
+     
+        try:
+           
+            if request.user.profile.role == 'admin':
+               
+                return redirect('dashboard:dashboard')
+            else:
+               
+                return redirect('/')
+        except UserProfile.DoesNotExist:
+            
+            return redirect('/')
+     
+
 
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -38,10 +50,18 @@ def register(request):
 
 def index(request): 
     
+    # --- BAGIAN 1: Pengalihan untuk pengguna yang sudah login ---
     if request.user.is_authenticated:
-      
-        return redirect('dashboard:dashboard')
+        # Cek role dari UserProfile yang terhubung dengan user
+        # 'hasattr' digunakan untuk keamanan, jika ada user yang belum punya profil
+        if hasattr(request.user, 'profile') and request.user.profile.role == 'admin':
+            # Jika rolenya 'admin', arahkan ke dashboard
+            return redirect('dashboard:dashboard')
+        else:
+            # Jika rolenya 'pengguna' atau tidak punya profil, arahkan ke halaman utama
+            return redirect('/')
 
+    # --- BAGIAN 2: Logika saat login baru ---
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -56,8 +76,16 @@ def index(request):
 
             if user is not None:
                 login(request, user)
-               
-                return redirect('dashboard:dashboard') 
+                
+                # Cek lagi role dari UserProfile setelah login berhasil
+                if hasattr(user, 'profile') and user.profile.role == 'admin':
+                    # Jika rolenya 'admin', arahkan ke dashboard
+                    messages.success(request, f'Selamat datang kembali, Admin {user.username}!')
+                    return redirect('dashboard:dashboard')
+                else:
+                    # Jika rolenya 'pengguna', arahkan ke halaman utama
+                    messages.success(request, f'Selamat datang, {user.username}!')
+                    return redirect('/')
             else:
                 messages.error(request, 'Email atau password salah.')
     else:

@@ -1,4 +1,8 @@
 {% load static %}
+
+{% if user.is_authenticated %}
+
+
 <div>
     <a href="{% url 'chatbot:chatbot' %}"
         class="fixed bottom-10 right-4 z-50  flex flex-col  items-center py-3 px-5  transition-transform transform hover:scale-105"
@@ -10,3 +14,19 @@
         <span class="text-pr-900 font-se font-semibold"> TL-BOT </span>
     </a>
 </div>
+
+{% else %}
+
+<div>
+    <a href="{% url 'chatbot:chatbot_redirect' %}"
+        class="fixed bottom-10 right-4 z-50  flex flex-col  items-center py-3 px-5  transition-transform transform hover:scale-105"
+        aria-label="Buka Chat AI">
+
+        <img src="{% static 'image/iconai4.png' %}" class="h-20 w-20">
+
+
+        <span class="text-pr-900 font-se font-semibold"> TL-BOT </span>
+    </a>
+</div>
+
+{% endif %}

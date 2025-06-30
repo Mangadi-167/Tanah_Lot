@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 dotenv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
@@ -39,8 +41,18 @@ if API_KEY_GEMINI:
         )
     except Exception as e:
         print(f"Error saat inisialisasi model Gemini: {e}")
-       
 
+def chatbot_redirect_view(request):
+    # Periksa apakah pengguna sudah login
+    if request.user.is_authenticated:
+        # Jika sudah, langsung arahkan ke halaman chatbot yang sebenarnya
+        return redirect('chatbot:chatbot')
+    else:
+        # Jika belum, tambahkan pesan error dan arahkan ke halaman login
+        messages.warning(request, 'Anda harus login terlebih dahulu untuk mengakses chatbot.')
+        return redirect('login:login') # Ganti 'login:login' jika nama URL login Anda berbeda
+       
+@login_required(login_url='/login/')
 def chat_view(request):
     if model is None:
         error_msg = 'Model Gemini gagal dimuat. '
@@ -104,6 +116,8 @@ def chat_view(request):
     request.session.modified = True # Pastikan sesi disimpan
     return render(request, 'chatbot.html', {'chat_history': current_chat_history})
 
+
+@login_required(login_url='/login/')
 def clear_chat_history(request):
     """Menghapus riwayat percakapan dari sesi."""
     chat_history_session_key = 'gemini_chat_history_talbot'

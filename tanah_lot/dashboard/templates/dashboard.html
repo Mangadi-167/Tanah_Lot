@@ -59,8 +59,11 @@
     </script>
     {% endif %}
     
-    {# Ini script Anda yang sudah ada #}
+ 
     {% include "snippets/scripts.html"%}
+
+    {% block page_scripts %}{% endblock page_scripts %}
+    
 
     
 </body>

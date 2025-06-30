@@ -383,26 +383,26 @@ def add_calender(request):
 
 @login_required(login_url='/login/')
 def edit_calender(request, event_id):
-    # Ambil event yang sesuai dengan ID, atau tampilkan 404 jika tidak ada
+    # Ambil data event yang ada
     event = get_object_or_404(Event, id=event_id)
     
     if request.method == 'POST':
+        # Saat menyimpan, ikat data baru ke instance event yang ada
         form = EventForm(request.POST, instance=event)
         if form.is_valid():
-            form.save()
+            form.save() # Ini akan melakukan UPDATE
             messages.success(request, 'Event berhasil diperbarui.')
             return redirect('dashboard:calender_data')
     else:
-        # Saat GET request, tampilkan form yang sudah terisi data event
+        # Saat menampilkan, isi form dengan data dari instance event
         form = EventForm(instance=event)
     
     context = {
         'judul': 'Edit Event',
-        'form': form,
-        'event': event, # Kirim objek event untuk info tambahan jika perlu
+        'form': form
     }
-    # Kita bisa gunakan template yang sama dengan 'add' jika form-nya sama
-    return render(request, 'calender/add.html', context)
+    # Render template KHUSUS untuk edit
+    return render(request, 'calender/edit.html', context)
 
 
 @login_required(login_url='/login/')
