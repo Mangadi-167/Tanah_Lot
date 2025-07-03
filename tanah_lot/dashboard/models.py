@@ -72,7 +72,7 @@ class Content(models.Model):
 # Calender
 class Event(models.Model):
     event_date = models.DateField()
-    event_name = models.CharField(max_length=255) # Pastikan ini ada dan ejaannya benar
+    event_name = models.CharField(max_length=255) 
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

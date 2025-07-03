@@ -40,4 +40,7 @@ urlpatterns = [
     # khusus reset password
     path("reset-password/", views.resetPassword, name="reset_password"),
 
+
+    path("ticket-prices/", views.manage_ticket_prices, name="manage_ticket_prices"),
+
 ]

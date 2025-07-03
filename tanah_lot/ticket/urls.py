@@ -5,7 +5,7 @@ from . import views
 app_name = 'ticket'
 
 urlpatterns = [
-    # URL untuk halaman pembelian utama
+  
     path("", views.index, name="ticket"),
 
 

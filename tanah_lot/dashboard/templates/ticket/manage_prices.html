@@ -1,0 +1,228 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block body %}
+<div class="px-0 sm:px-6 lg:px-8 py-6 w-full max-w-9xl mx-auto">
+
+    <!-- Header Halaman -->
+    <div class="sm:flex sm:justify-between sm:items-center mb-8">
+        <div>
+            <h1 class="text-2xl md:text-3xl text-gray-800 dark:text-white font-bold font-se">Manage Ticket Prices</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Update the price for each ticket category.</p>
+        </div>
+        <nav class="flex mt-4 sm:mt-0" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a href="{% url 'dashboard:dashboard' %}"
+                        class="inline-flex items-center font-se text-sm font-medium text-gray-700  dark:text-gray-400 dark:hover:text-white">Dashboard</a>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="ms-1 text-sm font-medium text-gray-900 md:ms-2 dark:text-gray-400">Manage
+                            Prices</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Menampilkan pesan sukses atau error -->
+    {% if messages %}
+    {% for message in messages %}
+    <div class="p-4 mb-4 text-sm rounded-lg {% if message.tags == 'success' %} bg-green-100 text-green-800 dark:bg-gray-800 dark:text-green-400 {% else %} bg-red-100 text-red-800 dark:bg-gray-800 dark:text-red-400 {% endif %}"
+        role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Form Utama -->
+    <form method="POST" action="{% url 'dashboard:manage_ticket_prices' %}">
+        {% csrf_token %}
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8 ">
+            <div class="grid grid-cols-1  md:grid-cols-2 gap-x-8 gap-y-10">
+
+                <!-- Card: Adult Ticket (Local Residents) -->
+                {% with ticket=ticket_types.domestik_adult %}
+                {% if ticket %}
+                <div class="">
+                    <div class="space-y-2">
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white font-se">Adult Ticket (Local
+                            Residents)</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Special tickets for Indonesian citizens</p>
+                        <div class="flex items-center space-x-2">
+                            <!-- Input Group Wrapper -->
+                            <div class="relative w-full">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <span class="text-gray-500 sm:text-sm font-se">Rp</span>
+                                </div>
+                                <input type="number" name="price-{{ ticket.id }}" value="{{ ticket.price }}" readonly
+                                    class="price-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10">
+                            </div>
+                            <button type="button"
+                                class="edit-btn flex-shrink-0 p-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 rounded-lg">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <!-- Card: Child Ticket (Local Residents) -->
+                {% with ticket=ticket_types.domestik_child %}
+                {% if ticket %}
+                <div class="mt-8 md:mt-0 gap-4">
+                    <div class="space-y-2">
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white font-se">Child Ticket (Local
+                            Residents)</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Special tickets for Indonesian citizens</p>
+                        <div class="flex items-center space-x-2">
+                            <div class="relative w-full">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <span class="text-gray-500 sm:text-sm font-se">Rp</span>
+                                </div>
+                                <input type="number" name="price-{{ ticket.id }}" value="{{ ticket.price }}" readonly
+                                    class="price-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10">
+                            </div>
+                            <button type="button"
+                                class="edit-btn flex-shrink-0 p-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 rounded-lg">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <!-- Card: Adult Ticket (Foreign Tourist) -->
+                {% with ticket=ticket_types.asing_adult %}
+                {% if ticket %}
+                <div class="mt-8">
+                    <div class="space-y-2">
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white font-se ">Adult Ticket (Foreign
+                            Tourist)</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Special tickets for foreign nationals</p>
+                        <div class="flex items-center space-x-2">
+                            <div class="relative w-full">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <span class="text-gray-500 sm:text-sm font-se">Rp</span>
+                                </div>
+                                <input type="number" name="price-{{ ticket.id }}" value="{{ ticket.price }}" readonly
+                                    class="price-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10">
+                            </div>
+                            <button type="button"
+                                class="edit-btn flex-shrink-0 p-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 rounded-lg">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <!-- Card: Child Ticket (Foreign Tourist) -->
+                {% with ticket=ticket_types.asing_child %}
+                {% if ticket %}
+                <div class="mt-8">
+                    <div class="space-y-2">
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white font-se">Child Ticket (Foreign
+                            Tourist)</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Special tickets for foreign nationals</p>
+                        <div class="flex items-center space-x-2">
+                            <div class="relative w-full">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <span class="text-gray-500 sm:text-sm font-se">Rp</span>
+                                </div>
+                                <input type="number" name="price-{{ ticket.id }}" value="{{ ticket.price }}" readonly
+                                    class="price-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-900 focus:border-pr-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10">
+                            </div>
+                            <button type="button"
+                                class="edit-btn flex-shrink-0 p-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 rounded-lg">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                    </path>
+                                    <path fill-rule="evenodd"
+                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
+
+            </div>
+
+            <!-- Tombol Aksi -->
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 flex justify-end space-x-3">
+                <a href="{% url 'dashboard:dashboard' %}"
+                    class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700">
+                    Cancel
+                </a>
+                <button type="submit"
+                    class="px-6 py-2.5 text-sm font-medium text-white bg-pr-900 hover:bg-blue-800 rounded-lg focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-pr-900 dark:focus:ring-blue-800">
+                    Update Ticket
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editButtons = document.querySelectorAll('.edit-btn');
+        editButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                // Temukan elemen-elemen terkait
+                const parentDiv = this.closest('.flex');
+                const inputField = parentDiv.querySelector('.price-input');
+
+                // Toggle mode edit
+                if (inputField.hasAttribute('readonly')) {
+                    inputField.removeAttribute('readonly');
+                    // Beri style aktif
+                    inputField.classList.add('ring-2', 'ring-pr-900');
+                    inputField.classList.remove('bg-gray-50', 'dark:bg-gray-700');
+
+                    inputField.focus();
+                    inputField.select(); // Pilih semua teks di dalamnya
+                } else {
+                    inputField.setAttribute('readonly', true);
+                    inputField.classList.remove('ring-2', 'ring-pr-900');
+                    inputField.classList.add('bg-gray-50', 'dark:bg-gray-700');
+                }
+            });
+        });
+    });
+</script>
+{% endblock body %}
