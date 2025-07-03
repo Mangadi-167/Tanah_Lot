@@ -10,9 +10,7 @@ def send_eticket_email(transaction):
     Membuat QR code, dan mengirimkannya sebagai inline attachment di email.
     """
     try:
-        # 1. Buat gambar QR Code di memori (tetap sama)
-        # qr_img = qrcode.make(transaction.order_id)
-        # Membuat URL lengkap untuk verifikasi tiket
+        
         verification_url = f"https://tanahlot.id/ticket/verify/{transaction.order_id}/"
         qr_img = qrcode.make(verification_url)
         buffer = BytesIO()

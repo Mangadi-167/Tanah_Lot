@@ -15,6 +15,8 @@ from django.contrib import messages
 from .forms import EventForm
 import json 
 from .models import Event
+from ticket.models import TicketType
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import JsonResponse
 from django.urls import reverse
@@ -418,3 +420,52 @@ def delete_calender(request, event_id):
         # Jika diakses via GET, redirect saja (atau tampilkan halaman konfirmasi)
         # Untuk keamanan, kita hanya akan mengizinkan POST
         return redirect('dashboard:calender_data')
+    
+    
+# ____________________________________________________________________________________
+
+#                                   Update Harga Ticket
+
+# ____________________________________________________________________________________
+
+
+
+@login_required(login_url='/login/')
+def manage_ticket_prices(request):
+    # Logika untuk menangani permintaan POST (saat form disubmit)
+    if request.method == 'POST':
+        # Ambil semua ID tiket dan harga baru dari data POST
+        prices_data = {key.split('-')[1]: value for key, value in request.POST.items() if key.startswith('price-')}
+
+        try:
+            for ticket_id, new_price in prices_data.items():
+                if new_price: # Pastikan harganya tidak kosong
+                    ticket = TicketType.objects.get(id=int(ticket_id))
+                    ticket.price = int(new_price)
+                    ticket.save()
+
+            messages.success(request, "Ticket prices have been updated successfully!")
+        except (ValueError, TicketType.DoesNotExist) as e:
+            messages.error(request, f"Failed to update prices. Error: {e}")
+
+        # Redirect kembali ke halaman yang sama untuk melihat perubahan
+        return redirect('dashboard:manage_ticket_prices')
+
+    # Logika untuk permintaan GET (saat halaman pertama kali dibuka)
+    try:
+        ticket_types = {
+            'domestik_adult': TicketType.objects.get(nationality='domestik', age_group='adult'),
+            'domestik_child': TicketType.objects.get(nationality='domestik', age_group='child'),
+            'asing_adult': TicketType.objects.get(nationality='asing', age_group='adult'),
+            'asing_child': TicketType.objects.get(nationality='asing', age_group='child'),
+        }
+    except TicketType.DoesNotExist:
+        messages.error(request, "Ticket price data not found. Please add it via the Django Admin page first.")
+        ticket_types = {}
+
+    context = {
+        'judul': 'Manage Ticket Prices',
+        'ticket_types': ticket_types,
+    }
+    
+    return render(request, "ticket/manage_prices.html", context)

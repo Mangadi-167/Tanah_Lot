@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
+
 
 {% block body %}
 
@@ -41,7 +43,7 @@
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white">Domestic Tourist</h3>
                         </div>
                         <div class="text-start mb-6">
-                            <span class="text-2xl font-bold font-se  text-pr-900 dark:text-white">Rp 20K - 30K</span>
+                            <span class="text-2xl font-bold font-se  text-pr-900 dark:text-white">Rp {{ ticket_prices.domestik.child|floatformat:0|intcomma }} - {{ ticket_prices.domestik.adult|floatformat:0|intcomma }}</span>
                             <span class="text-lg font-medium text-gray-500 dark:text-gray-400">/person</span>
                         </div>
                         <ul class="space-y-3 text-gray-600 dark:text-gray-300 mb-8">
@@ -50,13 +52,13 @@
                                     <path fill-rule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
-                                </svg>Child: Rp 20.000</li>
+                                </svg>Child: Rp {{ ticket_prices.domestik.child|floatformat:0|intcomma }}</li>
                             <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
-                                </svg>Adult: Rp 30.000</li>
+                                </svg>Adult: Rp {{ ticket_prices.domestik.adult|floatformat:0|intcomma }}</li>
                             <li class="fflex items-center text-sm mt-5 sm:mt-5 font-se">
                                 Special Tickets for Indonesian Citizens*
                             </li>
@@ -88,7 +90,7 @@
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white">Foreigner Tourist</h3>
                         </div>
                         <div class="text-start mb-6">
-                            <span class="text-2xl font-bold font-se  text-pr-900 dark:text-white">Rp 40K - 75K</span>
+                            <span class="text-2xl font-bold font-se  text-pr-900 dark:text-white">Rp {{ ticket_prices.asing.child|floatformat:0|intcomma }} - {{ ticket_prices.asing.adult|floatformat:0|intcomma }}</span>
                             <span class="text-lg font-medium text-gray-500 dark:text-gray-400">/person</span>
                         </div>
                         <ul class="space-y-3 text-gray-600 dark:text-gray-300 mb-8">
@@ -97,13 +99,13 @@
                                     <path fill-rule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
-                                </svg>Child: Rp 40.000</li>
+                                </svg>Child: Rp {{ ticket_prices.asing.child|floatformat:0|intcomma }}</li>
                             <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
-                                </svg>Adult: Rp 75.000</li>
+                                </svg>Adult: {{ ticket_prices.asing.adult|floatformat:0|intcomma }}</li>
                             <li class="flex items-center text-sm mt-5 sm:mt-5 font-se">
                                 Special Tickets for Foreign Nationals*
                             </li>
@@ -132,7 +134,7 @@
                     <div class="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
                         <div>
                             <p class="font-semibold text-gray-800 dark:text-gray-200">Adult</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Rp 30.000</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Rp {{ ticket_prices.domestik.adult|floatformat:0|intcomma }}</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <button data-type="adult" data-action="decrement"
@@ -146,7 +148,7 @@
                     <div class="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
                         <div>
                             <p class="font-semibold text-gray-800 dark:text-gray-200">Child</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Rp 20.000</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Rp {{ ticket_prices.domestik.child|floatformat:0|intcomma }}</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <button data-type="child" data-action="decrement"
@@ -163,7 +165,7 @@
                     <div class="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
                         <div>
                             <p class="font-semibold text-gray-800 dark:text-gray-200">Adult</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Rp 75.000</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Rp {{ ticket_prices.asing.adult|floatformat:0|intcomma }}</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <button data-type="adult" data-action="decrement"
@@ -177,7 +179,7 @@
                     <div class="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
                         <div>
                             <p class="font-semibold text-gray-800 dark:text-gray-200">Child</p>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Rp 40.000</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Rp {{ ticket_prices.asing.child|floatformat:0|intcomma }}</p>
                         </div>
                         <div class="flex items-center gap-3">
                             <button data-type="child" data-action="decrement"
@@ -275,10 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputChildTickets = document.getElementById('input-child-tickets');
     const inputTotalPrice = document.getElementById('input-total-price');
 
-    const ticketPrices = {
-        domestik: { adult: 30000, child: 20000 },
-        asing: { adult: 75000, child: 40000 }
-    };
+    const ticketPrices = JSON.parse('{{ ticket_prices_json|escapejs }}');
 
     let currentNationality = null;
     let ticketCounts = { adult: 0, child: 0 };

@@ -11,19 +11,38 @@ import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .email_utils import send_eticket_email
+from .models import Transaction, TicketType
+
+
 
 # ____________________________________________________________________
 #
 #                   KHUSUS TAMPILAN PEMBELIAN USER
 # ____________________________________________________________________
 
+
+
 def index(request):
+    # Logika untuk mengambil harga dari database
+    try:
+        ticket_prices_db = TicketType.objects.filter(is_active=True)
+        prices = {
+            'domestik': {
+                'adult': ticket_prices_db.get(nationality='domestik', age_group='adult').price,
+                'child': ticket_prices_db.get(nationality='domestik', age_group='child').price
+            },
+            'asing': {
+                'adult': ticket_prices_db.get(nationality='asing', age_group='adult').price,
+                'child': ticket_prices_db.get(nationality='asing', age_group='child').price
+            }
+        }
+    except TicketType.DoesNotExist:
+        prices = { 
+            'domestik': {'adult': 30000, 'child': 20000},
+            'asing': {'adult': 75000, 'child': 40000}
+        }
+
     if request.method == 'POST':
-        print("\n--- MEMERIKSA KUNCI API YANG DIGUNAKAN ---")
-        print(f"SERVER KEY: '{settings.MIDTRANS_SERVER_KEY}'")
-        print(f"CLIENT KEY: '{settings.MIDTRANS_CLIENT_KEY}'")
-        print("-------------------------------------------\n")
-        # 1. Ambil data dari form
         full_name = request.POST.get('full_name')
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
@@ -32,7 +51,8 @@ def index(request):
         child_tickets = int(request.POST.get('child_tickets'))
         total_price = float(request.POST.get('total_price'))
 
-        # 2. Simpan transaksi ke database kita
+       
+        # Membuat objek transaksi dengan menyebutkan setiap field secara eksplisit
         transaction = Transaction.objects.create(
             full_name=full_name,
             email=email,
@@ -43,34 +63,33 @@ def index(request):
             total_price=total_price,
             status='pending'
         )
+        # ==========================================================
 
-        # 3. Konfigurasi Klien Midtrans (mengambil dari settings.py)
+        # Konfigurasi Midtrans 
         snap = midtransclient.Snap(
             is_production=settings.MIDTRANS_IS_PRODUCTION,
             server_key=settings.MIDTRANS_SERVER_KEY,
             client_key=settings.MIDTRANS_CLIENT_KEY
         )
 
-        # 4. Siapkan detail item
+        # Siapkan detail item untuk Midtrans 
         item_details = []
         if adult_tickets > 0:
-            price = 75000 if nationality == 'asing' else 30000
             item_details.append({
                 "id": f"TICKET-ADULT-{transaction.order_id}",
-                "price": price,
+                "price": prices[nationality]['adult'],
                 "quantity": adult_tickets,
                 "name": f"Adult Ticket ({nationality.capitalize()})"
             })
         if child_tickets > 0:
-            price = 40000 if nationality == 'asing' else 20000
             item_details.append({
                 "id": f"TICKET-CHILD-{transaction.order_id}",
-                "price": price,
+                "price": prices[nationality]['child'],
                 "quantity": child_tickets,
                 "name": f"Child Ticket ({nationality.capitalize()})"
             })
-
-        # 5. Siapkan parameter lengkap
+        
+        
         params = {
             "transaction_details": {
                 "order_id": transaction.order_id,
@@ -83,24 +102,24 @@ def index(request):
                 "phone": phone_number
             }
         }
-
-        # 6. Buat transaksi di Midtrans
         try:
             snap_transaction = snap.create_transaction(params)
             transaction.midtrans_token = snap_transaction['token']
             transaction.midtrans_redirect_url = snap_transaction['redirect_url']
             transaction.save()
-
             return JsonResponse({'token': snap_transaction['token']})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
-    # Untuk method GET
+    # Untuk method GET 
     context = {
         'judul': 'Ticket',
         'midtrans_client_key': settings.MIDTRANS_CLIENT_KEY,
+        'ticket_prices': prices,
+        'ticket_prices_json': json.dumps(prices),
     }
     return render(request, "payment/purchase_page.html", context)
+
 
 
 def order_confirmation(request, order_id):
@@ -126,7 +145,7 @@ from django.db.models import Sum, F
 def data(request):
     search_query = request.GET.get('q', None)
 
-    # 1. Mulai dengan queryset dasar. Ini belum mengambil data dari database.
+    # 1. Mulai dengan queryset dasar. belum mengambil data dari database.
     transactions_queryset = Transaction.objects.all().order_by('-created_at')
 
     # 2. Filter queryset JIKA ada kata kunci pencarian.
@@ -155,7 +174,7 @@ def data(request):
     # 5. Kirim 'page_obj' ke template, bukan queryset utuh.
     context = {
         'judul': 'Data Transaction',
-        'transactions': page_obj, # <== PASTIKAN MENGGUNAKAN page_obj
+        'transactions': page_obj, 
         'search_query': search_query,
         'total_transactions_count': total_transactions_count,
         'successful_transactions_count': successful_transactions_count,
@@ -194,7 +213,7 @@ def midtrans_webhook(request):
 
             print(f"Webhook Diterima: Order ID {order_id}, Status {transaction_status}") # Untuk debugging
 
-            # 2. Ambil transaksi dari database kita
+            # 2. Ambil transaksi dari database 
             try:
                 transaction = Transaction.objects.get(order_id=order_id)
             except Transaction.DoesNotExist:
