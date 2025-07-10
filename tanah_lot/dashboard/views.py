@@ -30,6 +30,14 @@ from django.db.models import Q
 
 @login_required(login_url='/login/')
 def article(request): 
+    
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+    
     """Menampilkan semua data konten di tabel, dan menangani pencarian."""
  
     
@@ -58,6 +66,15 @@ def article(request):
 
 @login_required(login_url='/login/')
 def addArticle(request):
+    
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+
+
     """Menangani form untuk menambah konten baru."""
   
 
@@ -77,6 +94,15 @@ def addArticle(request):
 
 @login_required(login_url='/login/')
 def update_content(request, pk):
+
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+
     """Menangani form untuk mengedit konten yang sudah ada."""
     
 
@@ -109,6 +135,14 @@ def update_content(request, pk):
 
 @login_required(login_url='/login/')
 def delete_content(request, pk):
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+
     """
     Menampilkan halaman konfirmasi dan menghapus objek konten.
     """
@@ -135,6 +169,15 @@ def delete_content(request, pk):
 
 @login_required(login_url='/login/')
 def user(request): 
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+
+
     """
     Menampilkan semua data user di tabel, DAN menangani logika pencarian.
     """
@@ -172,6 +215,15 @@ def user(request):
 
 @login_required(login_url='/login/')
 def addUser(request):
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+
+
     """Menangani form untuk menambah user baru oleh admin."""
   
 
@@ -196,6 +248,13 @@ def addUser(request):
 # ===================================================================
 
 def update_user(request, pk):
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
  
     
     user_to_update = get_object_or_404(User, pk=pk)
@@ -239,6 +298,16 @@ def update_user(request, pk):
 # ===================================================================
 
 def delete_user(request, pk):
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+
+
+
     """Menghapus user setelah ada konfirmasi."""
   
 
@@ -270,6 +339,14 @@ def delete_user(request, pk):
 
 @login_required(login_url='/login/')
 def resetPassword(request):
+
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
   
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -299,6 +376,14 @@ def resetPassword(request):
 
 @login_required(login_url='/login/') 
 def index(request):
+
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
     
     content_count = Content.objects.count()
     user_count = User.objects.count()
@@ -351,6 +436,16 @@ def index(request):
 # khusus calender
 @login_required(login_url='/login/')
 def calender_events_api(request):
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+
+
+
     all_events = Event.objects.all()
     events_list = []
     for event in all_events:
@@ -366,12 +461,34 @@ def calender_events_api(request):
 # --- VIEW UNTUK MENAMPILKAN HALAMAN KALENDER (DISEDERHANAKAN) ---
 @login_required(login_url='/login/')
 def calender_data(request):
+
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+    
+
+
     context = {'judul': "Event Calender"}
     return render(request, 'calender/data.html', context)
 
 # --- VIEW UNTUK MENAMBAH EVENT (TETAP SAMA) ---
 @login_required(login_url='/login/')
 def add_calender(request):
+
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+    
+
+
     if request.method == 'POST':
         form = EventForm(request.POST)
         if form.is_valid():
@@ -385,6 +502,17 @@ def add_calender(request):
 
 @login_required(login_url='/login/')
 def edit_calender(request, event_id):
+
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+    
+
+
     # Ambil data event yang ada
     event = get_object_or_404(Event, id=event_id)
     
@@ -409,6 +537,17 @@ def edit_calender(request, event_id):
 
 @login_required(login_url='/login/')
 def delete_calender(request, event_id):
+
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+    
+
+
     event = get_object_or_404(Event, id=event_id)
     
     # Sebaiknya gunakan method POST untuk delete demi keamanan
@@ -432,6 +571,18 @@ def delete_calender(request, event_id):
 
 @login_required(login_url='/login/')
 def manage_ticket_prices(request):
+
+
+
+    try:
+        if request.user.profile.role != 'admin':
+            return redirect('/')
+    except UserProfile.DoesNotExist:
+        messages.error(request, 'Profil pengguna tidak ditemukan. Akses ditolak.')
+        return redirect('/')
+    
+
+    
     # Logika untuk menangani permintaan POST (saat form disubmit)
     if request.method == 'POST':
         # Ambil semua ID tiket dan harga baru dari data POST

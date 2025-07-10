@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404 
 
 from dashboard.models import Content 
+from dashboard.models import Event
 
 def index(request):
   
@@ -15,8 +16,12 @@ def index(request):
 
 
 def calender(request):
-    context={
+    # Ambil semua event, urutkan dari yang paling baru atau paling dekat
+    all_events = Event.objects.all().order_by('event_date')
+
+    context = {
         'judul' : 'Event Calender',
+        'events': all_events, # Kirim data event ke template dengan nama 'events'
     }
     return render(request, "calender.html", context)
 
@@ -58,3 +63,6 @@ def batumejan(request):
         'judul' : 'Batu Mejan Temple '
     }
     return render(request,"batumejan.html", context)
+
+def custom_404_view(request, exception=None): 
+    return render(request, '404.html', status=404)

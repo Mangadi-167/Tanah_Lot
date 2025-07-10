@@ -2,6 +2,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path, include, re_path
+
+from . import views as project_views
+from dashboard import views as dashboard_views
 
 from . import views
 
@@ -15,17 +19,21 @@ urlpatterns = [
     path("about/", include("about.urls")),
     path("login/", include("login.urls")),
     path("chatbot/", include("chatbot.urls")),
-    path('', views.index,name='/'),
+    path('', project_views.index,name='/'),
     
-    path('pakendungan/', views.pakendungan,name='pakendungan'),
-    path('penataranmadya/', views.penataranmadya,name='penataranmadya'),
-    path('jrokandang/', views.jrokandang,name='jrokandang'),
-    path('njunggaluh/', views.njunggaluh,name='njunggaluh'),
-    path('batubolong/', views.batubolong,name='batubolong'),
-    path('batumejan/', views.batumejan,name='batumejan'),
+    path('pakendungan/', project_views.pakendungan, name='pakendungan'),
+    path('penataranmadya/', project_views.penataranmadya, name='penataranmadya'),
+    path('jrokandang/', project_views.jrokandang, name='jrokandang'),
+    path('njunggaluh/', project_views.njunggaluh, name='njunggaluh'),
+    path('batubolong/', project_views.batubolong, name='batubolong'),
+    path('batumejan/', project_views.batumejan, name='batumejan'),
 
-    path("calender/", views.calender, name='calender'),
+    path("calender/", dashboard_views.calender_data, name='calender'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns.append(
+    re_path(r'^.*$', project_views.custom_404_view, name='404_catch_all')
+)
