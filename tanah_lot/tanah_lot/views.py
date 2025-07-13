@@ -16,12 +16,12 @@ def index(request):
 
 
 def calender(request):
-    # Ambil semua event, urutkan dari yang paling baru atau paling dekat
+    
     all_events = Event.objects.all().order_by('event_date')
 
     context = {
         'judul' : 'Event Calender',
-        'events': all_events, # Kirim data event ke template dengan nama 'events'
+        'events': all_events, 
     }
     return render(request, "calender.html", context)
 

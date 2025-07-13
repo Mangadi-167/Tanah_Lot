@@ -28,7 +28,7 @@ urlpatterns = [
     path('batubolong/', project_views.batubolong, name='batubolong'),
     path('batumejan/', project_views.batumejan, name='batumejan'),
 
-    path("calender/", dashboard_views.calender_data, name='calender'),
+    path("calender/", project_views.calender, name='calender'),
 ]
 
 if settings.DEBUG:
