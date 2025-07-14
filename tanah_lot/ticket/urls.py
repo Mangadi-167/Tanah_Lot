@@ -20,4 +20,6 @@ urlpatterns = [
 
     path("verify/<str:order_id>/", views.verify_ticket, name="verify_ticket"),
     path("resend-eticket/<str:order_id>/", views.resend_eticket, name="resend_eticket"),
+
+    path('login-required/', views.login_required_redirect, name='login_required_redirect'),
 ]

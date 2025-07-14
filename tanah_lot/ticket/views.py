@@ -15,10 +15,21 @@ from .models import Transaction, TicketType
 
 
 
+def login_required_redirect(request):
+    
+    if request.user.is_authenticated:
+        return redirect('ticket:ticket')
+    else:
+      
+        messages.warning(request, 'Anda harus login terlebih dahulu untuk memesan tiket.')
+        return redirect('login:login')
+
 # ____________________________________________________________________
 #
 #                   KHUSUS TAMPILAN PEMBELIAN USER
 # ____________________________________________________________________
+
+
 
 
 
